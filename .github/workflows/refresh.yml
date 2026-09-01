@@ -1,0 +1,53 @@
+﻿name: 更新公开官方知识包
+
+on:
+  schedule:
+    - cron: '17 2 * * *' # 每天台湾时间 10:17
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: shopify-meta-public-knowledge
+  cancel-in-progress: false
+
+jobs:
+  refresh-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - name: 取得公开发布器
+        uses: actions/checkout@v4
+
+      - name: 安装 Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: 还原上一份合格官方资料
+        shell: bash
+        run: |
+          if [ -f published/meta-shopify-official-source-pack.tar.gz ]; then
+            mkdir -p knowledge/official/meta-shopify
+            tar -xzf published/meta-shopify-official-source-pack.tar.gz -C knowledge/official/meta-shopify
+          fi
+
+      - name: 只读刷新官方公开来源
+        run: npm run refresh
+
+      - name: 生成有校验码的公开知识包
+        run: npm run publish
+
+      - name: 只在内容变化时提交新版本
+        shell: bash
+        run: |
+          git add published
+          if git diff --cached --quiet; then
+            echo "没有官方正文变化，不创建无意义版本。"
+            exit 0
+          fi
+          git config user.name "shopify-meta-knowledge-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: refresh public official knowledge"
+          git push

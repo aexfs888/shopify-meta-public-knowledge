@@ -1,0 +1,14 @@
+﻿{
+    "version":  "1.0.0",
+    "name":  "shopify-meta-public-knowledge-publisher",
+    "scripts":  {
+                    "update":  "npm run refresh \u0026\u0026 npm run publish",
+                    "publish":  "node scripts/build-public-knowledge-package.mjs",
+                    "refresh":  "node scripts/public-knowledge-refresh.mjs"
+                },
+    "type":  "module",
+    "engines":  {
+                    "node":  "\u003e=22"
+                },
+    "private":  true
+}
