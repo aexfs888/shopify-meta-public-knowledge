@@ -14,6 +14,7 @@ export const COMPLIANCE_RISK_ROOT = path.join(COMMUNITY_ROOT, 'compliance-risk')
 export const COMPLIANCE_RISK_REGISTRY_PATH = path.join(COMPLIANCE_RISK_ROOT, 'isolated-risk-registry.json');
 export const COMPLIANCE_RISK_HISTORY_PATH = path.join(COMPLIANCE_RISK_ROOT, 'screening-history.json');
 export const RESEARCH_SOURCE_LEDGER_PATH = path.join(COMMUNITY_ROOT, 'research-sources', 'source-ledger.json');
+export const COMMUNITY_DISCOVERY_HISTORY_PATH = path.join(COMMUNITY_ROOT, 'history', 'discovery-runs.json');
 export const COMMUNITY_RESEARCH_REPORT_PATH = workspacePath('reports', 'public', '开源技术雷达-最新研究报告.md');
 export const COMMUNITY_CONFIG_PATH = workspacePath('config', 'community-open-source-discovery.json');
 const GITHUB_API = 'https://api.github.com/search/repositories';
@@ -216,6 +217,22 @@ function metadataEvidenceProfile(repo, quality) {
   };
 }
 
+function communitySignalProfile(repo, now = new Date()) {
+  const stars = Number(repo.stargazers_count ?? 0);
+  const forks = Number(repo.forks_count ?? 0);
+  const projectAgeDays = Math.floor(daysSince(repo.created_at, now));
+  let label = '公开社区信号未形成';
+  if (stars >= 20 || forks >= 5) label = '已有基础公开社区信号';
+  else if (stars >= 3 || forks >= 1) label = '已有有限公开社区信号';
+  return {
+    stars,
+    forks,
+    project_age_days: Number.isFinite(projectAgeDays) ? projectAgeDays : null,
+    label_zh: label,
+    note_zh: '仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。'
+  };
+}
+
 const CAPABILITY_EXPOSURE_RULES = [
   {
     id: 'potential_external_write',
@@ -268,6 +285,7 @@ function manualReviewRequirements(repo, evidence, exposures) {
 function compactRepository(repo, quality, query, provider = 'GitHub') {
   const evidence = metadataEvidenceProfile(repo, quality);
   const exposures = capabilityExposureProfile(repo, quality);
+  const communitySignal = communitySignalProfile(repo);
   return {
     source_id: sourceId(repo.full_name),
     source_tier: 'community_open_source',
@@ -286,6 +304,8 @@ function compactRepository(repo, quality, query, provider = 'GitHub') {
     forks: Number(repo.forks_count ?? 0),
     hotness_score: Math.round((Number(repo.stargazers_count ?? 0) + Number(repo.forks_count ?? 0) * 0.35) * 100) / 100,
     open_issues: Number(repo.open_issues_count ?? 0),
+    created_at: repo.created_at ?? null,
+    project_age_days: communitySignal.project_age_days,
     pushed_at: repo.pushed_at ?? null,
     updated_at: repo.updated_at ?? null,
     age_days: quality.age_days,
@@ -299,8 +319,13 @@ function compactRepository(repo, quality, query, provider = 'GitHub') {
     metadata_verified_fields_zh: evidence.verified_fields_zh,
     metadata_missing_fields_zh: evidence.missing_fields_zh,
     metadata_evidence_note_zh: evidence.note_zh,
+    public_community_signal_label_zh: communitySignal.label_zh,
+    public_community_signal_note_zh: communitySignal.note_zh,
     selection_reasons_zh: quality.reasons,
     discovery_query: query,
+    discovery_queries: [query],
+    discovery_providers: [provider],
+    matching_query_count: 1,
     capability_exposures: exposures,
     automatic_adoption_allowed: false,
     research_status: 'research_only',
@@ -516,14 +541,21 @@ export async function buildCommunityResearchReport({
     ''
   ];
   if (coverage.providerStatistics.length) {
-    lines.push('| 平台 | 计划 | 成功 | 未完成 | 返回的公开元数据条目 |', '| --- | ---: | ---: | ---: | ---: |');
-    for (const item of coverage.providerStatistics) lines.push(`| ${markdownInline(item.provider)} | ${Number(item.attempted_queries ?? 0)} | ${Number(item.successful_queries ?? 0)} | ${Number(item.failed_queries ?? 0)} | ${Number(item.returned_repository_metadata ?? 0)} |`);
+    lines.push('| 平台 | 计划 | 成功 | 未完成 | 返回的公开元数据条目 | 合格候选命中（含重复） |', '| --- | ---: | ---: | ---: | ---: | ---: |');
+    for (const item of coverage.providerStatistics) lines.push(`| ${markdownInline(item.provider)} | ${Number(item.attempted_queries ?? 0)} | ${Number(item.successful_queries ?? 0)} | ${Number(item.failed_queries ?? 0)} | ${Number(item.returned_repository_metadata ?? 0)} | ${Number(item.qualifying_candidate_observations ?? 0)} |`);
     lines.push('');
+  }
+  const efficiency = source.discovery_efficiency;
+  if (efficiency) {
+    lines.push('### 筛选效率与边界', '');
+    lines.push(`- 本轮累计读取公开元数据 ${Number(efficiency.returned_repository_metadata ?? 0)} 条（跨查询可能重复）；硬性拒绝 ${Number(efficiency.hard_rejected_observations ?? 0)} 条；低于研究排序门槛 ${Number(efficiency.below_minimum_quality_observations ?? 0)} 条；进入风险隔离 ${Number(efficiency.risk_isolated_observations ?? 0)} 条；最终唯一候选 ${Number(efficiency.unique_candidate_count ?? repositories.length)} 个。`);
+    lines.push(`- 说明：${markdownInline(efficiency.note_zh ?? '')}`, '');
   }
   if (coverage.gaps.length) {
     lines.push('### 覆盖缺口（不绕过）', '');
     for (const gap of coverage.gaps) {
-      lines.push(`- ${markdownInline(gap.provider)}：查询“${markdownInline(gap.query)}”未完成（${markdownInline(gap.error)}）。${markdownInline(gap.handling_zh ?? '等待下次正常计划任务再试。')}`);
+      const providerMessage = gap.provider_message ? `平台说明：${markdownInline(gap.provider_message)}。` : '';
+      lines.push(`- ${markdownInline(gap.provider)}：查询“${markdownInline(gap.query)}”未完成（${markdownInline(gap.error)}）。${providerMessage}${markdownInline(gap.handling_zh ?? '等待下次正常计划任务再试。')}`);
     }
     lines.push('');
   }
@@ -539,8 +571,11 @@ export async function buildCommunityResearchReport({
       topics: item.topics ?? [],
       language: item.language,
       default_branch: item.default_branch,
+      created_at: item.created_at,
       updated_at: item.updated_at,
-      pushed_at: item.pushed_at
+      pushed_at: item.pushed_at,
+      stargazers_count: item.stars,
+      forks_count: item.forks
     };
     const profileQuality = { license: item.license_spdx, topics: item.topics ?? [] };
     const computedEvidence = metadataEvidenceProfile(profileRepo, profileQuality);
@@ -550,6 +585,10 @@ export async function buildCommunityResearchReport({
       missing_fields_zh: item.metadata_missing_fields_zh ?? []
     };
     const exposures = item.capability_exposures ?? capabilityExposureProfile(profileRepo, profileQuality);
+    const communitySignal = item.public_community_signal_label_zh ? {
+      label_zh: item.public_community_signal_label_zh,
+      note_zh: item.public_community_signal_note_zh
+    } : communitySignalProfile(profileRepo);
     const exposureLabels = exposures.map((exposure) => exposure.label_zh);
     const reviewRequirements = item.manual_review_requirements_zh ?? manualReviewRequirements(profileRepo, evidence, exposures);
     lines.push(`### ${index + 1}. ${markdownRepositoryLink(item.repository, item.canonical_url)}`, '');
@@ -557,6 +596,8 @@ export async function buildCommunityResearchReport({
     lines.push(`- 元数据：许可证 ${markdownInline(item.license_spdx)}；语言 ${markdownInline(item.language || '未标注')}；最近更新 ${markdownInline(item.updated_at || '未知')}；星标 / Fork ${Number(item.stars ?? 0)} / ${Number(item.forks ?? 0)}。`);
     lines.push(`- 发现排序：${Number(item.discovery_priority_score ?? item.quality_score ?? 0)} 分。${markdownInline(item.discovery_priority_note_zh ?? '旧版目录的分数只适用于发现排序，不代表可采用。')}`);
     lines.push(`- 证据完整度：${Number(evidence.score * 100).toFixed(0)}%（${markdownInline(evidence.label_zh)}）。`);
+    lines.push(`- 公开社区信号：${markdownInline(communitySignal.label_zh)}。${markdownInline(communitySignal.note_zh)}`);
+    lines.push(`- 命中来源：${Number(item.matching_query_count ?? (item.discovery_queries ?? [item.discovery_query]).filter(Boolean).length)} 条查询；${markdownInline((item.discovery_providers ?? [item.provider]).filter(Boolean).join('、') || '未记录')}。`);
     lines.push(`- 公开元数据提示的能力暴露：${exposureLabels.length ? exposureLabels.map(markdownInline).join('；') : '未命中预设暴露信号；这不等于没有风险或外部连接能力。'}`);
     lines.push(`- 当前状态：${markdownInline(item.research_status_zh ?? '仅元数据候选；未安装、未审计、未授权接入。')}`);
     lines.push('- 人工复核：');
@@ -622,7 +663,16 @@ async function githubSearch(query, { fetchImpl = fetch, token, perPage = 40 } = 
   if (token) headers.Authorization = `Bearer ${token}`;
   const response = await fetchPublicMetadata(url, { headers, signal: AbortSignal.timeout(25_000) }, fetchImpl, 'GitHub');
   const payload = await response.json();
-  return Array.isArray(payload.items) ? payload.items : [];
+  const items = Array.isArray(payload.items) ? payload.items : [];
+  return {
+    items,
+    telemetry: {
+      returned_repository_metadata: items.length,
+      reported_total_count: Number.isFinite(Number(payload.total_count)) ? Number(payload.total_count) : null,
+      incomplete_results: Boolean(payload.incomplete_results),
+      response: responseDiagnostics(response)
+    }
+  };
 }
 
 function normalizeGitLabRepository(project) {
@@ -641,6 +691,7 @@ function normalizeGitLabRepository(project) {
     stargazers_count: Number(project.star_count ?? 0),
     forks_count: Number(project.forks_count ?? 0),
     open_issues_count: 0,
+    created_at: project.created_at ?? null,
     pushed_at: project.last_activity_at ?? project.updated_at ?? null,
     updated_at: project.updated_at ?? project.last_activity_at ?? null,
     default_branch: project.default_branch ?? null,
@@ -658,7 +709,48 @@ async function gitlabSearch(query, { fetchImpl = fetch, perPage = 40 } = {}) {
   url.searchParams.set('per_page', String(Math.min(100, Math.max(1, perPage))));
   const response = await fetchPublicMetadata(url, { headers: { Accept: 'application/json', 'User-Agent': 'Hermes-Open-Source-Radar/1.0' }, signal: AbortSignal.timeout(25_000) }, fetchImpl, 'GitLab');
   const payload = await response.json();
-  return Array.isArray(payload) ? payload.map(normalizeGitLabRepository) : [];
+  const items = Array.isArray(payload) ? payload.map(normalizeGitLabRepository) : [];
+  return {
+    items,
+    telemetry: {
+      returned_repository_metadata: items.length,
+      reported_total_count: numericHeader(response.headers, 'x-total'),
+      incomplete_results: false,
+      response: responseDiagnostics(response)
+    }
+  };
+}
+
+function numericHeader(headers, name) {
+  const value = headers?.get(name);
+  if (value == null || String(value).trim() === '') return null;
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
+}
+
+function responseDiagnostics(response) {
+  return {
+    http_status: response.status,
+    request_id: response.headers.get('x-github-request-id') ?? response.headers.get('x-request-id') ?? null,
+    retry_after_seconds: numericHeader(response.headers, 'retry-after'),
+    rate_limit: {
+      limit: numericHeader(response.headers, 'x-ratelimit-limit'),
+      remaining: numericHeader(response.headers, 'x-ratelimit-remaining'),
+      reset_epoch_seconds: numericHeader(response.headers, 'x-ratelimit-reset'),
+      resource: response.headers.get('x-ratelimit-resource') ?? null
+    }
+  };
+}
+
+async function providerErrorMessage(response) {
+  try {
+    const contentType = response.headers.get('content-type') ?? '';
+    const payload = contentType.includes('json') ? await response.json() : null;
+    const message = typeof payload?.message === 'string' ? payload.message : typeof payload?.error === 'string' ? payload.error : '';
+    return message.replace(/[\r\n\t]+/g, ' ').slice(0, 280) || null;
+  } catch {
+    return null;
+  }
 }
 
 function httpStatusFromError(error) {
@@ -668,6 +760,20 @@ function httpStatusFromError(error) {
 
 function queryFailureProfile(error) {
   const httpStatus = httpStatusFromError(error);
+  const response = error?.response_diagnostics ?? null;
+  const rate = response?.rate_limit ?? {};
+  const isPrimaryRateLimited = rate.remaining === 0;
+  const isSecondaryRateLimited = Number(response?.retry_after_seconds) > 0 || /secondary rate limit/i.test(String(error?.provider_message ?? ''));
+  if (httpStatus === 403 && isPrimaryRateLimited) return {
+    http_status: httpStatus,
+    failure_kind: 'primary_rate_limited',
+    handling_zh: '已停止该查询；GitHub 限额归零，将等待 x-ratelimit-reset 指定时间后由下次计划任务再试。'
+  };
+  if ((httpStatus === 403 || httpStatus === 429) && isSecondaryRateLimited) return {
+    http_status: httpStatus,
+    failure_kind: 'secondary_rate_limited',
+    handling_zh: '已停止该查询；将遵守 Retry-After 或至少等待下一次计划任务，不增加并发或绕过限制。'
+  };
   if (httpStatus === 401 || httpStatus === 403) return {
     http_status: httpStatus,
     failure_kind: 'access_or_permission_limited',
@@ -701,6 +807,8 @@ async function fetchPublicMetadata(url, options, fetchImpl, provider) {
         const error = new Error(`${provider} 公开仓库搜索失败：HTTP ${response.status}`);
         error.http_status = response.status;
         error.attempt_count = attempt + 1;
+        error.response_diagnostics = responseDiagnostics(response);
+        error.provider_message = await providerErrorMessage(response);
         throw error;
       }
       lastError = new Error(`${provider} 公开仓库搜索失败：HTTP ${response.status}`);
@@ -713,6 +821,31 @@ async function fetchPublicMetadata(url, options, fetchImpl, provider) {
     await new Promise((resolve) => setTimeout(resolve, 500 * (attempt + 1)));
   }
   throw lastError ?? new Error(`${provider} 公开仓库搜索失败。`);
+}
+
+function coverageGate(config, attemptedQueries, successfulQueries) {
+  const configured = Number(config.safety?.minimum_query_success_ratio ?? 0.75);
+  const minimumSuccessRatio = Number.isFinite(configured) && configured > 0 && configured <= 1 ? configured : 0.75;
+  const actualSuccessRatio = attemptedQueries > 0 ? Math.round((successfulQueries / attemptedQueries) * 10_000) / 10_000 : 0;
+  return {
+    minimum_success_ratio: minimumSuccessRatio,
+    actual_success_ratio: actualSuccessRatio,
+    publication_eligible: actualSuccessRatio >= minimumSuccessRatio,
+    rule_zh: `至少完成 ${(minimumSuccessRatio * 100).toFixed(0)}% 的计划公开查询，才允许用新目录替换上一份合格目录或公开发布。`
+  };
+}
+
+function mergeCandidateProvenance(existing, candidate) {
+  if (!existing) return candidate;
+  const selected = candidate.quality_score > existing.quality_score ? candidate : existing;
+  const discoveryQueries = [...new Set([...(existing.discovery_queries ?? [existing.discovery_query]), ...(candidate.discovery_queries ?? [candidate.discovery_query])])].filter(Boolean);
+  const discoveryProviders = [...new Set([...(existing.discovery_providers ?? [existing.provider]), ...(candidate.discovery_providers ?? [candidate.provider])])].filter(Boolean);
+  return {
+    ...selected,
+    discovery_queries: discoveryQueries,
+    discovery_providers: discoveryProviders,
+    matching_query_count: discoveryQueries.length
+  };
 }
 
 export async function discoverOpenSourceTechnology({
@@ -733,6 +866,14 @@ export async function discoverOpenSourceTechnology({
   const previous = await exists(catalogPath) ? await readJson(catalogPath) : null;
   const warnings = [];
   const providerStatistics = {};
+  const queryRuns = [];
+  const filterSummary = {
+    returned_repository_metadata: 0,
+    hard_rejected_observations: 0,
+    below_minimum_quality_observations: 0,
+    risk_isolated_observations: 0,
+    qualifying_candidate_observations: 0
+  };
   const candidates = new Map();
   const riskObservations = new Map();
   const observedRiskSources = new Map();
@@ -740,7 +881,19 @@ export async function discoverOpenSourceTechnology({
   let attempted = 0;
   function statisticsFor(provider) {
     const key = provider.toLowerCase();
-    providerStatistics[key] ??= { provider, attempted_queries: 0, successful_queries: 0, failed_queries: 0, returned_repository_metadata: 0 };
+    providerStatistics[key] ??= {
+      provider,
+      attempted_queries: 0,
+      successful_queries: 0,
+      failed_queries: 0,
+      returned_repository_metadata: 0,
+      reported_total_count_sum: 0,
+      incomplete_query_count: 0,
+      hard_rejected_observations: 0,
+      below_minimum_quality_observations: 0,
+      risk_isolated_observations: 0,
+      qualifying_candidate_observations: 0
+    };
     return providerStatistics[key];
   }
   async function collect(provider, query, search, providerConfig) {
@@ -748,10 +901,28 @@ export async function discoverOpenSourceTechnology({
     const statistics = statisticsFor(provider);
     statistics.attempted_queries += 1;
     try {
-      const items = await search(query, { fetchImpl, token, perPage: providerConfig.max_results_per_query });
+      const searchResult = await search(query, { fetchImpl, token, perPage: providerConfig.max_results_per_query });
+      const items = Array.isArray(searchResult) ? searchResult : (searchResult.items ?? []);
+      const telemetry = Array.isArray(searchResult) ? {} : (searchResult.telemetry ?? {});
       searched += 1;
       statistics.successful_queries += 1;
       statistics.returned_repository_metadata += items.length;
+      statistics.reported_total_count_sum += Number(telemetry.reported_total_count ?? 0);
+      if (telemetry.incomplete_results) statistics.incomplete_query_count += 1;
+      filterSummary.returned_repository_metadata += items.length;
+      const queryRun = {
+        provider,
+        query,
+        outcome: 'completed',
+        returned_repository_metadata: items.length,
+        reported_total_count: telemetry.reported_total_count ?? null,
+        incomplete_results: Boolean(telemetry.incomplete_results),
+        response: telemetry.response ?? null,
+        hard_rejected_observations: 0,
+        below_minimum_quality_observations: 0,
+        risk_isolated_observations: 0,
+        qualifying_candidate_observations: 0
+      };
       for (const repo of items) {
         const quality = scoreOpenSourceRepository(repo, {
           allowedLicenses: providerConfig.allowed_licenses,
@@ -761,6 +932,9 @@ export async function discoverOpenSourceTechnology({
           now
         });
         if (quality.risk_category_key) {
+          queryRun.risk_isolated_observations += 1;
+          statistics.risk_isolated_observations += 1;
+          filterSummary.risk_isolated_observations += 1;
           const sourceKey = sourceId(repo.full_name);
           const seenSources = observedRiskSources.get(quality.risk_category_key) ?? new Set();
           if (!seenSources.has(sourceKey)) {
@@ -774,20 +948,73 @@ export async function discoverOpenSourceTechnology({
             riskObservations.set(quality.risk_category_key, observation);
           }
         }
-        if (quality.score < Number(providerConfig.minimum_quality_score ?? 7)) continue;
+        if (quality.score < Number(providerConfig.minimum_quality_score ?? 7)) {
+          if (quality.score < 0) {
+            queryRun.hard_rejected_observations += 1;
+            statistics.hard_rejected_observations += 1;
+            filterSummary.hard_rejected_observations += 1;
+          } else {
+            queryRun.below_minimum_quality_observations += 1;
+            statistics.below_minimum_quality_observations += 1;
+            filterSummary.below_minimum_quality_observations += 1;
+          }
+          continue;
+        }
+        queryRun.qualifying_candidate_observations += 1;
+        statistics.qualifying_candidate_observations += 1;
+        filterSummary.qualifying_candidate_observations += 1;
         const card = compactRepository(repo, quality, query, provider);
         const existing = candidates.get(card.source_id);
-        if (!existing || card.quality_score > existing.quality_score) candidates.set(card.source_id, card);
+        candidates.set(card.source_id, mergeCandidateProvenance(existing, card));
       }
+      queryRuns.push(queryRun);
     } catch (error) {
       statistics.failed_queries += 1;
       const failure = queryFailureProfile(error);
-      warnings.push({ provider, query, error: error.message, ...failure });
+      const warning = {
+        provider,
+        query,
+        error: error.message,
+        provider_message: error.provider_message ?? null,
+        response: error.response_diagnostics ?? null,
+        ...failure
+      };
+      warnings.push(warning);
+      queryRuns.push({ provider, query, outcome: 'failed', ...warning });
     }
   }
   if (config.providers?.includes('github') !== false) for (const query of config.github.queries) await collect('GitHub', query, githubSearch, config.github);
   if (config.providers?.includes('gitlab') && config.gitlab) for (const query of config.gitlab.queries) await collect('GitLab', query, gitlabSearch, config.gitlab);
-  if (searched === 0 && previous) return { catalog: previous, retained_previous: true, warnings };
+  const gate = coverageGate(config, attempted, searched);
+  const coverage = {
+    attempted_queries: attempted,
+    successful_queries: searched,
+    failed_queries: attempted - searched,
+    coverage_status_zh: gate.publication_eligible
+      ? (attempted === searched ? '本轮全部计划查询已完成。' : `本轮有 ${attempted - searched} 条查询未完成，但通过完整性闸门；详见覆盖缺口，结果不代表全网只有当前候选。`)
+      : `本轮仅完成 ${(gate.actual_success_ratio * 100).toFixed(0)}% 查询，未达到发布闸门；不会用此结果替换上一份合格目录。`,
+    provider_statistics: providerStatistics,
+    query_runs: queryRuns,
+    gaps: warnings.map((item) => ({
+      provider: item.provider,
+      query: item.query,
+      error: item.error,
+      provider_message: item.provider_message,
+      http_status: item.http_status,
+      failure_kind: item.failure_kind,
+      response: item.response,
+      handling_zh: item.handling_zh
+    })),
+    quality_gate: gate
+  };
+  if (!gate.publication_eligible && previous) return {
+    catalog: previous,
+    retained_previous: true,
+    retention_reason_zh: `本轮查询完整度 ${(gate.actual_success_ratio * 100).toFixed(0)}% 未达到 ${(gate.minimum_success_ratio * 100).toFixed(0)}% 闸门，上一份合格目录已保留。`,
+    coverage,
+    warnings
+  };
+  if (searched === 0 && previous) return { catalog: previous, retained_previous: true, coverage, warnings };
   if (searched === 0) throw new Error(`所有 GitHub 搜索均失败：${warnings.map((item) => item.error).join('；')}`);
   // 通过硬性合格门槛后，按公开热度由高到低显示；更新时间只用于同热度时的稳定排序。
   const repositories = [...candidates.values()].sort((a, b) => b.hotness_score - a.hotness_score || b.quality_score - a.quality_score || String(b.updated_at).localeCompare(String(a.updated_at)) || a.repository.localeCompare(b.repository));
@@ -799,20 +1026,11 @@ export async function discoverOpenSourceTechnology({
     provider: 'GitHub and GitLab public repository metadata APIs',
     metadata_only: true,
     searched_queries: searched,
-    query_coverage: {
-      attempted_queries: attempted,
-      successful_queries: searched,
-      failed_queries: attempted - searched,
-      coverage_status_zh: attempted === searched ? '本轮全部计划查询已完成。' : `本轮有 ${attempted - searched} 条查询未完成；详见覆盖缺口，结果不代表全网只有当前候选。`,
-      provider_statistics: providerStatistics,
-      gaps: warnings.map((item) => ({
-        provider: item.provider,
-        query: item.query,
-        error: item.error,
-        http_status: item.http_status,
-        failure_kind: item.failure_kind,
-        handling_zh: item.handling_zh
-      }))
+    query_coverage: coverage,
+    discovery_efficiency: {
+      ...filterSummary,
+      unique_candidate_count: repositories.length,
+      note_zh: '返回条目按每条查询累计，可能含重复项目；唯一候选在硬性许可证、时效、平台关联和风险规则筛选后去重。'
     },
     repository_count: repositories.length,
     warnings,
@@ -828,7 +1046,7 @@ export async function discoverOpenSourceTechnology({
     ? COMMUNITY_RESEARCH_REPORT_PATH
     : path.join(path.dirname(catalogPath), '开源技术雷达-最新研究报告.md'));
   const report = await buildCommunityResearchReport({ catalog, riskRegistry: riskRegistry.registry, reportPath: resolvedReportPath, now });
-  return { catalog, catalogPath, index, frontier, riskRegistry, sourceLedger, report, retained_previous: false, warnings };
+  return { catalog, catalogPath, index, frontier, riskRegistry, sourceLedger, report, coverage, retained_previous: false, warnings };
 }
 
 const CHINESE_QUERY_MAP = {

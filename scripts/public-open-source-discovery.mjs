@@ -9,8 +9,9 @@ const result = await discoverOpenSourceTechnology({
 console.log(JSON.stringify({
   repositories: result.catalog.repository_count,
   queries: result.catalog.searched_queries,
-  query_coverage: result.catalog.query_coverage,
+  query_coverage: result.coverage ?? result.catalog.query_coverage,
   retained_previous: result.retained_previous,
+  retention_reason_zh: result.retention_reason_zh ?? null,
   warnings: result.warnings.length,
   catalog_path: result.catalogPath ?? null
 }, null, 2));

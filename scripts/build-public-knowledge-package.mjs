@@ -38,6 +38,20 @@ async function copyFile(source, target) {
   await fsp.copyFile(source, target);
 }
 
+function assertPublishableCommunityCoverage(catalog) {
+  const coverage = catalog.query_coverage;
+  const gate = coverage?.quality_gate;
+  const attempted = Number(coverage?.attempted_queries);
+  const successful = Number(coverage?.successful_queries);
+  const failed = Number(coverage?.failed_queries);
+  if (!coverage || !gate || gate.publication_eligible !== true || !Number.isInteger(attempted) || attempted < 1 || !Number.isInteger(successful) || !Number.isInteger(failed) || successful + failed !== attempted) {
+    throw new Error('开源技术目录查询完整度或发布闸门无效，拒绝公开发布。');
+  }
+  if (Number(gate.actual_success_ratio) < Number(gate.minimum_success_ratio)) {
+    throw new Error('开源技术目录未达到查询完整度发布闸门，拒绝公开发布。');
+  }
+}
+
 async function run(command, args, cwd) {
   await new Promise((resolve, reject) => {
     const child = spawn(command, args, { cwd, stdio: 'inherit', shell: false });
@@ -108,7 +122,8 @@ if (await exists(communityCatalogPath)) {
   if (catalog.schema_version !== 1 || catalog.source_tier !== 'community_open_source') {
     throw new Error('开源技术目录格式无效，拒绝公开发布。');
   }
-  if (repositories.some((item) => item.source_tier !== 'community_open_source' || Number(item.age_days) > 180 || !/^https:\/\/(github\.com|gitlab\.com)\//i.test(item.canonical_url ?? ''))) {
+  assertPublishableCommunityCoverage(catalog);
+  if (repositories.some((item) => item.source_tier !== 'community_open_source' || Number(item.age_days) > 180 || !/^https:\/\/(github\.com|gitlab\.com)\//i.test(item.canonical_url ?? '') || item.automatic_adoption_allowed !== false || item.research_status !== 'research_only' || !Array.isArray(item.discovery_queries) || !Array.isArray(item.discovery_providers))) {
     throw new Error('开源技术目录包含非允许公开平台元数据或超过半年未更新项目，拒绝发布。');
   }
   const targetPath = path.join(outputRoot, communityCatalogName);
@@ -129,7 +144,7 @@ if (await exists(frontierCatalogPath)) {
   if (catalog.schema_version !== 1 || catalog.source_tier !== 'community_open_source' || catalog.catalog_kind !== 'frontier_latest_30_days') {
     throw new Error('近 30 天前沿技术目录格式无效，拒绝公开发布。');
   }
-  if (Number(catalog.maximum_age_days) !== 30 || repositories.some((item) => item.source_tier !== 'community_open_source' || Number(item.age_days) > 30 || !/^https:\/\/(github\.com|gitlab\.com)\//i.test(item.canonical_url ?? ''))) {
+  if (Number(catalog.maximum_age_days) !== 30 || repositories.some((item) => item.source_tier !== 'community_open_source' || Number(item.age_days) > 30 || !/^https:\/\/(github\.com|gitlab\.com)\//i.test(item.canonical_url ?? '') || item.automatic_adoption_allowed !== false || item.research_status !== 'research_only')) {
     throw new Error('近 30 天前沿技术目录包含非允许公开平台元数据或超出时间窗项目，拒绝发布。');
   }
   const targetPath = path.join(outputRoot, frontierCatalogName);
