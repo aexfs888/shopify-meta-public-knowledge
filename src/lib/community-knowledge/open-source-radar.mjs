@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
 import path from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
-import { ensureDir, exists, isoTaipei, readJson, writeJsonAtomic } from '../fs-utils.mjs';
+import { ensureDir, exists, isoTaipei, readJson, writeJsonAtomic, writeTextAtomic } from '../fs-utils.mjs';
 import { workspacePath } from '../paths.mjs';
 
 export const COMMUNITY_ROOT = workspacePath('knowledge', 'community', 'meta-shopify', 'open-source');
@@ -13,6 +13,8 @@ export const FRONTIER_DB_PATH = path.join(FRONTIER_ROOT, 'index', 'frontier.sqli
 export const COMPLIANCE_RISK_ROOT = path.join(COMMUNITY_ROOT, 'compliance-risk');
 export const COMPLIANCE_RISK_REGISTRY_PATH = path.join(COMPLIANCE_RISK_ROOT, 'isolated-risk-registry.json');
 export const COMPLIANCE_RISK_HISTORY_PATH = path.join(COMPLIANCE_RISK_ROOT, 'screening-history.json');
+export const RESEARCH_SOURCE_LEDGER_PATH = path.join(COMMUNITY_ROOT, 'research-sources', 'source-ledger.json');
+export const COMMUNITY_RESEARCH_REPORT_PATH = workspacePath('reports', 'public', '开源技术雷达-最新研究报告.md');
 export const COMMUNITY_CONFIG_PATH = workspacePath('config', 'community-open-source-discovery.json');
 const GITHUB_API = 'https://api.github.com/search/repositories';
 const GITLAB_API = 'https://gitlab.com/api/v4/projects';
@@ -193,7 +195,79 @@ export function scoreOpenSourceRepository(repo, { allowedLicenses = [], freshWit
   return { score, reasons, topics, license, age_days: ageDays, freshness: ageDays <= freshWithinDays ? 'fresh_within_30_days' : 'updated_within_180_days' };
 }
 
+function metadataEvidenceProfile(repo, quality) {
+  const checks = [
+    { key: 'license', ok: quality.license && quality.license !== 'NOASSERTION', label_zh: '许可证' },
+    { key: 'description', ok: String(repo.description ?? '').trim().length >= 40, label_zh: '足够的公开简介' },
+    { key: 'language', ok: Boolean(repo.language), label_zh: '主要语言' },
+    { key: 'topics', ok: (repo.topics ?? []).length >= 2, label_zh: '主题标签' },
+    { key: 'branch', ok: Boolean(repo.default_branch), label_zh: '默认分支' },
+    { key: 'timestamps', ok: Boolean(repo.updated_at) && Boolean(repo.pushed_at), label_zh: '更新时间和推送时间' }
+  ];
+  const passed = checks.filter((item) => item.ok);
+  const score = Math.round((passed.length / checks.length) * 100) / 100;
+  const label = score >= 0.84 ? '公开元数据较完整' : score >= 0.5 ? '公开元数据部分完整' : '公开元数据不足';
+  return {
+    score,
+    label_zh: label,
+    verified_fields_zh: passed.map((item) => item.label_zh),
+    missing_fields_zh: checks.filter((item) => !item.ok).map((item) => item.label_zh),
+    note_zh: '只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。'
+  };
+}
+
+const CAPABILITY_EXPOSURE_RULES = [
+  {
+    id: 'potential_external_write',
+    pattern: /\b(?:post(?:ing)?|publish(?:ing)?|schedule|scheduling|drafts?|comment(?:s|ing)?|comment management|page management)\b/i,
+    label_zh: '公开元数据提示可能具有对外发布、排程或评论管理能力',
+    review_zh: '若后续评估，先逐项确认是否会发布、排程、创建草稿或管理评论；未获得单次书面授权不得连接真实主页。'
+  },
+  {
+    id: 'browser_automation',
+    pattern: /\b(?:playwright|puppeteer|selenium|browser automation)\b/i,
+    label_zh: '公开元数据提示可能包含浏览器自动化',
+    review_zh: '先确认数据源是否允许自动化访问；不得登录私人后台、绕过验证码或规避平台限制。'
+  },
+  {
+    id: 'agent_or_mcp_integration',
+    pattern: /\b(?:mcp|agents?|agentic)\b/i,
+    label_zh: '公开元数据提示可能与 Agent 或 MCP 工具连接有关',
+    review_zh: '先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。'
+  },
+  {
+    id: 'official_api_scope_review',
+    pattern: /\b(?:graph api|facebook api|meta api|shopify api)\b/i,
+    label_zh: '公开元数据提及平台 API',
+    review_zh: '以当日 Meta/Shopify 官方权限与数据范围说明为准，逐项核对读写范围和最小权限。'
+  }
+];
+
+function capabilityExposureProfile(repo, quality) {
+  const text = [relevanceText(repo), ...quality.topics].join(' ');
+  const exposures = CAPABILITY_EXPOSURE_RULES.filter((item) => item.pattern.test(text)).map((item) => ({
+    id: item.id,
+    label_zh: item.label_zh,
+    review_zh: item.review_zh
+  }));
+  return exposures;
+}
+
+function manualReviewRequirements(repo, evidence, exposures) {
+  const requirements = [
+    '阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。',
+    '在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。',
+    '核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。'
+  ];
+  if (evidence.score < 0.84) requirements.push(`补齐或人工核对：${evidence.missing_fields_zh.join('、')}。`);
+  for (const exposure of exposures) requirements.push(exposure.review_zh);
+  if (String(repo.description ?? '').trim().length < 40) requirements.push('项目公开简介过短，不能据此推断能力、数据源、成本、隐私或合规性。');
+  return [...new Set(requirements)];
+}
+
 function compactRepository(repo, quality, query, provider = 'GitHub') {
+  const evidence = metadataEvidenceProfile(repo, quality);
+  const exposures = capabilityExposureProfile(repo, quality);
   return {
     source_id: sourceId(repo.full_name),
     source_tier: 'community_open_source',
@@ -218,8 +292,20 @@ function compactRepository(repo, quality, query, provider = 'GitHub') {
     freshness: quality.freshness,
     freshness_label_zh: quality.freshness === 'fresh_within_30_days' ? '最近 30 天更新：新技术候选' : `超过一个月、半年内：最后更新距今 ${quality.age_days} 天`,
     quality_score: quality.score,
+    discovery_priority_score: quality.score,
+    discovery_priority_note_zh: '发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。',
+    metadata_evidence_score: evidence.score,
+    metadata_evidence_label_zh: evidence.label_zh,
+    metadata_verified_fields_zh: evidence.verified_fields_zh,
+    metadata_missing_fields_zh: evidence.missing_fields_zh,
+    metadata_evidence_note_zh: evidence.note_zh,
     selection_reasons_zh: quality.reasons,
     discovery_query: query,
+    capability_exposures: exposures,
+    automatic_adoption_allowed: false,
+    research_status: 'research_only',
+    research_status_zh: '仅限公开元数据研究；尚未安装、执行、审计或授权接入。',
+    manual_review_requirements_zh: manualReviewRequirements(repo, evidence, exposures),
     adoption_rule_zh: '只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。',
     status: 'candidate_verified_metadata'
   };
@@ -327,6 +413,164 @@ export async function appendComplianceRiskHistory({
   return { historyPath, runCount: history.run_count };
 }
 
+export async function buildResearchSourceLedger({
+  catalog = null,
+  frontier = null,
+  riskRegistry = null,
+  catalogPath = COMMUNITY_CATALOG_PATH,
+  frontierCatalogPath = FRONTIER_CATALOG_PATH,
+  riskRegistryPath = COMPLIANCE_RISK_REGISTRY_PATH,
+  ledgerPath = RESEARCH_SOURCE_LEDGER_PATH,
+  now = new Date()
+} = {}) {
+  const mainCatalog = catalog ?? await readJson(catalogPath);
+  const frontierCatalog = frontier ?? (await exists(frontierCatalogPath) ? await readJson(frontierCatalogPath) : { repositories: [] });
+  const risks = riskRegistry ?? (await exists(riskRegistryPath) ? await readJson(riskRegistryPath) : { official_evidence: [] });
+  const sources = new Map();
+  for (const item of [...(mainCatalog.repositories ?? []), ...(frontierCatalog.repositories ?? [])]) {
+    const url = String(item.canonical_url ?? '');
+    if (!/^https:\/\/(github\.com|gitlab\.com)\//i.test(url)) continue;
+    sources.set(url, {
+      source_id: item.source_id,
+      source_class_zh: '合规开源技术候选公开元数据',
+      title_zh: item.title_zh ?? item.repository,
+      provider: item.provider ?? 'unknown',
+      url,
+      updated_at: item.updated_at ?? null,
+      freshness: item.freshness ?? 'unknown'
+    });
+  }
+  for (const item of risks.official_evidence ?? []) {
+    const url = String(item.url ?? '');
+    if (!/^https:\/\/(?:[\w.-]*facebook\.com|[\w.-]*meta\.com|[\w.-]*shopify\.com)\//i.test(url)) continue;
+    sources.set(url, {
+      source_id: `official-${crypto.createHash('sha256').update(url).digest('hex').slice(0, 16)}`,
+      source_class_zh: '官方合规与防范依据',
+      title_zh: item.title_zh ?? '官方规则来源',
+      provider: item.publisher ?? 'official',
+      url,
+      updated_at: null,
+      freshness: 'official_reference'
+    });
+  }
+  const entries = [...sources.values()].sort((a, b) => a.source_class_zh.localeCompare(b.source_class_zh) || a.title_zh.localeCompare(b.title_zh));
+  const ledger = {
+    schema_version: 1,
+    source_tier: 'research_source_ledger',
+    generated_at: isoTaipei(now),
+    purpose_zh: '保存可安全研究的公开来源链接，支持技术核验、合规防范与回溯。',
+    source_count: entries.length,
+    source_scope_zh: '仅包含合规开源候选的 GitHub/GitLab 公开链接，以及 Meta/Shopify 官方规则与安全依据链接。',
+    excluded_scope_zh: '不保存可直接定位、下载或复用违规项目的链接、代码、账号规避步骤、Cookie、Token、凭据或绕过方法。',
+    sources: entries
+  };
+  await writeJsonAtomic(ledgerPath, ledger);
+  return { ledger, ledgerPath };
+}
+
+function markdownInline(value) {
+  return String(value ?? '').replace(/[\r\n]+/g, ' ').replace(/([\\`*_{}\[\]<>|])/g, '\\$1').trim();
+}
+
+function markdownRepositoryLink(repository, url) {
+  const label = markdownInline(repository || '未命名仓库');
+  return /^https:\/\/(?:github|gitlab)\.com\//i.test(String(url ?? '')) ? `[${label}](${url})` : label;
+}
+
+function coverageSummary(catalog) {
+  const coverage = catalog.query_coverage ?? {};
+  const successful = Number(coverage.successful_queries ?? catalog.searched_queries ?? 0);
+  const legacyGaps = catalog.warnings ?? [];
+  const gaps = Array.isArray(coverage.gaps) ? coverage.gaps : legacyGaps;
+  const failed = Number(coverage.failed_queries ?? (coverage.attempted_queries == null ? gaps.length : 0));
+  const attempted = Number(coverage.attempted_queries ?? (successful + failed));
+  const providerStatistics = Object.values(coverage.provider_statistics ?? {});
+  return { attempted, successful, failed, providerStatistics, gaps, status: coverage.coverage_status_zh ?? '旧版目录未记录完整查询覆盖信息。' };
+}
+
+export async function buildCommunityResearchReport({
+  catalog = null,
+  riskRegistry = null,
+  catalogPath = COMMUNITY_CATALOG_PATH,
+  riskRegistryPath = COMPLIANCE_RISK_REGISTRY_PATH,
+  reportPath = COMMUNITY_RESEARCH_REPORT_PATH,
+  now = new Date()
+} = {}) {
+  const source = catalog ?? await readJson(catalogPath);
+  const risks = riskRegistry ?? (await exists(riskRegistryPath) ? await readJson(riskRegistryPath) : null);
+  const coverage = coverageSummary(source);
+  const repositories = source.repositories ?? [];
+  const lines = [
+    '# GitHub / GitLab 公开技术雷达：最新研究报告',
+    '',
+    `- 生成时间：${source.generated_at ?? isoTaipei(now)}（Asia/Taipei）`,
+    `- 数据范围：${source.scope_zh ?? '仅公开仓库元数据'}`,
+    '- 数据边界：只读取公开仓库元数据；不克隆、不安装、不执行第三方代码；不读取或提供 Token、Cookie、账号资料、客户资料或真实 Meta / Shopify 数据。',
+    '- 研究状态：下列全部是“仅研究候选”，不是已安装、已启用、已审计或已批准采用的工具。',
+    '',
+    '## 采集覆盖',
+    '',
+    `- 计划查询：${coverage.attempted} 条；成功：${coverage.successful} 条；未完成：${coverage.failed} 条。`,
+    `- 结论：${coverage.status}`,
+    `- 入选候选：${repositories.length} 个。`,
+    ''
+  ];
+  if (coverage.providerStatistics.length) {
+    lines.push('| 平台 | 计划 | 成功 | 未完成 | 返回的公开元数据条目 |', '| --- | ---: | ---: | ---: | ---: |');
+    for (const item of coverage.providerStatistics) lines.push(`| ${markdownInline(item.provider)} | ${Number(item.attempted_queries ?? 0)} | ${Number(item.successful_queries ?? 0)} | ${Number(item.failed_queries ?? 0)} | ${Number(item.returned_repository_metadata ?? 0)} |`);
+    lines.push('');
+  }
+  if (coverage.gaps.length) {
+    lines.push('### 覆盖缺口（不绕过）', '');
+    for (const gap of coverage.gaps) {
+      lines.push(`- ${markdownInline(gap.provider)}：查询“${markdownInline(gap.query)}”未完成（${markdownInline(gap.error)}）。${markdownInline(gap.handling_zh ?? '等待下次正常计划任务再试。')}`);
+    }
+    lines.push('');
+  }
+  lines.push('## 候选逐项说明', '');
+  if (!repositories.length) {
+    lines.push('本轮没有通过硬性筛选的候选。没有候选不代表没有相关技术，只表示当前公开查询和筛选条件下未形成可研究候选。', '');
+  }
+  for (let index = 0; index < repositories.length; index += 1) {
+    const item = repositories[index];
+    const profileRepo = {
+      full_name: item.repository,
+      description: item.description_original,
+      topics: item.topics ?? [],
+      language: item.language,
+      default_branch: item.default_branch,
+      updated_at: item.updated_at,
+      pushed_at: item.pushed_at
+    };
+    const profileQuality = { license: item.license_spdx, topics: item.topics ?? [] };
+    const computedEvidence = metadataEvidenceProfile(profileRepo, profileQuality);
+    const evidence = item.metadata_evidence_score == null ? computedEvidence : {
+      score: item.metadata_evidence_score,
+      label_zh: item.metadata_evidence_label_zh,
+      missing_fields_zh: item.metadata_missing_fields_zh ?? []
+    };
+    const exposures = item.capability_exposures ?? capabilityExposureProfile(profileRepo, profileQuality);
+    const exposureLabels = exposures.map((exposure) => exposure.label_zh);
+    const reviewRequirements = item.manual_review_requirements_zh ?? manualReviewRequirements(profileRepo, evidence, exposures);
+    lines.push(`### ${index + 1}. ${markdownRepositoryLink(item.repository, item.canonical_url)}`, '');
+    lines.push(`- 公开简介：${markdownInline(item.description_original || '未提供；不能据此推断具体能力。')}`);
+    lines.push(`- 元数据：许可证 ${markdownInline(item.license_spdx)}；语言 ${markdownInline(item.language || '未标注')}；最近更新 ${markdownInline(item.updated_at || '未知')}；星标 / Fork ${Number(item.stars ?? 0)} / ${Number(item.forks ?? 0)}。`);
+    lines.push(`- 发现排序：${Number(item.discovery_priority_score ?? item.quality_score ?? 0)} 分。${markdownInline(item.discovery_priority_note_zh ?? '旧版目录的分数只适用于发现排序，不代表可采用。')}`);
+    lines.push(`- 证据完整度：${Number(evidence.score * 100).toFixed(0)}%（${markdownInline(evidence.label_zh)}）。`);
+    lines.push(`- 公开元数据提示的能力暴露：${exposureLabels.length ? exposureLabels.map(markdownInline).join('；') : '未命中预设暴露信号；这不等于没有风险或外部连接能力。'}`);
+    lines.push(`- 当前状态：${markdownInline(item.research_status_zh ?? '仅元数据候选；未安装、未审计、未授权接入。')}`);
+    lines.push('- 人工复核：');
+    for (const requirement of reviewRequirements) lines.push(`  - ${markdownInline(requirement)}`);
+    lines.push('');
+  }
+  lines.push('## 合规隔离与正确使用', '');
+  lines.push(`- 本轮匿名合规风险命中：${Number(risks?.observed_candidate_count ?? 0)}。风险隔离库只保存类别和匿名计数，不保存违规项目链接、代码、凭据或规避方法。`);
+  lines.push('- 判断平台规则、权限和数据边界时，以 Meta / Shopify 官方资料为准；第三方项目只能提供待核验的技术线索。');
+  lines.push('- 如需评估任何候选，先在隔离环境进行最小化只读审计，完成数据流和权限检查后，再决定是否值得继续；不得直接连接真实业务资产。', '');
+  await writeTextAtomic(reportPath, `${lines.join('\n')}\n`);
+  return { reportPath, repositoryCount: repositories.length, coverage };
+}
+
 export async function buildFrontierCatalog({
   catalogPath = COMMUNITY_CATALOG_PATH,
   frontierCatalogPath = FRONTIER_CATALOG_PATH,
@@ -376,8 +620,7 @@ async function githubSearch(query, { fetchImpl = fetch, token, perPage = 40 } = 
   url.searchParams.set('per_page', String(Math.min(100, Math.max(1, perPage))));
   const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'Hermes-Open-Source-Radar/1.0' };
   if (token) headers.Authorization = `Bearer ${token}`;
-  const response = await fetchImpl(url, { headers, signal: AbortSignal.timeout(25_000) });
-  if (!response.ok) throw new Error(`GitHub 公开仓库搜索失败：HTTP ${response.status}`);
+  const response = await fetchPublicMetadata(url, { headers, signal: AbortSignal.timeout(25_000) }, fetchImpl, 'GitHub');
   const payload = await response.json();
   return Array.isArray(payload.items) ? payload.items : [];
 }
@@ -413,10 +656,63 @@ async function gitlabSearch(query, { fetchImpl = fetch, perPage = 40 } = {}) {
   url.searchParams.set('sort', 'desc');
   url.searchParams.set('license', 'true');
   url.searchParams.set('per_page', String(Math.min(100, Math.max(1, perPage))));
-  const response = await fetchImpl(url, { headers: { Accept: 'application/json', 'User-Agent': 'Hermes-Open-Source-Radar/1.0' }, signal: AbortSignal.timeout(25_000) });
-  if (!response.ok) throw new Error(`GitLab 公开项目搜索失败：HTTP ${response.status}`);
+  const response = await fetchPublicMetadata(url, { headers: { Accept: 'application/json', 'User-Agent': 'Hermes-Open-Source-Radar/1.0' }, signal: AbortSignal.timeout(25_000) }, fetchImpl, 'GitLab');
   const payload = await response.json();
   return Array.isArray(payload) ? payload.map(normalizeGitLabRepository) : [];
+}
+
+function httpStatusFromError(error) {
+  const status = Number(error?.http_status ?? String(error?.message ?? '').match(/HTTP\s+(\d{3})/)?.[1]);
+  return Number.isInteger(status) ? status : null;
+}
+
+function queryFailureProfile(error) {
+  const httpStatus = httpStatusFromError(error);
+  if (httpStatus === 401 || httpStatus === 403) return {
+    http_status: httpStatus,
+    failure_kind: 'access_or_permission_limited',
+    handling_zh: '已停止该查询；不会绕过访问限制或改用其他身份。等待下次使用正常公开权限的计划任务再试。'
+  };
+  if (httpStatus === 429) return {
+    http_status: httpStatus,
+    failure_kind: 'rate_limited',
+    handling_zh: '已停止该查询；保留已取得结果，不进行高频重试，等待下次计划任务。'
+  };
+  if (httpStatus && httpStatus >= 500) return {
+    http_status: httpStatus,
+    failure_kind: 'provider_temporary_error',
+    handling_zh: '已按普通临时错误最多重试两次；仍失败则保留覆盖缺口，等待下次计划任务。'
+  };
+  return {
+    http_status: httpStatus,
+    failure_kind: 'network_or_unknown_error',
+    handling_zh: '保留覆盖缺口；下次计划任务会重新尝试，不会用绕过方式补取。'
+  };
+}
+
+async function fetchPublicMetadata(url, options, fetchImpl, provider) {
+  let lastError = null;
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      const response = await fetchImpl(url, options);
+      if (response.ok) return response;
+      const retryable = response.status >= 500 && response.status <= 599;
+      if (!retryable || attempt === 2) {
+        const error = new Error(`${provider} 公开仓库搜索失败：HTTP ${response.status}`);
+        error.http_status = response.status;
+        error.attempt_count = attempt + 1;
+        throw error;
+      }
+      lastError = new Error(`${provider} 公开仓库搜索失败：HTTP ${response.status}`);
+    } catch (error) {
+      lastError = error;
+      const httpStatus = httpStatusFromError(error);
+      const retryable = !httpStatus || (httpStatus >= 500 && httpStatus <= 599);
+      if (!retryable || attempt === 2) throw error;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 500 * (attempt + 1)));
+  }
+  throw lastError ?? new Error(`${provider} 公开仓库搜索失败。`);
 }
 
 export async function discoverOpenSourceTechnology({
@@ -424,6 +720,8 @@ export async function discoverOpenSourceTechnology({
   catalogPath = COMMUNITY_CATALOG_PATH,
   frontierCatalogPath = path.join(path.dirname(catalogPath), 'frontier', 'latest-30-days.json'),
   riskRegistryPath = path.join(path.dirname(catalogPath), 'compliance-risk', 'isolated-risk-registry.json'),
+  sourceLedgerPath = path.join(path.dirname(catalogPath), 'research-sources', 'source-ledger.json'),
+  reportPath = null,
   fetchImpl = fetch,
   token = process.env.GITHUB_TOKEN || '',
   now = new Date()
@@ -434,14 +732,26 @@ export async function discoverOpenSourceTechnology({
   }
   const previous = await exists(catalogPath) ? await readJson(catalogPath) : null;
   const warnings = [];
+  const providerStatistics = {};
   const candidates = new Map();
   const riskObservations = new Map();
   const observedRiskSources = new Map();
   let searched = 0;
+  let attempted = 0;
+  function statisticsFor(provider) {
+    const key = provider.toLowerCase();
+    providerStatistics[key] ??= { provider, attempted_queries: 0, successful_queries: 0, failed_queries: 0, returned_repository_metadata: 0 };
+    return providerStatistics[key];
+  }
   async function collect(provider, query, search, providerConfig) {
+    attempted += 1;
+    const statistics = statisticsFor(provider);
+    statistics.attempted_queries += 1;
     try {
       const items = await search(query, { fetchImpl, token, perPage: providerConfig.max_results_per_query });
       searched += 1;
+      statistics.successful_queries += 1;
+      statistics.returned_repository_metadata += items.length;
       for (const repo of items) {
         const quality = scoreOpenSourceRepository(repo, {
           allowedLicenses: providerConfig.allowed_licenses,
@@ -470,7 +780,9 @@ export async function discoverOpenSourceTechnology({
         if (!existing || card.quality_score > existing.quality_score) candidates.set(card.source_id, card);
       }
     } catch (error) {
-      warnings.push({ provider, query, error: error.message });
+      statistics.failed_queries += 1;
+      const failure = queryFailureProfile(error);
+      warnings.push({ provider, query, error: error.message, ...failure });
     }
   }
   if (config.providers?.includes('github') !== false) for (const query of config.github.queries) await collect('GitHub', query, githubSearch, config.github);
@@ -484,9 +796,24 @@ export async function discoverOpenSourceTechnology({
     scope_zh: config.scope_zh,
     source_tier: 'community_open_source',
     generated_at: isoTaipei(now),
-    provider: 'GitHub public repository metadata API',
+    provider: 'GitHub and GitLab public repository metadata APIs',
     metadata_only: true,
     searched_queries: searched,
+    query_coverage: {
+      attempted_queries: attempted,
+      successful_queries: searched,
+      failed_queries: attempted - searched,
+      coverage_status_zh: attempted === searched ? '本轮全部计划查询已完成。' : `本轮有 ${attempted - searched} 条查询未完成；详见覆盖缺口，结果不代表全网只有当前候选。`,
+      provider_statistics: providerStatistics,
+      gaps: warnings.map((item) => ({
+        provider: item.provider,
+        query: item.query,
+        error: item.error,
+        http_status: item.http_status,
+        failure_kind: item.failure_kind,
+        handling_zh: item.handling_zh
+      }))
+    },
     repository_count: repositories.length,
     warnings,
     safety: config.safety,
@@ -496,7 +823,12 @@ export async function discoverOpenSourceTechnology({
   const index = await buildCommunityIndex({ catalog, catalogPath });
   const frontier = await buildFrontierCatalog({ catalog, config, frontierCatalogPath, now });
   const riskRegistry = await buildComplianceRiskRegistry({ observations: riskObservations, registryPath: riskRegistryPath, now });
-  return { catalog, catalogPath, index, frontier, riskRegistry, retained_previous: false, warnings };
+  const sourceLedger = await buildResearchSourceLedger({ catalog, frontier: frontier.catalog, riskRegistry: riskRegistry.registry, ledgerPath: sourceLedgerPath, now });
+  const resolvedReportPath = reportPath ?? (path.resolve(catalogPath) === path.resolve(COMMUNITY_CATALOG_PATH)
+    ? COMMUNITY_RESEARCH_REPORT_PATH
+    : path.join(path.dirname(catalogPath), '开源技术雷达-最新研究报告.md'));
+  const report = await buildCommunityResearchReport({ catalog, riskRegistry: riskRegistry.registry, reportPath: resolvedReportPath, now });
+  return { catalog, catalogPath, index, frontier, riskRegistry, sourceLedger, report, retained_previous: false, warnings };
 }
 
 const CHINESE_QUERY_MAP = {
