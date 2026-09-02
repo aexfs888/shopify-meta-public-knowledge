@@ -204,6 +204,45 @@ export async function syncOfficialSource(source, options = {}) {
   const normalized = normalizeFetchedContent({ contentType: fetched.contentType, buffer: fetched.buffer, fallbackTitle: source.title_zh });
   const quality = assessNormalizedContent({ contentType: fetched.contentType, normalized: normalized.normalized });
   await ensureDir(sourceDir);
+
+  // HTTP 200 不等于正文可用。Meta 等站点偶尔会返回登录墙或只有标题的
+  // 客户端空壳；这类响应应作为拒收证据保存，不能覆盖最后一次合格正文。
+  const hasLastKnownGood = previous?.quality?.usable_for_index !== false
+    && ['current', 'changed'].includes(previous?.status);
+  if (!quality.usable && hasLastKnownGood) {
+    const rejectedRawPath = path.join(sourceDir, `last-rejected${extension}`);
+    await writeBufferAtomic(rejectedRawPath, fetched.buffer);
+    const checkedAt = isoTaipei();
+    const metadata = {
+      ...previous,
+      ...source,
+      title: previous.title || source.title_zh,
+      last_checked_at: checkedAt,
+      last_error: quality.reason,
+      last_fetch_error: null,
+      last_quality_rejection: {
+        at: checkedAt,
+        code: quality.status,
+        message: quality.reason,
+        final_url: fetched.finalUrl,
+        content_type: fetched.contentType,
+        content_hash: contentHash,
+        content_bytes: fetched.buffer.length,
+        normalized_chars: normalized.normalized.length,
+        local_raw_path: path.relative(options.workspaceRoot ?? path.resolve(KNOWLEDGE_SOURCE_ROOT, '..', '..', '..', '..'), rejectedRawPath)
+      }
+    };
+    await writeJsonAtomic(metaPath, metadata);
+    return {
+      source_id: source.source_id,
+      status: 'retained_previous',
+      error: quality.reason,
+      error_code: quality.status,
+      http_status: fetched.status,
+      metadata
+    };
+  }
+
   await writeBufferAtomic(rawPath, fetched.buffer);
   if (quality.usable && normalized.normalized) await writeTextAtomic(normalizedPath, `${normalized.normalized.trim()}\n`);
 

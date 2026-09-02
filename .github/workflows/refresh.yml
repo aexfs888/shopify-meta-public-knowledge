@@ -26,6 +26,9 @@ jobs:
           node-version: 22
           package-manager-cache: false
 
+      - name: 运行采集器回归测试
+        run: npm test
+
       - name: 还原上一份合格官方资料
         shell: bash
         run: |
