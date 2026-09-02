@@ -2,15 +2,15 @@
   "schema_version": 1,
   "scope_zh": "Shopify 独立站使用 Meta、Facebook、Instagram 投流的第三方开源与前沿技术发现；仅作方案与工具参考，不替代官方规则。",
   "source_tier": "community_open_source",
-  "generated_at": "2026-09-02T08:24:05+08:00",
+  "generated_at": "2026-09-02T08:26:07+08:00",
   "provider": "GitHub public repository metadata API",
   "metadata_only": true,
   "searched_queries": 20,
-  "repository_count": 4,
+  "repository_count": 5,
   "warnings": [
     {
       "provider": "GitHub",
-      "query": "marketing attribution incrementality mmm shopify in:name,description,readme archived:false",
+      "query": "shopify product feed catalog advertising in:name,description,readme archived:false",
       "error": "GitHub 公开仓库搜索失败：HTTP 403"
     }
   ],
@@ -57,6 +57,53 @@
     "third_party_label_zh": "第三方开源技术参考，需先以 Meta/Shopify 官方资料核验后再采用"
   },
   "repositories": [
+    {
+      "source_id": "oss-4a5ac1b0cabef293",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / rghrmkr1993",
+      "provider": "GitHub",
+      "repository": "rghrmkr1993/ad-campaign-skills",
+      "title_zh": "开源项目：rghrmkr1993/ad-campaign-skills",
+      "description_original": "Production-grade paid-media agents & skills for Claude Code - complete ad campaigns for any industry, any region, from a 4-line client brief (Meta, Google, YouTube, TikTok).",
+      "canonical_url": "https://github.com/rghrmkr1993/ad-campaign-skills",
+      "homepage_url": null,
+      "default_branch": "main",
+      "language": null,
+      "license_spdx": "MIT",
+      "topics": [
+        "ads",
+        "agents",
+        "claude",
+        "claude-code",
+        "google-ads",
+        "marketing",
+        "meta-ads",
+        "paid-media",
+        "skills",
+        "tiktok-ads",
+        "campaigns",
+        "automation"
+      ],
+      "stars": 1,
+      "forks": 0,
+      "hotness_score": 1,
+      "open_issues": 0,
+      "pushed_at": "2026-07-18T21:16:07Z",
+      "updated_at": "2026-07-18T21:16:11Z",
+      "age_days": 45,
+      "freshness": "updated_within_180_days",
+      "freshness_label_zh": "超过一个月、半年内：最后更新距今 45 天",
+      "quality_score": 8,
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最后更新距今 45 天（超过一个月，半年内）",
+        "涉及 Meta 投流或信号",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "marketing attribution incrementality mmm shopify in:name,description,readme archived:false",
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
     {
       "source_id": "oss-75daf01a4a58b456",
       "source_tier": "community_open_source",
