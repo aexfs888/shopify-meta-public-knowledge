@@ -10,6 +10,30 @@
     "bytes": 297416,
     "format": "tar.gz"
   },
+  "community_open_source_catalog": {
+    "file": "community-open-source-catalog.json",
+    "sha256": "455977274405d600859c4c89d945c9db782c4f1b4e5bebb1061195ff68b558a3",
+    "bytes": 9096,
+    "repository_count": 4,
+    "maximum_age_days": 180,
+    "scope_zh": "第三方开源技术参考；不替代官方规则"
+  },
+  "community_frontier_catalog": {
+    "file": "community-frontier-latest-30-days.json",
+    "sha256": "a5d3e10670d5d6fff9cb1529b322026e68048382d25e71d135bb2e577b8905e0",
+    "bytes": 10283,
+    "repository_count": 4,
+    "maximum_age_days": 30,
+    "sort_order_zh": "更新时间优先，其次为质量与公开热度",
+    "scope_zh": "第三方开源前沿技术参考；不替代官方规则"
+  },
+  "community_compliance_risk_registry": {
+    "file": "community-compliance-risk-registry.json",
+    "sha256": "3caa53003f271515e7eeb153d32446b50611bb4078334e2d862a82a9afe39936",
+    "bytes": 7457,
+    "observed_candidate_count": 0,
+    "data_handling_zh": "只含匿名聚合风险类别；不含项目标识、URL、代码或操作步骤"
+  },
   "local_apply": {
     "rebuild_index": true,
     "translate_changed_chunks_offline": true,

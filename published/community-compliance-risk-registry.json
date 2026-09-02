@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "source_tier": "compliance_risk_research",
+  "generated_at": "2026-09-02T08:17:58+08:00",
+  "purpose_zh": "用于正常工作流的合规筛查、培训和风险规避，不用于发现、使用或传播违规工具。",
+  "coverage_zh": "覆盖账号与访问、广告完整性、隐私数据、商品安全、知识产权、追踪归因等八大风险类；类别会随公开官方资料的更新而复核。",
+  "data_handling_zh": "仅保留风险类别和匿名聚合计数；不保存可操作的违规项目标识、URL、代码、凭据或规避步骤。",
+  "evidence_boundary_zh": "官方规则是判定依据；匿名命中数只表示本次合规公开技术检索中被拦截的数量，不代表全网发生率。",
+  "official_evidence": [
+    {
+      "publisher": "Meta",
+      "title_zh": "Meta 广告标准",
+      "url": "https://transparency.meta.com/policies/ad-standards/"
+    },
+    {
+      "publisher": "Meta",
+      "title_zh": "Meta Business Tools Terms",
+      "url": "https://www.facebook.com/legal/technology_terms"
+    },
+    {
+      "publisher": "Meta",
+      "title_zh": "Meta Commercial Terms",
+      "url": "https://www.facebook.com/legal/commercial_terms"
+    },
+    {
+      "publisher": "Meta",
+      "title_zh": "Customer List Custom Audiences Terms",
+      "url": "https://www.facebook.com/legal/terms/customaudience"
+    },
+    {
+      "publisher": "Shopify",
+      "title_zh": "Shopify 顾客隐私设置",
+      "url": "https://help.shopify.com/en/manual/privacy-and-security/privacy/customer-privacy-settings/privacy-settings"
+    },
+    {
+      "publisher": "Shopify",
+      "title_zh": "Shopify Web Pixel 隐私",
+      "url": "https://shopify.dev/docs/api/web-pixels-api/pixel-privacy"
+    }
+  ],
+  "normal_use_checklist_zh": [
+    "新增工具、素材、数据源或自动化前，先选择对应风险类别并核对官方规则。",
+    "涉及客户数据、Pixel、CAPI、受众或 Cookie 时，先核对同意、最小化收集和授权边界。",
+    "涉及广告、商品或素材时，核对真实声明、商品安全、地区要求、商标和授权证据。",
+    "一旦命中风险类别，停止接入；记录原因并改用官方接口、授权资料或人工复核。"
+  ],
+  "observed_candidate_count": 0,
+  "categories": [
+    {
+      "category_id": "account_evasion",
+      "category_zh": "账号、身份或平台限制规避",
+      "observed_candidate_count": 0,
+      "observed_source_providers": [],
+      "observed_business_contexts_zh": [],
+      "risk_zh": "可能违反平台条款并触发账号、资产或支付限制。",
+      "safe_alternative_zh": "使用官方 OAuth、正式权限、真实业务资料和平台申诉/支持渠道；发生限制时先停用自动化并核对官方提示。",
+      "handling_zh": "只计入匿名聚合计数与非操作性场景；不保存项目名称、链接、代码、下载物或操作步骤。"
+    },
+    {
+      "category_id": "access_bypass",
+      "category_zh": "验证码或访问限制绕过",
+      "observed_candidate_count": 0,
+      "observed_source_providers": [],
+      "observed_business_contexts_zh": [],
+      "risk_zh": "属于规避访问控制，可能违法或违反服务条款。",
+      "safe_alternative_zh": "只使用公开 API、RSS、站点地图或已获授权的数据导出；遇到验证码、登录或付费墙立即停止。",
+      "handling_zh": "只计入匿名聚合计数与非操作性场景；不保存项目名称、链接、代码、下载物或操作步骤。"
+    },
+    {
+      "category_id": "credential_misuse",
+      "category_zh": "凭据、Cookie 或会话数据滥用",
+      "observed_candidate_count": 0,
+      "observed_source_providers": [],
+      "observed_business_contexts_zh": [],
+      "risk_zh": "可能造成未授权访问、数据泄露与账户接管。",
+      "safe_alternative_zh": "凭据只保存在官方安全授权存储；不导出、不复制 Cookie 或 Token，并定期撤销失效授权。",
+      "handling_zh": "只计入匿名聚合计数与非操作性场景；不保存项目名称、链接、代码、下载物或操作步骤。"
+    },
+    {
+      "category_id": "advertising_integrity",
+      "category_zh": "广告审核、内容真实性与互动完整性风险",
+      "observed_candidate_count": 0,
+      "observed_source_providers": [],
+      "observed_business_contexts_zh": [],
+      "risk_zh": "可能导致广告拒登、停投、账户处罚或消费者误导。",
+      "safe_alternative_zh": "广告文案、素材、落地页和商品声明均以 Meta 广告标准及实际可验证证据复核；不伪造评价、互动、折扣或功效。",
+      "handling_zh": "只计入匿名聚合计数与非操作性场景；不保存项目名称、链接、代码、下载物或操作步骤。"
+    },
+    {
+      "category_id": "privacy_and_data_governance",
+      "category_zh": "隐私、同意与客户数据治理风险",
+      "observed_candidate_count": 0,
+      "observed_source_providers": [],
+      "observed_business_contexts_zh": [],
+      "risk_zh": "可能违反隐私承诺、平台条款或数据保护法律，并损害客户权益。",
+      "safe_alternative_zh": "先取得适用的同意与合法依据；最小化收集；遵守退订、删除和数据访问请求；只用官方或获授权接口。",
+      "handling_zh": "只计入匿名聚合计数与非操作性场景；不保存项目名称、链接、代码、下载物或操作步骤。"
+    },
+    {
+      "category_id": "product_and_consumer_safety",
+      "category_zh": "商品、消费者安全与受限品类风险",
+      "observed_candidate_count": 0,
+      "observed_source_providers": [],
+      "observed_business_contexts_zh": [],
+      "risk_zh": "可能引发下架、退款、召回、监管处罚或消费者伤害。",
+      "safe_alternative_zh": "上架前完成商品身份、合规标签、警示、运输限制、目标国规则和供应链证据检查。",
+      "handling_zh": "只计入匿名聚合计数与非操作性场景；不保存项目名称、链接、代码、下载物或操作步骤。"
+    },
+    {
+      "category_id": "intellectual_property_and_content_rights",
+      "category_zh": "商标、版权与素材权利风险",
+      "observed_candidate_count": 0,
+      "observed_source_providers": [],
+      "observed_business_contexts_zh": [],
+      "risk_zh": "可能造成投诉、下架、账户限制、赔偿或纠纷。",
+      "safe_alternative_zh": "只使用已验证授权的商品、商标和图片视频；保留许可、署名和授权范围证据。",
+      "handling_zh": "只计入匿名聚合计数与非操作性场景；不保存项目名称、链接、代码、下载物或操作步骤。"
+    },
+    {
+      "category_id": "measurement_integrity",
+      "category_zh": "追踪、归因与指标真实性风险",
+      "observed_candidate_count": 0,
+      "observed_source_providers": [],
+      "observed_business_contexts_zh": [],
+      "risk_zh": "会误导优化决策、破坏平台信号质量，并可能违反平台或合同要求。",
+      "safe_alternative_zh": "只发送真实业务事件；使用官方 Pixel/CAPI 去重、同意和数据质量规则，并以订单、退款和支付记录复核。",
+      "handling_zh": "只计入匿名聚合计数与非操作性场景；不保存项目名称、链接、代码、下载物或操作步骤。"
+    }
+  ]
+}

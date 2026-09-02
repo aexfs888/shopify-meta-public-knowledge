@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "scope_zh": "Shopify 独立站使用 Meta、Facebook、Instagram 投流的第三方开源与前沿技术发现；仅作方案与工具参考，不替代官方规则。",
+  "providers": ["github", "gitlab"],
+  "github": {
+    "max_results_per_query": 40,
+    "queries": [
+      "shopify meta ads in:name,description,readme archived:false",
+      "shopify facebook conversions api in:name,description,readme archived:false",
+      "meta marketing api mcp in:name,description,readme archived:false",
+      "shopify web pixels in:name,description,readme archived:false",
+      "meta ads mcp in:name,description,readme archived:false",
+      "meta conversions api server side tracking in:name,description,readme archived:false",
+      "shopify functions marketing analytics in:name,description,readme archived:false",
+      "shopify agent mcp ecommerce in:name,description,readme archived:false",
+      "meta ads creative ai open source in:name,description,readme archived:false",
+      "shopify product feed catalog advertising in:name,description,readme archived:false",
+      "marketing attribution incrementality mmm shopify in:name,description,readme archived:false"
+    ],
+    "allowed_licenses": ["MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "MPL-2.0", "ISC", "LGPL-3.0", "GPL-3.0"],
+    "minimum_quality_score": 7,
+    "fresh_within_days": 30,
+    "maximum_age_days": 180
+  },
+  "gitlab": {
+    "max_results_per_query": 40,
+    "queries": ["meta ads", "shopify meta", "facebook pixel", "conversions api", "marketing api", "shopify functions", "marketing mcp", "server side tracking", "marketing attribution", "ad creative ai"],
+    "allowed_licenses": ["MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "MPL-2.0", "ISC", "LGPL-3.0", "GPL-3.0"],
+    "minimum_quality_score": 7,
+    "fresh_within_days": 30,
+    "maximum_age_days": 180
+  },
+  "frontier": {
+    "maximum_age_days": 30,
+    "minimum_quality_score": 7,
+    "sort_order_zh": "更新时间优先，其次为质量与公开热度"
+  },
+  "safety": {
+    "never_clone_or_execute": true,
+    "never_collect_tokens_or_account_data": true,
+    "metadata_only": true,
+    "excluded_terms": ["captcha bypass", "login bypass", "private scraper", "anti-detect", "antidetect", "fingerprint spoof", "cookie theft", "cookie stealer", "credential theft", "token stealer", "account farm", "account warming", "ban evasion", "policy bypass", "stealth browser", "ad review bypass", "misleading claims", "fake engagement", "click fraud", "consent bypass", "data exfiltration", "pii scraper", "customer list leak", "unsafe product", "prohibited product", "counterfeit product", "trademark infringement", "brand impersonation", "watermark removal", "drm cracking", "fake conversion", "event spoofing", "metric manipulation"],
+    "excluded_scope_zh": "隔离账号规避、访问绕过、凭据滥用、广告完整性、隐私数据、商品安全、知识产权和指标真实性等违规风险项目；只保留匿名风险统计用于防范",
+    "third_party_label_zh": "第三方开源技术参考，需先以 Meta/Shopify 官方资料核验后再采用"
+  }
+}

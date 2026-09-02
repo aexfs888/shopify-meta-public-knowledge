@@ -36,6 +36,9 @@ jobs:
       - name: 只读刷新官方公开来源
         run: npm run refresh
 
+      - name: 只读发现近期第三方开源技术
+        run: npm run community-discover
+
       - name: 生成有校验码的公开知识包
         run: npm run publish
 
