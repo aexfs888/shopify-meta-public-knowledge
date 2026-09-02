@@ -75,56 +75,64 @@ const COMPLIANCE_RISK_CATEGORIES = [
     terms: ['anti-detect', 'antidetect', 'fingerprint spoof', 'account farm', 'account warming', 'ban evasion', 'policy bypass', 'stealth browser'],
     category_zh: '账号、身份或平台限制规避',
     risk_zh: '可能违反平台条款并触发账号、资产或支付限制。',
-    safe_alternative_zh: '使用官方 OAuth、正式权限、真实业务资料和平台申诉/支持渠道；发生限制时先停用自动化并核对官方提示。'
+    safe_alternative_zh: '使用官方 OAuth、正式权限、真实业务资料和平台申诉/支持渠道；发生限制时先停用自动化并核对官方提示。',
+    defensive_signals_zh: ['要求共享 Cookie、Token、恢复资料或使用与业务主体不一致的身份。', '要求以规避平台限制为卖点，而非通过官方支持或申诉处理。']
   },
   {
     key: 'access_bypass',
     terms: ['captcha bypass', 'login bypass', 'private scraper'],
     category_zh: '验证码或访问限制绕过',
     risk_zh: '属于规避访问控制，可能违法或违反服务条款。',
-    safe_alternative_zh: '只使用公开 API、RSS、站点地图或已获授权的数据导出；遇到验证码、登录或付费墙立即停止。'
+    safe_alternative_zh: '只使用公开 API、RSS、站点地图或已获授权的数据导出；遇到验证码、登录或付费墙立即停止。',
+    defensive_signals_zh: ['数据源需要登录、验证码、付费墙或私有权限，却声称可自动批量读取。', '没有公开 API 或书面授权，仍要求接入私人后台或受限页面。']
   },
   {
     key: 'credential_misuse',
     terms: ['cookie theft', 'cookie stealer', 'credential theft', 'token stealer'],
     category_zh: '凭据、Cookie 或会话数据滥用',
     risk_zh: '可能造成未授权访问、数据泄露与账户接管。',
-    safe_alternative_zh: '凭据只保存在官方安全授权存储；不导出、不复制 Cookie 或 Token，并定期撤销失效授权。'
+    safe_alternative_zh: '凭据只保存在官方安全授权存储；不导出、不复制 Cookie 或 Token，并定期撤销失效授权。',
+    defensive_signals_zh: ['安装或运行步骤要求导出浏览器资料、会话信息或永久访问凭据。', '工具用途与其要求读取的账号、客户或支付数据范围不相称。']
   },
   {
     key: 'advertising_integrity',
     terms: ['ad review bypass', 'misleading claims', 'fake engagement', 'click fraud'],
     category_zh: '广告审核、内容真实性与互动完整性风险',
     risk_zh: '可能导致广告拒登、停投、账户处罚或消费者误导。',
-    safe_alternative_zh: '广告文案、素材、落地页和商品声明均以 Meta 广告标准及实际可验证证据复核；不伪造评价、互动、折扣或功效。'
+    safe_alternative_zh: '广告文案、素材、落地页和商品声明均以 Meta 广告标准及实际可验证证据复核；不伪造评价、互动、折扣或功效。',
+    defensive_signals_zh: ['功效、优惠、库存、评价或互动无法由真实证据支持。', '广告素材、落地页、商品资料三者的声明不一致。']
   },
   {
     key: 'privacy_and_data_governance',
     terms: ['consent bypass', 'data exfiltration', 'pii scraper', 'customer list leak'],
     category_zh: '隐私、同意与客户数据治理风险',
     risk_zh: '可能违反隐私承诺、平台条款或数据保护法律，并损害客户权益。',
-    safe_alternative_zh: '先取得适用的同意与合法依据；最小化收集；遵守退订、删除和数据访问请求；只用官方或获授权接口。'
+    safe_alternative_zh: '先取得适用的同意与合法依据；最小化收集；遵守退订、删除和数据访问请求；只用官方或获授权接口。',
+    defensive_signals_zh: ['Pixel、CAPI、受众或客户名单没有同意记录、用途说明或删除机制。', '数据流向无法说明收集目的、最小化范围与处理责任方。']
   },
   {
     key: 'product_and_consumer_safety',
     terms: ['unsafe product', 'prohibited product', 'counterfeit product'],
     category_zh: '商品、消费者安全与受限品类风险',
     risk_zh: '可能引发下架、退款、召回、监管处罚或消费者伤害。',
-    safe_alternative_zh: '上架前完成商品身份、合规标签、警示、运输限制、目标国规则和供应链证据检查。'
+    safe_alternative_zh: '上架前完成商品身份、合规标签、警示、运输限制、目标国规则和供应链证据检查。',
+    defensive_signals_zh: ['商品身份、责任主体、标签警示、运输限制或目标国资料缺失。', '来源、检测、召回和售后资料相互矛盾或无法验证。']
   },
   {
     key: 'intellectual_property_and_content_rights',
     terms: ['trademark infringement', 'brand impersonation', 'watermark removal', 'drm cracking'],
     category_zh: '商标、版权与素材权利风险',
     risk_zh: '可能造成投诉、下架、账户限制、赔偿或纠纷。',
-    safe_alternative_zh: '只使用已验证授权的商品、商标和图片视频；保留许可、署名和授权范围证据。'
+    safe_alternative_zh: '只使用已验证授权的商品、商标和图片视频；保留许可、署名和授权范围证据。',
+    defensive_signals_zh: ['素材、品牌、人物形象或音乐没有商业许可范围与来源证据。', '项目卖点是移除权利标识、冒用品牌或复制他人内容。']
   },
   {
     key: 'measurement_integrity',
     terms: ['fake conversion', 'event spoofing', 'metric manipulation'],
     category_zh: '追踪、归因与指标真实性风险',
     risk_zh: '会误导优化决策、破坏平台信号质量，并可能违反平台或合同要求。',
-    safe_alternative_zh: '只发送真实业务事件；使用官方 Pixel/CAPI 去重、同意和数据质量规则，并以订单、退款和支付记录复核。'
+    safe_alternative_zh: '只发送真实业务事件；使用官方 Pixel/CAPI 去重、同意和数据质量规则，并以订单、退款和支付记录复核。',
+    defensive_signals_zh: ['事件量、订单、支付、退款与库存无法对账。', '工具要求制造、重复或修改业务事件，而不是修复真实采集链路。']
   }
 ];
 
@@ -258,6 +266,7 @@ export async function buildComplianceRiskRegistry({
       observed_business_contexts_zh: [...(observation?.contexts ?? [])].sort(),
       risk_zh: item.risk_zh,
       safe_alternative_zh: item.safe_alternative_zh,
+      defensive_signals_zh: item.defensive_signals_zh,
       handling_zh: '只计入匿名聚合计数与非操作性场景；不保存项目名称、链接、代码、下载物或操作步骤。'
     };
   });
