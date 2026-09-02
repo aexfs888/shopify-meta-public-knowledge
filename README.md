@@ -1,9 +1,9 @@
 ﻿# Shopify × Meta 公开官方知识发布器
 
-此仓库只用于自动抓取 Meta、Facebook、Instagram、Shopify 的**公开官方页面**，并发布可校验的本地知识更新包。
+此仓库用于自动抓取 Meta、Facebook、Instagram、Shopify 的**公开官方页面**，并读取 GitHub / GitLab 的**公开仓库元数据**形成独立的第三方技术研究层。第三方候选不会混入官方知识库，也不会自动安装、执行或接入真实账号。
 
 它不包含任何账号、Cookie、Token、客户资料、广告成效、课程进度、原始视频、PDF、截图或本机 Hermes 配置。
 
-GitHub Actions 每天执行一次：恢复上次合格资料 → 用 ETag 只读检查官方页面 → 保留临时失败前的合格正文 → 生成 `published/manifest.json` 与压缩包。
+GitHub Actions 每天执行一次：恢复上次合格资料 → 用 ETag 只读检查官方页面 → 使用任务结束即失效的内置 `GITHUB_TOKEN` 认证读取 GitHub 公开搜索接口 → 通过 GitLab 单项目公开接口补齐候选许可证 → 生成带 SHA-256 的发布包。GitHub / GitLab 全部计划查询必须完成且不能带有不完整结果，才允许替换上一版合格技术目录。
 
-本机 Hermes Studio 启动后只下载这两个文件，先核对 SHA-256，再替换本地官方来源、重建 SQLite 索引，并用本机离线模型补齐中文译文。
+本机 Hermes Studio 每小时第 05、35 分钟检查清单；只接受清单中合格的公开包，先核对来源、长度、SHA-256、查询完整度和研究状态，再事务化替换本地官方来源与第三方目录、重建 SQLite 索引，并用本机离线模型补齐中文教学译文。任何组件失败都会保留旧合格版本并在下一轮继续重试。

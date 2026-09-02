@@ -44,10 +44,12 @@ function assertPublishableCommunityCoverage(catalog) {
   const attempted = Number(coverage?.attempted_queries);
   const successful = Number(coverage?.successful_queries);
   const failed = Number(coverage?.failed_queries);
-  if (!coverage || !gate || gate.publication_eligible !== true || !Number.isInteger(attempted) || attempted < 1 || !Number.isInteger(successful) || !Number.isInteger(failed) || successful + failed !== attempted) {
+  const incomplete = Number(gate?.incomplete_query_count ?? 0);
+  const expectedRatio = attempted > 0 ? Math.round((successful / attempted) * 10_000) / 10_000 : 0;
+  if (!coverage || !gate || gate.publication_eligible !== true || !Number.isInteger(attempted) || attempted < 1 || !Number.isInteger(successful) || !Number.isInteger(failed) || successful + failed !== attempted || !Number.isInteger(incomplete) || incomplete !== 0 || !Array.isArray(coverage.query_runs) || coverage.query_runs.length !== attempted) {
     throw new Error('开源技术目录查询完整度或发布闸门无效，拒绝公开发布。');
   }
-  if (Number(gate.actual_success_ratio) < Number(gate.minimum_success_ratio)) {
+  if (Math.abs(Number(gate.actual_success_ratio) - expectedRatio) > 0.0001 || Number(gate.actual_success_ratio) < Number(gate.minimum_success_ratio)) {
     throw new Error('开源技术目录未达到查询完整度发布闸门，拒绝公开发布。');
   }
 }
@@ -123,6 +125,9 @@ if (await exists(communityCatalogPath)) {
     throw new Error('开源技术目录格式无效，拒绝公开发布。');
   }
   assertPublishableCommunityCoverage(catalog);
+  if (Number(catalog.repository_count) !== repositories.length) {
+    throw new Error('开源技术目录候选数量与内容不一致，拒绝公开发布。');
+  }
   if (repositories.some((item) => item.source_tier !== 'community_open_source' || Number(item.age_days) > 180 || !/^https:\/\/(github\.com|gitlab\.com)\//i.test(item.canonical_url ?? '') || item.automatic_adoption_allowed !== false || item.research_status !== 'research_only' || !Array.isArray(item.discovery_queries) || !Array.isArray(item.discovery_providers))) {
     throw new Error('开源技术目录包含非允许公开平台元数据或超过半年未更新项目，拒绝发布。');
   }

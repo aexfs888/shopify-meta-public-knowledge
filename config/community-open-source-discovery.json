@@ -40,8 +40,8 @@
     "never_clone_or_execute": true,
     "never_collect_tokens_or_account_data": true,
     "metadata_only": true,
-    "minimum_query_success_ratio": 0.75,
-    "coverage_gate_zh": "少于 75% 计划公开查询成功时，不使用新结果覆盖上一份合格目录，也不公开发布不完整目录。",
+    "minimum_query_success_ratio": 1.0,
+    "coverage_gate_zh": "必须完成 100% 计划公开查询且没有平台标记的不完整结果，才使用新结果覆盖上一份合格目录并公开发布；否则保留上一份合格目录。",
     "excluded_terms": ["captcha bypass", "login bypass", "private scraper", "anti-detect", "antidetect", "fingerprint spoof", "cookie theft", "cookie stealer", "credential theft", "token stealer", "account farm", "account warming", "ban evasion", "policy bypass", "stealth browser", "ad review bypass", "misleading claims", "fake engagement", "click fraud", "consent bypass", "data exfiltration", "pii scraper", "customer list leak", "unsafe product", "prohibited product", "counterfeit product", "trademark infringement", "brand impersonation", "watermark removal", "drm cracking", "fake conversion", "event spoofing", "metric manipulation"],
     "excluded_scope_zh": "隔离账号规避、访问绕过、凭据滥用、广告完整性、隐私数据、商品安全、知识产权和指标真实性等违规风险项目；只保留匿名风险统计用于防范",
     "third_party_label_zh": "第三方开源技术参考，需先以 Meta/Shopify 官方资料核验后再采用"

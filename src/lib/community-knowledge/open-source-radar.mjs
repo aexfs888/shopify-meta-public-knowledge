@@ -14,7 +14,6 @@ export const COMPLIANCE_RISK_ROOT = path.join(COMMUNITY_ROOT, 'compliance-risk')
 export const COMPLIANCE_RISK_REGISTRY_PATH = path.join(COMPLIANCE_RISK_ROOT, 'isolated-risk-registry.json');
 export const COMPLIANCE_RISK_HISTORY_PATH = path.join(COMPLIANCE_RISK_ROOT, 'screening-history.json');
 export const RESEARCH_SOURCE_LEDGER_PATH = path.join(COMMUNITY_ROOT, 'research-sources', 'source-ledger.json');
-export const COMMUNITY_DISCOVERY_HISTORY_PATH = path.join(COMMUNITY_ROOT, 'history', 'discovery-runs.json');
 export const COMMUNITY_RESEARCH_REPORT_PATH = workspacePath('reports', 'public', '开源技术雷达-最新研究报告.md');
 export const COMMUNITY_CONFIG_PATH = workspacePath('config', 'community-open-source-discovery.json');
 const GITHUB_API = 'https://api.github.com/search/repositories';
@@ -659,9 +658,9 @@ async function githubSearch(query, { fetchImpl = fetch, token, perPage = 40 } = 
   url.searchParams.set('sort', 'updated');
   url.searchParams.set('order', 'desc');
   url.searchParams.set('per_page', String(Math.min(100, Math.max(1, perPage))));
-  const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'Hermes-Open-Source-Radar/1.0' };
+  const headers = { Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', 'User-Agent': 'Hermes-Open-Source-Radar/1.0' };
   if (token) headers.Authorization = `Bearer ${token}`;
-  const response = await fetchPublicMetadata(url, { headers, signal: AbortSignal.timeout(25_000) }, fetchImpl, 'GitHub');
+  const response = await fetchPublicMetadata(url, { headers, timeoutMs: 25_000 }, fetchImpl, 'GitHub');
   const payload = await response.json();
   const items = Array.isArray(payload.items) ? payload.items : [];
   return {
@@ -677,6 +676,7 @@ async function githubSearch(query, { fetchImpl = fetch, token, perPage = 40 } = 
 
 function normalizeGitLabRepository(project) {
   return {
+    provider_project_id: project.id ?? null,
     full_name: project.path_with_namespace,
     name: project.name,
     description: project.description,
@@ -690,7 +690,7 @@ function normalizeGitLabRepository(project) {
     topics: project.topics ?? project.tag_list ?? [],
     stargazers_count: Number(project.star_count ?? 0),
     forks_count: Number(project.forks_count ?? 0),
-    open_issues_count: 0,
+    open_issues_count: Number(project.open_issues_count ?? 0),
     created_at: project.created_at ?? null,
     pushed_at: project.last_activity_at ?? project.updated_at ?? null,
     updated_at: project.updated_at ?? project.last_activity_at ?? null,
@@ -699,23 +699,74 @@ function normalizeGitLabRepository(project) {
   };
 }
 
-async function gitlabSearch(query, { fetchImpl = fetch, perPage = 40 } = {}) {
+function shouldEnrichGitLabLicense(repo, { maximumAgeDays = 180, unsafeTerms = [] } = {}) {
+  if (repo.archived || repo.fork || repo.disabled) return false;
+  const text = relevanceText(repo);
+  if (isUnsafeRepository(text, unsafeTerms)) return false;
+  if (!isMetaPlatformRelevant(text) && !isShopifyPlatformRelevant(text)) return false;
+  const ageDays = daysSince(repo.updated_at);
+  return Number.isFinite(ageDays) && ageDays <= Number(maximumAgeDays ?? 180);
+}
+
+async function gitlabSearch(query, { fetchImpl = fetch, perPage = 40, detailCache = new Map(), providerConfig = {}, unsafeTerms = [] } = {}) {
   const url = new URL(GITLAB_API);
   url.searchParams.set('search', query);
   url.searchParams.set('visibility', 'public');
   url.searchParams.set('order_by', 'updated_at');
   url.searchParams.set('sort', 'desc');
-  url.searchParams.set('license', 'true');
   url.searchParams.set('per_page', String(Math.min(100, Math.max(1, perPage))));
-  const response = await fetchPublicMetadata(url, { headers: { Accept: 'application/json', 'User-Agent': 'Hermes-Open-Source-Radar/1.0' }, signal: AbortSignal.timeout(25_000) }, fetchImpl, 'GitLab');
+  const headers = { Accept: 'application/json', 'User-Agent': 'Hermes-Open-Source-Radar/1.0' };
+  const response = await fetchPublicMetadata(url, { headers, timeoutMs: 25_000 }, fetchImpl, 'GitLab');
   const payload = await response.json();
   const items = Array.isArray(payload) ? payload.map(normalizeGitLabRepository) : [];
+  const enrichment = {
+    eligible_projects: 0,
+    detail_requests: 0,
+    cache_hits: 0,
+    resolved_projects: 0,
+    not_found_projects: 0,
+    failed_projects: 0
+  };
+  for (let index = 0; index < items.length; index += 1) {
+    const item = items[index];
+    if (!shouldEnrichGitLabLicense(item, { maximumAgeDays: providerConfig.maximum_age_days, unsafeTerms })) continue;
+    enrichment.eligible_projects += 1;
+    const projectId = item.provider_project_id;
+    if (projectId == null) {
+      enrichment.failed_projects += 1;
+      continue;
+    }
+    const cacheKey = String(projectId);
+    let detailPromise = detailCache.get(cacheKey);
+    if (!detailPromise) {
+      const detailUrl = new URL(`${GITLAB_API}/${encodeURIComponent(cacheKey)}`);
+      detailUrl.searchParams.set('license', 'true');
+      detailPromise = (async () => {
+        const detailResponse = await fetchPublicMetadata(detailUrl, { headers, timeoutMs: 25_000 }, fetchImpl, 'GitLab');
+        return detailResponse.json();
+      })();
+      detailCache.set(cacheKey, detailPromise);
+      enrichment.detail_requests += 1;
+    } else {
+      enrichment.cache_hits += 1;
+    }
+    try {
+      const detail = await detailPromise;
+      if (!detail || typeof detail !== 'object' || Array.isArray(detail)) throw new Error('GitLab 项目详情格式无效');
+      items[index] = { ...item, ...normalizeGitLabRepository(detail) };
+      enrichment.resolved_projects += 1;
+    } catch (error) {
+      if (httpStatusFromError(error) === 404) enrichment.not_found_projects += 1;
+      else enrichment.failed_projects += 1;
+    }
+  }
   return {
     items,
     telemetry: {
       returned_repository_metadata: items.length,
       reported_total_count: numericHeader(response.headers, 'x-total'),
-      incomplete_results: false,
+      incomplete_results: enrichment.failed_projects > 0,
+      license_enrichment: enrichment,
       response: responseDiagnostics(response)
     }
   };
@@ -742,12 +793,24 @@ function responseDiagnostics(response) {
   };
 }
 
+function sanitizeProviderMessage(value) {
+  return String(value ?? '')
+    .replace(/[\r\n\t]+/g, ' ')
+    .replace(/https?:\/\/[^\s\/@:]+:[^\s\/@]+@/gi, 'https://[凭据已省略]@')
+    .replace(/\b(?:github_pat_|gh[pousr]_)[A-Za-z0-9_]{12,}\b/g, '[凭据已省略]')
+    .replace(/\b(?:\d{1,3}\.){3}\d{1,3}\b/g, '[服务端地址已省略]')
+    .replace(/\b(?:[A-F0-9]{1,4}:){2,7}[A-F0-9]{1,4}\b/gi, '[服务端地址已省略]')
+    .replace(/((?:access[_-]?token|token|authorization|cookie|secret)\s*[:=]\s*)([^,;\s]+)/gi, '$1[已省略]')
+    .trim()
+    .slice(0, 280);
+}
+
 async function providerErrorMessage(response) {
   try {
     const contentType = response.headers.get('content-type') ?? '';
     const payload = contentType.includes('json') ? await response.json() : null;
     const message = typeof payload?.message === 'string' ? payload.message : typeof payload?.error === 'string' ? payload.error : '';
-    return message.replace(/[\r\n\t]+/g, ' ').slice(0, 280) || null;
+    return sanitizeProviderMessage(message) || null;
   } catch {
     return null;
   }
@@ -796,11 +859,15 @@ function queryFailureProfile(error) {
   };
 }
 
-async function fetchPublicMetadata(url, options, fetchImpl, provider) {
+async function fetchPublicMetadata(url, options = {}, fetchImpl, provider) {
   let lastError = null;
+  const { timeoutMs = 25_000, signal: providedSignal, ...requestOptions } = options;
   for (let attempt = 0; attempt < 3; attempt += 1) {
     try {
-      const response = await fetchImpl(url, options);
+      const attemptOptions = { ...requestOptions };
+      if (Number.isFinite(Number(timeoutMs)) && Number(timeoutMs) > 0) attemptOptions.signal = AbortSignal.timeout(Number(timeoutMs));
+      else if (providedSignal) attemptOptions.signal = providedSignal;
+      const response = await fetchImpl(url, attemptOptions);
       if (response.ok) return response;
       const retryable = response.status >= 500 && response.status <= 599;
       if (!retryable || attempt === 2) {
@@ -823,15 +890,16 @@ async function fetchPublicMetadata(url, options, fetchImpl, provider) {
   throw lastError ?? new Error(`${provider} 公开仓库搜索失败。`);
 }
 
-function coverageGate(config, attemptedQueries, successfulQueries) {
-  const configured = Number(config.safety?.minimum_query_success_ratio ?? 0.75);
-  const minimumSuccessRatio = Number.isFinite(configured) && configured > 0 && configured <= 1 ? configured : 0.75;
+function coverageGate(config, attemptedQueries, successfulQueries, incompleteQueryCount = 0) {
+  const configured = Number(config.safety?.minimum_query_success_ratio ?? 1);
+  const minimumSuccessRatio = Number.isFinite(configured) && configured > 0 && configured <= 1 ? configured : 1;
   const actualSuccessRatio = attemptedQueries > 0 ? Math.round((successfulQueries / attemptedQueries) * 10_000) / 10_000 : 0;
   return {
     minimum_success_ratio: minimumSuccessRatio,
     actual_success_ratio: actualSuccessRatio,
-    publication_eligible: actualSuccessRatio >= minimumSuccessRatio,
-    rule_zh: `至少完成 ${(minimumSuccessRatio * 100).toFixed(0)}% 的计划公开查询，才允许用新目录替换上一份合格目录或公开发布。`
+    incomplete_query_count: incompleteQueryCount,
+    publication_eligible: actualSuccessRatio >= minimumSuccessRatio && incompleteQueryCount === 0,
+    rule_zh: `至少完成 ${(minimumSuccessRatio * 100).toFixed(0)}% 的计划公开查询，且没有平台标记的不完整结果，才允许用新目录替换上一份合格目录或公开发布。`
   };
 }
 
@@ -885,6 +953,7 @@ export async function discoverOpenSourceTechnology({
   const warnings = [];
   const providerStatistics = {};
   const rateResetTimes = new Map();
+  const gitlabDetailCache = new Map();
   const queryRuns = [];
   const filterSummary = {
     returned_repository_metadata: 0,
@@ -913,7 +982,13 @@ export async function discoverOpenSourceTechnology({
       risk_isolated_observations: 0,
       qualifying_candidate_observations: 0,
       rate_limit_wait_seconds: 0,
-      rate_limit_deferred_queries: 0
+      rate_limit_deferred_queries: 0,
+      license_enrichment_eligible_projects: 0,
+      license_detail_requests: 0,
+      license_detail_cache_hits: 0,
+      license_detail_resolved_projects: 0,
+      license_detail_not_found_projects: 0,
+      license_detail_failed_projects: 0
     };
     return providerStatistics[key];
   }
@@ -941,7 +1016,14 @@ export async function discoverOpenSourceTechnology({
       return;
     }
     try {
-      const searchResult = await search(query, { fetchImpl, token, perPage: providerConfig.max_results_per_query });
+      const searchResult = await search(query, {
+        fetchImpl,
+        token,
+        perPage: providerConfig.max_results_per_query,
+        providerConfig,
+        unsafeTerms: config.safety?.excluded_terms ?? [],
+        detailCache: gitlabDetailCache
+      });
       const items = Array.isArray(searchResult) ? searchResult : (searchResult.items ?? []);
       const telemetry = Array.isArray(searchResult) ? {} : (searchResult.telemetry ?? {});
       searched += 1;
@@ -949,6 +1031,13 @@ export async function discoverOpenSourceTechnology({
       statistics.returned_repository_metadata += items.length;
       statistics.reported_total_count_sum += Number(telemetry.reported_total_count ?? 0);
       if (telemetry.incomplete_results) statistics.incomplete_query_count += 1;
+      const licenseEnrichment = telemetry.license_enrichment ?? {};
+      statistics.license_enrichment_eligible_projects += Number(licenseEnrichment.eligible_projects ?? 0);
+      statistics.license_detail_requests += Number(licenseEnrichment.detail_requests ?? 0);
+      statistics.license_detail_cache_hits += Number(licenseEnrichment.cache_hits ?? 0);
+      statistics.license_detail_resolved_projects += Number(licenseEnrichment.resolved_projects ?? 0);
+      statistics.license_detail_not_found_projects += Number(licenseEnrichment.not_found_projects ?? 0);
+      statistics.license_detail_failed_projects += Number(licenseEnrichment.failed_projects ?? 0);
       filterSummary.returned_repository_metadata += items.length;
       const queryRun = {
         provider,
@@ -957,6 +1046,7 @@ export async function discoverOpenSourceTechnology({
         returned_repository_metadata: items.length,
         reported_total_count: telemetry.reported_total_count ?? null,
         incomplete_results: Boolean(telemetry.incomplete_results),
+        license_enrichment: telemetry.license_enrichment ?? null,
         response: telemetry.response ?? null,
         rate_limit_wait_seconds: rateWait.waited_seconds,
         hard_rejected_observations: 0,
@@ -1030,14 +1120,17 @@ export async function discoverOpenSourceTechnology({
   }
   if (config.providers?.includes('github') !== false) for (const query of config.github.queries) await collect('GitHub', query, githubSearch, config.github);
   if (config.providers?.includes('gitlab') && config.gitlab) for (const query of config.gitlab.queries) await collect('GitLab', query, gitlabSearch, config.gitlab);
-  const gate = coverageGate(config, attempted, searched);
+  const incompleteQueryCount = Object.values(providerStatistics).reduce((sum, item) => sum + Number(item.incomplete_query_count ?? 0), 0);
+  const gate = coverageGate(config, attempted, searched, incompleteQueryCount);
   const coverage = {
     attempted_queries: attempted,
     successful_queries: searched,
     failed_queries: attempted - searched,
     coverage_status_zh: gate.publication_eligible
       ? (attempted === searched ? '本轮全部计划查询已完成。' : `本轮有 ${attempted - searched} 条查询未完成，但通过完整性闸门；详见覆盖缺口，结果不代表全网只有当前候选。`)
-      : `本轮仅完成 ${(gate.actual_success_ratio * 100).toFixed(0)}% 查询，未达到发布闸门；不会用此结果替换上一份合格目录。`,
+      : (incompleteQueryCount > 0
+        ? `本轮有 ${incompleteQueryCount} 条查询返回不完整结果，未通过发布闸门；不会用此结果替换上一份合格目录。`
+        : `本轮仅完成 ${(gate.actual_success_ratio * 100).toFixed(0)}% 查询，未达到发布闸门；不会用此结果替换上一份合格目录。`),
     provider_statistics: providerStatistics,
     query_runs: queryRuns,
     gaps: warnings.map((item) => ({
