@@ -5,6 +5,7 @@
                     "update":  "npm run refresh \u0026\u0026 npm run publish",
                     "community-discover":  "node --disable-warning=ExperimentalWarning scripts/public-open-source-discovery.mjs",
                     "publish":  "node --disable-warning=ExperimentalWarning scripts/build-public-knowledge-package.mjs",
+                    "verify:published":  "node scripts/verify-published-package.mjs",
                     "refresh":  "node scripts/public-knowledge-refresh.mjs",
                     "test":  "node --disable-warning=ExperimentalWarning --test"
                 },

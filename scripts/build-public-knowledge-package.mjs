@@ -132,7 +132,9 @@ if (await exists(communityCatalogPath)) {
     throw new Error('开源技术目录包含非允许公开平台元数据或超过半年未更新项目，拒绝发布。');
   }
   const targetPath = path.join(outputRoot, communityCatalogName);
-  await copyFile(communityCatalogPath, targetPath);
+  // Re-serialize generated JSON so bytes are LF-stable on Windows and Linux.
+  // Git line-ending normalization must never invalidate the published SHA-256.
+  await writeJsonAtomic(targetPath, catalog);
   const bytes = await fsp.readFile(targetPath);
   communityOpenSourceCatalog = {
     file: communityCatalogName,
@@ -153,7 +155,7 @@ if (await exists(frontierCatalogPath)) {
     throw new Error('近 30 天前沿技术目录包含非允许公开平台元数据或超出时间窗项目，拒绝发布。');
   }
   const targetPath = path.join(outputRoot, frontierCatalogName);
-  await copyFile(frontierCatalogPath, targetPath);
+  await writeJsonAtomic(targetPath, catalog);
   const bytes = await fsp.readFile(targetPath);
   communityFrontierCatalog = {
     file: frontierCatalogName,
@@ -174,7 +176,7 @@ if (await exists(complianceRiskRegistryPath)) {
     throw new Error('违规风险研究隔离库包含可操作项目标识，拒绝公开发布。');
   }
   const targetPath = path.join(outputRoot, complianceRiskRegistryName);
-  await copyFile(complianceRiskRegistryPath, targetPath);
+  await writeJsonAtomic(targetPath, registry);
   const bytes = await fsp.readFile(targetPath);
   communityComplianceRiskRegistry = {
     file: complianceRiskRegistryName,
