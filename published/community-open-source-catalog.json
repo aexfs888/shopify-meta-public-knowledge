@@ -2,16 +2,51 @@
   "schema_version": 1,
   "scope_zh": "Shopify 独立站使用 Meta、Facebook、Instagram 投流的第三方开源与前沿技术发现；仅作方案与工具参考，不替代官方规则。",
   "source_tier": "community_open_source",
-  "generated_at": "2026-09-02T08:26:07+08:00",
-  "provider": "GitHub public repository metadata API",
+  "generated_at": "2026-09-02T08:49:21+08:00",
+  "provider": "GitHub and GitLab public repository metadata APIs",
   "metadata_only": true,
   "searched_queries": 20,
+  "query_coverage": {
+    "attempted_queries": 21,
+    "successful_queries": 20,
+    "failed_queries": 1,
+    "coverage_status_zh": "本轮有 1 条查询未完成；详见覆盖缺口，结果不代表全网只有当前候选。",
+    "provider_statistics": {
+      "github": {
+        "provider": "GitHub",
+        "attempted_queries": 11,
+        "successful_queries": 10,
+        "failed_queries": 1,
+        "returned_repository_metadata": 400
+      },
+      "gitlab": {
+        "provider": "GitLab",
+        "attempted_queries": 10,
+        "successful_queries": 10,
+        "failed_queries": 0,
+        "returned_repository_metadata": 145
+      }
+    },
+    "gaps": [
+      {
+        "provider": "GitHub",
+        "query": "marketing attribution incrementality mmm shopify in:name,description,readme archived:false",
+        "error": "GitHub 公开仓库搜索失败：HTTP 403",
+        "http_status": 403,
+        "failure_kind": "access_or_permission_limited",
+        "handling_zh": "已停止该查询；不会绕过访问限制或改用其他身份。等待下次使用正常公开权限的计划任务再试。"
+      }
+    ]
+  },
   "repository_count": 5,
   "warnings": [
     {
       "provider": "GitHub",
-      "query": "shopify product feed catalog advertising in:name,description,readme archived:false",
-      "error": "GitHub 公开仓库搜索失败：HTTP 403"
+      "query": "marketing attribution incrementality mmm shopify in:name,description,readme archived:false",
+      "error": "GitHub 公开仓库搜索失败：HTTP 403",
+      "http_status": 403,
+      "failure_kind": "access_or_permission_limited",
+      "handling_zh": "已停止该查询；不会绕过访问限制或改用其他身份。等待下次使用正常公开权限的计划任务再试。"
     }
   ],
   "safety": {
@@ -58,49 +93,90 @@
   },
   "repositories": [
     {
-      "source_id": "oss-4a5ac1b0cabef293",
+      "source_id": "oss-082c3e2110eb9ba6",
       "source_tier": "community_open_source",
-      "publisher": "GitHub / rghrmkr1993",
+      "publisher": "GitHub / kinerette",
       "provider": "GitHub",
-      "repository": "rghrmkr1993/ad-campaign-skills",
-      "title_zh": "开源项目：rghrmkr1993/ad-campaign-skills",
-      "description_original": "Production-grade paid-media agents & skills for Claude Code - complete ad campaigns for any industry, any region, from a 4-line client brief (Meta, Google, YouTube, TikTok).",
-      "canonical_url": "https://github.com/rghrmkr1993/ad-campaign-skills",
-      "homepage_url": null,
-      "default_branch": "main",
-      "language": null,
+      "repository": "kinerette/claude-code-store-design",
+      "title_zh": "开源项目：kinerette/claude-code-store-design",
+      "description_original": "Claude Code skill for store, product page and landing page design. Decides which selling mechanics belong on THIS product — quantity breaks as named tiers (never a stepper), free-shipping bar, order bump (never pre-ticked), sticky mobile add-to-cart — with the EU rules encoded in the code. Includes a zero-dependency store audit. MIT.",
+      "canonical_url": "https://github.com/kinerette/claude-code-store-design",
+      "homepage_url": "https://www.uxgen.ai",
+      "default_branch": "master",
+      "language": "TypeScript",
       "license_spdx": "MIT",
       "topics": [
-        "ads",
-        "agents",
-        "claude",
+        "agent-skills",
+        "average-order-value",
         "claude-code",
-        "google-ads",
-        "marketing",
-        "meta-ads",
-        "paid-media",
-        "skills",
-        "tiktok-ads",
-        "campaigns",
+        "claude-code-plugin",
+        "claude-code-skill",
+        "claude-skills",
+        "conversion",
+        "conversion-rate-optimization",
+        "cro",
+        "design",
+        "ecommerce",
+        "landing-page",
+        "mcp",
+        "order-bump",
+        "quantity-breaks",
+        "react",
+        "shopify",
+        "tiered-pricing",
+        "ui",
+        "upsell",
+        "tracking",
         "automation"
       ],
-      "stars": 1,
+      "stars": 0,
       "forks": 0,
-      "hotness_score": 1,
+      "hotness_score": 0,
       "open_issues": 0,
-      "pushed_at": "2026-07-18T21:16:07Z",
-      "updated_at": "2026-07-18T21:16:11Z",
-      "age_days": 45,
-      "freshness": "updated_within_180_days",
-      "freshness_label_zh": "超过一个月、半年内：最后更新距今 45 天",
-      "quality_score": 8,
+      "pushed_at": "2026-09-02T00:27:37Z",
+      "updated_at": "2026-09-02T00:27:42Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 11,
+      "discovery_priority_score": 11,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
       "selection_reasons_zh": [
         "许可证 MIT",
-        "最后更新距今 45 天（超过一个月，半年内）",
+        "最近 0 天更新（新技术）",
+        "直接涉及 Shopify",
         "涉及 Meta 投流或信号",
         "涉及自动化或 AI 助手"
       ],
-      "discovery_query": "marketing attribution incrementality mmm shopify in:name,description,readme archived:false",
+      "discovery_query": "shopify agent mcp ecommerce in:name,description,readme archived:false",
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
       "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
       "status": "candidate_verified_metadata"
     },
@@ -140,12 +216,26 @@
       "forks": 0,
       "hotness_score": 0,
       "open_issues": 0,
-      "pushed_at": "2026-09-02T00:08:48Z",
-      "updated_at": "2026-09-02T00:09:12Z",
+      "pushed_at": "2026-09-02T00:40:15Z",
+      "updated_at": "2026-09-02T00:40:20Z",
       "age_days": 0,
       "freshness": "fresh_within_30_days",
       "freshness_label_zh": "最近 30 天更新：新技术候选",
       "quality_score": 9,
+      "discovery_priority_score": 9,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
       "selection_reasons_zh": [
         "许可证 MIT",
         "最近 0 天更新（新技术）",
@@ -153,6 +243,28 @@
         "涉及自动化或 AI 助手"
       ],
       "discovery_query": "meta ads mcp in:name,description,readme archived:false",
+      "capability_exposures": [
+        {
+          "id": "browser_automation",
+          "label_zh": "公开元数据提示可能包含浏览器自动化",
+          "review_zh": "先确认数据源是否允许自动化访问；不得登录私人后台、绕过验证码或规避平台限制。"
+        },
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "先确认数据源是否允许自动化访问；不得登录私人后台、绕过验证码或规避平台限制。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
       "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
       "status": "candidate_verified_metadata"
     },
@@ -184,13 +296,45 @@
       "freshness": "fresh_within_30_days",
       "freshness_label_zh": "最近 30 天更新：新技术候选",
       "quality_score": 9,
+      "discovery_priority_score": 9,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 0.83,
+      "metadata_evidence_label_zh": "公开元数据部分完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [
+        "主题标签"
+      ],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
       "selection_reasons_zh": [
         "许可证 MIT",
         "最近 0 天更新（新技术）",
         "涉及 Meta 投流或信号",
         "涉及自动化或 AI 助手"
       ],
-      "discovery_query": "meta ads mcp in:name,description,readme archived:false",
+      "discovery_query": "meta ads creative ai open source in:name,description,readme archived:false",
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "补齐或人工核对：主题标签。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
       "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
       "status": "candidate_verified_metadata"
     },
@@ -229,6 +373,21 @@
       "freshness": "fresh_within_30_days",
       "freshness_label_zh": "最近 30 天更新：新技术候选",
       "quality_score": 9,
+      "discovery_priority_score": 9,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 0.83,
+      "metadata_evidence_label_zh": "公开元数据部分完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [
+        "足够的公开简介"
+      ],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
       "selection_reasons_zh": [
         "许可证 MIT",
         "最近 0 天更新（新技术）",
@@ -236,6 +395,24 @@
         "涉及自动化或 AI 助手"
       ],
       "discovery_query": "shopify agent mcp ecommerce in:name,description,readme archived:false",
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "补齐或人工核对：足够的公开简介。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。",
+        "项目公开简介过短，不能据此推断能力、数据源、成本、隐私或合规性。"
+      ],
       "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
       "status": "candidate_verified_metadata"
     },
@@ -272,18 +449,60 @@
       "forks": 0,
       "hotness_score": 0,
       "open_issues": 0,
-      "pushed_at": "2026-09-02T00:08:49Z",
-      "updated_at": "2026-09-02T00:09:19Z",
+      "pushed_at": "2026-09-02T00:40:16Z",
+      "updated_at": "2026-09-02T00:40:22Z",
       "age_days": 0,
       "freshness": "fresh_within_30_days",
       "freshness_label_zh": "最近 30 天更新：新技术候选",
       "quality_score": 7,
+      "discovery_priority_score": 7,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
       "selection_reasons_zh": [
         "许可证 MIT",
         "最近 0 天更新（新技术）",
         "涉及自动化或 AI 助手"
       ],
       "discovery_query": "meta marketing api mcp in:name,description,readme archived:false",
+      "capability_exposures": [
+        {
+          "id": "potential_external_write",
+          "label_zh": "公开元数据提示可能具有对外发布、排程或评论管理能力",
+          "review_zh": "若后续评估，先逐项确认是否会发布、排程、创建草稿或管理评论；未获得单次书面授权不得连接真实主页。"
+        },
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        },
+        {
+          "id": "official_api_scope_review",
+          "label_zh": "公开元数据提及平台 API",
+          "review_zh": "以当日 Meta/Shopify 官方权限与数据范围说明为准，逐项核对读写范围和最小权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "若后续评估，先逐项确认是否会发布、排程、创建草稿或管理评论；未获得单次书面授权不得连接真实主页。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。",
+        "以当日 Meta/Shopify 官方权限与数据范围说明为准，逐项核对读写范围和最小权限。"
+      ],
       "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
       "status": "candidate_verified_metadata"
     }
