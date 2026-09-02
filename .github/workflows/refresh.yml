@@ -18,12 +18,13 @@ jobs:
     timeout-minutes: 55
     steps:
       - name: 取得公开发布器
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: 安装 Node.js 22
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
+          package-manager-cache: false
 
       - name: 还原上一份合格官方资料
         shell: bash
