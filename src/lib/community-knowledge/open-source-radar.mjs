@@ -541,8 +541,8 @@ export async function buildCommunityResearchReport({
     ''
   ];
   if (coverage.providerStatistics.length) {
-    lines.push('| 平台 | 计划 | 成功 | 未完成 | 返回的公开元数据条目 | 合格候选命中（含重复） |', '| --- | ---: | ---: | ---: | ---: | ---: |');
-    for (const item of coverage.providerStatistics) lines.push(`| ${markdownInline(item.provider)} | ${Number(item.attempted_queries ?? 0)} | ${Number(item.successful_queries ?? 0)} | ${Number(item.failed_queries ?? 0)} | ${Number(item.returned_repository_metadata ?? 0)} | ${Number(item.qualifying_candidate_observations ?? 0)} |`);
+    lines.push('| 平台 | 计划 | 成功 | 未完成 | 限额等待 | 返回的公开元数据条目 | 合格候选命中（含重复） |', '| --- | ---: | ---: | ---: | ---: | ---: | ---: |');
+    for (const item of coverage.providerStatistics) lines.push(`| ${markdownInline(item.provider)} | ${Number(item.attempted_queries ?? 0)} | ${Number(item.successful_queries ?? 0)} | ${Number(item.failed_queries ?? 0)} | ${Number(item.rate_limit_wait_seconds ?? 0)} 秒 | ${Number(item.returned_repository_metadata ?? 0)} | ${Number(item.qualifying_candidate_observations ?? 0)} |`);
     lines.push('');
   }
   const efficiency = source.discovery_efficiency;
@@ -848,6 +848,24 @@ function mergeCandidateProvenance(existing, candidate) {
   };
 }
 
+function maximumRateLimitWaitSeconds(providerConfig = {}) {
+  const value = Number(providerConfig.max_rate_limit_wait_seconds ?? 75);
+  return Number.isFinite(value) && value >= 1 && value <= 300 ? Math.floor(value) : 75;
+}
+
+async function waitForRateLimitReset(provider, providerConfig, rateResetTimes) {
+  const resetAt = Number(rateResetTimes.get(provider) ?? 0);
+  if (!Number.isFinite(resetAt) || resetAt <= Date.now()) return { waited_seconds: 0, deferred: false };
+  const waitMilliseconds = resetAt - Date.now() + 1_000;
+  const waitSeconds = Math.ceil(waitMilliseconds / 1_000);
+  if (waitSeconds > maximumRateLimitWaitSeconds(providerConfig)) {
+    return { waited_seconds: 0, deferred: true, reset_epoch_seconds: Math.floor(resetAt / 1_000) };
+  }
+  await new Promise((resolve) => setTimeout(resolve, waitMilliseconds));
+  rateResetTimes.delete(provider);
+  return { waited_seconds: waitSeconds, deferred: false, reset_epoch_seconds: Math.floor(resetAt / 1_000) };
+}
+
 export async function discoverOpenSourceTechnology({
   configPath = COMMUNITY_CONFIG_PATH,
   catalogPath = COMMUNITY_CATALOG_PATH,
@@ -866,6 +884,7 @@ export async function discoverOpenSourceTechnology({
   const previous = await exists(catalogPath) ? await readJson(catalogPath) : null;
   const warnings = [];
   const providerStatistics = {};
+  const rateResetTimes = new Map();
   const queryRuns = [];
   const filterSummary = {
     returned_repository_metadata: 0,
@@ -892,7 +911,9 @@ export async function discoverOpenSourceTechnology({
       hard_rejected_observations: 0,
       below_minimum_quality_observations: 0,
       risk_isolated_observations: 0,
-      qualifying_candidate_observations: 0
+      qualifying_candidate_observations: 0,
+      rate_limit_wait_seconds: 0,
+      rate_limit_deferred_queries: 0
     };
     return providerStatistics[key];
   }
@@ -900,6 +921,25 @@ export async function discoverOpenSourceTechnology({
     attempted += 1;
     const statistics = statisticsFor(provider);
     statistics.attempted_queries += 1;
+    const rateWait = await waitForRateLimitReset(provider, providerConfig, rateResetTimes);
+    statistics.rate_limit_wait_seconds += rateWait.waited_seconds;
+    if (rateWait.deferred) {
+      statistics.failed_queries += 1;
+      statistics.rate_limit_deferred_queries += 1;
+      const warning = {
+        provider,
+        query,
+        error: '为遵守公开 API 限额而延后查询',
+        provider_message: null,
+        response: { http_status: null, request_id: null, retry_after_seconds: null, rate_limit: { limit: null, remaining: 0, reset_epoch_seconds: rateWait.reset_epoch_seconds, resource: 'search' } },
+        http_status: null,
+        failure_kind: 'rate_limit_reset_deferred',
+        handling_zh: '已在不超过允许等待时间的前提下停止本轮；等待下次计划任务在额度重置后再试。'
+      };
+      warnings.push(warning);
+      queryRuns.push({ provider, query, outcome: 'deferred', rate_limit_wait_seconds: 0, ...warning });
+      return;
+    }
     try {
       const searchResult = await search(query, { fetchImpl, token, perPage: providerConfig.max_results_per_query });
       const items = Array.isArray(searchResult) ? searchResult : (searchResult.items ?? []);
@@ -918,6 +958,7 @@ export async function discoverOpenSourceTechnology({
         reported_total_count: telemetry.reported_total_count ?? null,
         incomplete_results: Boolean(telemetry.incomplete_results),
         response: telemetry.response ?? null,
+        rate_limit_wait_seconds: rateWait.waited_seconds,
         hard_rejected_observations: 0,
         below_minimum_quality_observations: 0,
         risk_isolated_observations: 0,
@@ -966,6 +1007,10 @@ export async function discoverOpenSourceTechnology({
         const card = compactRepository(repo, quality, query, provider);
         const existing = candidates.get(card.source_id);
         candidates.set(card.source_id, mergeCandidateProvenance(existing, card));
+      }
+      const resetEpoch = Number(telemetry.response?.rate_limit?.reset_epoch_seconds ?? 0);
+      if (telemetry.response?.rate_limit?.remaining === 0 && Number.isFinite(resetEpoch) && resetEpoch > 0) {
+        rateResetTimes.set(provider, resetEpoch * 1_000);
       }
       queryRuns.push(queryRun);
     } catch (error) {

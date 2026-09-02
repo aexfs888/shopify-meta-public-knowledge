@@ -4,6 +4,7 @@
   "providers": ["github", "gitlab"],
   "github": {
     "max_results_per_query": 40,
+    "max_rate_limit_wait_seconds": 75,
     "queries": [
       "shopify meta ads in:name,description,readme archived:false",
       "shopify facebook conversions api in:name,description,readme archived:false",
