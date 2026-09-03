@@ -1,0 +1,36 @@
+name: Public knowledge freshness monitor
+
+on:
+  schedule:
+    # 在刷新后的第 7 分钟检查；只读 GitHub 运行元数据，不触发刷新。
+    - cron: '12,42 * * * *'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 取得公开发布器
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
+      - name: 安装 Node.js 22
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0, Node 24
+        with:
+          node-version: 22
+          package-manager-cache: false
+      - name: 只读汇总定时刷新新鲜度
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          WORKFLOW_FILE: refresh.yml
+        run: node scripts/workflow-freshness-summary.mjs
+      - name: 上传新鲜度摘要
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1, Node 24
+        with:
+          name: workflow-freshness-${{ github.run_id }}
+          path: 临时文件/workflow-health/workflow-freshness-summary.json
+          if-no-files-found: error
+          retention-days: 30
