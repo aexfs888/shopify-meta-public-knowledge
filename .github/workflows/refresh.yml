@@ -2,7 +2,8 @@
 
 on:
   schedule:
-    - cron: '17 2 * * *' # 每天台湾时间 10:17
+    # 与本机 Hermes 同步节奏一致：每小时第 05、35 分钟（UTC）。
+    - cron: '5,35 * * * *'
   workflow_dispatch:
 
 permissions:
