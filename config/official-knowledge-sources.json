@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-31T00:00:00+08:00",
+  "updated_at": "2026-09-04T19:54:28+08:00",
   "scope_zh": "Shopify 独立站使用 Meta、Facebook、Instagram 进行商品投流所需的官方知识",
   "sources": [
     {"publisher":"Meta","title_zh":"Meta for Developers","url":"https://developers.facebook.com/","type":"developer","modules":["assets","tracking"]},
@@ -105,6 +105,12 @@
     {"publisher":"Meta","title_zh":"Conversions API Business SDK 功能","url":"https://developers.facebook.com/documentation/ads-commerce/conversions-api/guides/business-sdk-features","type":"developer","modules":["tracking"]},
     {"publisher":"Meta","title_zh":"Conversions API Gateway Pixel 管理","url":"https://developers.facebook.com/documentation/ads-commerce/conversions-api/guides/gateway-control-plane-api/reference/pixel-management","type":"developer","modules":["tracking","governance"]},
     {"publisher":"Meta","title_zh":"Conversions API Gateway 术语表","url":"https://developers.facebook.com/documentation/ads-commerce/conversions-api/guides/gateway-multiple-accounts/glossary","type":"developer","modules":["tracking","governance"]},
-    {"publisher":"Meta","title_zh":"商品目录智能 Pixel 设置","url":"https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference/product-catalog/smart_pixel_settings","type":"developer","modules":["catalog","tracking"]}
+    {"publisher":"Meta","title_zh":"商品目录智能 Pixel 设置","url":"https://developers.facebook.com/documentation/ads-commerce/marketing-api/reference/product-catalog/smart_pixel_settings","type":"developer","modules":["catalog","tracking"]},
+    {"publisher":"Meta","title_zh":"Graph API 变更日志","url":"https://developers.facebook.com/docs/graph-api/changelog","type":"changelog","modules":["tracking","assets","campaigns","catalog","governance"]},
+    {"publisher":"Meta","title_zh":"潜在客户广告","url":"https://developers.facebook.com/documentation/ads-commerce/marketing-api/guides/lead-ads","type":"developer","modules":["campaigns","tracking","governance"]},
+    {"publisher":"Meta","title_zh":"Marketing API Insights 指南","url":"https://developers.facebook.com/documentation/ads-commerce/marketing-api/insights","type":"developer","modules":["reporting","tracking","campaigns"]},
+    {"publisher":"Shopify","title_zh":"Shopify 开发者变更日志","url":"https://shopify.dev/changelog","type":"changelog","modules":["shopify","governance","catalog","tracking"]},
+    {"publisher":"Shopify","title_zh":"Admin GraphQL API 最新版","url":"https://shopify.dev/docs/api/admin-graphql/latest","type":"developer","modules":["shopify","catalog","orders","products"]},
+    {"publisher":"Shopify","title_zh":"构建结账应用","url":"https://shopify.dev/docs/apps/build/checkout","type":"developer","modules":["shopify","checkout","privacy","governance"]}
   ]
 }
