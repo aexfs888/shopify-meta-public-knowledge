@@ -1,37 +1,40 @@
 {
   "schema_version": 1,
   "scope": "Shopify × Meta 公开官方知识快照",
-  "generated_at": "2026-09-04T17:03:15+08:00",
-  "usable_source_count": 85,
+  "generated_at": "2026-09-04T21:29:10+08:00",
+  "snapshot_content_hash": "5dba9a4f8be06798f0426dbc28f6c6309b215d5e481a1b6d3dfb524c5de27406",
+  "source_snapshot_hash": "71c44a4ce0459f30f5db4efa6f0184d55c95f40b668e0e283ce955be9a9de12f",
+  "source_generated_at": "2026-09-04T21:29:10+08:00",
+  "usable_source_count": 91,
   "source_floor": 81,
   "archive": {
     "file": "meta-shopify-official-source-pack.tar.gz",
-    "sha256": "8d37271e85d824cce8b9a5d85202957ddafafcab6e489a1f3ef2a1014e68b276",
-    "bytes": 299620,
+    "sha256": "861701fe300d04b8aac0ceba0f03dd7cbd31efa95d4c4e902cacfde264f7239c",
+    "bytes": 306678,
     "format": "tar.gz"
   },
   "community_open_source_catalog": {
     "file": "community-open-source-catalog.json",
-    "sha256": "02d5a6967a5100845c83c9dfa6b0dc817c7d4a0be33dd427de7b86c97f22fe2a",
-    "bytes": 41495,
-    "repository_count": 4,
+    "sha256": "245768b1e3d1b859ae71c54d50a19a799d77574de9ce4108e25a854014250d00",
+    "bytes": 49280,
+    "repository_count": 6,
     "maximum_age_days": 180,
     "scope_zh": "第三方开源技术参考；不替代官方规则"
   },
   "community_frontier_catalog": {
     "file": "community-frontier-latest-30-days.json",
-    "sha256": "76213ebcb4dfe41b6686aea95c3ace0369028dd27250215fb8342e2abec5bb30",
-    "bytes": 11759,
-    "repository_count": 2,
+    "sha256": "b38098060bc43a567df7d29c5cc0d845df5f908fb610e7597adad7b52239e8ba",
+    "bytes": 20093,
+    "repository_count": 4,
     "maximum_age_days": 30,
     "sort_order_zh": "更新时间优先，其次为质量与公开热度",
     "scope_zh": "第三方开源前沿技术参考；不替代官方规则"
   },
   "community_compliance_risk_registry": {
     "file": "community-compliance-risk-registry.json",
-    "sha256": "bf15d13154ded8a2a7e62eb35f50d88a63d010463b1a56922add480eb2fd2de3",
-    "bytes": 9371,
-    "observed_candidate_count": 1,
+    "sha256": "a42de81344f022e5131ae2a5fcfcb48d07ac89e1a0437174b47b52aadcad3459",
+    "bytes": 9234,
+    "observed_candidate_count": 0,
     "data_handling_zh": "只含匿名聚合风险类别；不含项目标识、URL、代码或操作步骤"
   },
   "local_apply": {

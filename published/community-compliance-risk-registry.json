@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source_tier": "compliance_risk_research",
-  "generated_at": "2026-09-04T17:02:46+08:00",
+  "generated_at": "2026-09-04T21:28:46+08:00",
   "purpose_zh": "用于正常工作流的合规筛查、培训和风险规避，不用于发现、使用或传播违规工具。",
   "coverage_zh": "覆盖账号与访问、广告完整性、隐私数据、商品安全、知识产权、追踪归因等八大风险类；类别会随公开官方资料的更新而复核。",
   "data_handling_zh": "仅保留风险类别和匿名聚合计数；不保存可操作的违规项目标识、URL、代码、凭据或规避步骤。",
@@ -44,19 +44,14 @@
     "涉及广告、商品或素材时，核对真实声明、商品安全、地区要求、商标和授权证据。",
     "一旦命中风险类别，停止接入；记录原因并改用官方接口、授权资料或人工复核。"
   ],
-  "observed_candidate_count": 1,
+  "observed_candidate_count": 0,
   "categories": [
     {
       "category_id": "account_evasion",
       "category_zh": "账号、身份或平台限制规避",
-      "observed_candidate_count": 1,
-      "observed_source_providers": [
-        "GitHub"
-      ],
-      "observed_business_contexts_zh": [
-        "AI 智能体、MCP 与工作流自动化",
-        "Meta/Shopify 相关公开开源技术筛选"
-      ],
+      "observed_candidate_count": 0,
+      "observed_source_providers": [],
+      "observed_business_contexts_zh": [],
       "risk_zh": "可能违反平台条款并触发账号、资产或支付限制。",
       "safe_alternative_zh": "使用官方 OAuth、正式权限、真实业务资料和平台申诉/支持渠道；发生限制时先停用自动化并核对官方提示。",
       "defensive_signals_zh": [
