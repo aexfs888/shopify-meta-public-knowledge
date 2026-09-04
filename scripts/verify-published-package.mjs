@@ -39,5 +39,14 @@ const entries = String(listed.stdout || '').split(/\r?\n/).filter(Boolean);
 if (entries.some((entry) => entry.startsWith('/') || /^[A-Za-z]:/.test(entry) || /(^|\/)\.\.(\/|$)/.test(entry) || !(entry.startsWith('sources/') || entry === 'source-manifest.json'))) fail('压缩包含有越界或无关路径');
 const sourceCount = entries.filter((entry) => /^sources\/[^/]+\/source\.json$/.test(entry)).length;
 if (sourceCount !== Number(manifest.usable_source_count)) fail(`来源数量不一致：清单 ${manifest.usable_source_count}，压缩包 ${sourceCount}`);
+if (!/^[a-f0-9]{64}$/i.test(String(manifest.source_snapshot_hash || '')) || !/^[a-f0-9]{64}$/i.test(String(manifest.snapshot_content_hash || ''))) fail('快照内容哈希无效');
 
-console.log(JSON.stringify({ ok: true, usable_source_count: sourceCount, archive_sha256: manifest.archive.sha256 }, null, 2));
+const extracted = spawnSync('tar', ['-xOzf', archivePath, 'source-manifest.json'], { encoding: 'utf8', windowsHide: true });
+if (extracted.status !== 0) fail(`无法读取来源清单：${String(extracted.stderr || '').trim()}`);
+let sourceManifest;
+try { sourceManifest = JSON.parse(String(extracted.stdout || '')); } catch { fail('来源清单不是有效 JSON'); }
+if (sourceManifest.schema_version !== 1 || sourceManifest.scope !== 'official_public_source_snapshot' || sourceManifest.usable_source_count !== sourceCount || sourceManifest.snapshot_content_hash !== manifest.source_snapshot_hash || !Array.isArray(sourceManifest.sources)) fail('来源清单与发布清单不一致');
+const sourceIds = sourceManifest.sources.map((item) => item?.source_id);
+if (new Set(sourceIds).size !== sourceIds.length || sourceIds.some((value) => typeof value !== 'string' || !value)) fail('来源清单存在重复或无效 source_id');
+
+console.log(JSON.stringify({ ok: true, usable_source_count: sourceCount, archive_sha256: manifest.archive.sha256, source_snapshot_hash: manifest.source_snapshot_hash }, null, 2));

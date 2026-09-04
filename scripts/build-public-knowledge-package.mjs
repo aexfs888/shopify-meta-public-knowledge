@@ -2,7 +2,7 @@
 import fsp from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { spawn } from 'node:child_process';
+import { gzipSync } from 'node:zlib';
 import { exists, ensureDir, isoTaipei, listFilesRecursive, readJson, writeJsonAtomic } from '../src/lib/fs-utils.mjs';
 import { KNOWLEDGE_SOURCE_ROOT } from '../src/lib/official-knowledge/constants.mjs';
 import { COMMUNITY_CATALOG_PATH, FRONTIER_CATALOG_PATH, COMPLIANCE_RISK_REGISTRY_PATH } from '../src/lib/community-knowledge/open-source-radar.mjs';
@@ -54,13 +54,39 @@ function assertPublishableCommunityCoverage(catalog) {
   }
 }
 
-async function run(command, args, cwd) {
-  await new Promise((resolve, reject) => {
-    const child = spawn(command, args, { cwd, stdio: 'inherit', shell: false });
-    child.on('error', reject);
-    child.on('exit', (code) => code === 0 ? resolve() : reject(new Error(`${command} 退出码 ${code}`)));
-  });
+function writeTarString(buffer, offset, length, value) {
+  const bytes = Buffer.from(String(value), 'utf8');
+  if (bytes.length > length) throw new Error(`tar 字段过长：${value}`);
+  bytes.copy(buffer, offset);
 }
+
+function writeTarOctal(buffer, offset, length, value) {
+  const encoded = `${Number(value).toString(8).padStart(length - 1, '0')}\0`;
+  writeTarString(buffer, offset, length, encoded);
+}
+
+function stableTarEntry(name, bytes) {
+  if (!/^[^/]+(?:\/[^/]+)*$/.test(name) || Buffer.byteLength(name) > 100) throw new Error(`tar 路径不安全或过长：${name}`);
+  const header = Buffer.alloc(512, 0);
+  writeTarString(header, 0, 100, name);
+  writeTarOctal(header, 100, 8, 0o644); writeTarOctal(header, 108, 8, 0); writeTarOctal(header, 116, 8, 0);
+  writeTarOctal(header, 124, 12, bytes.length); writeTarOctal(header, 136, 12, 0);
+  header.fill(0x20, 148, 156); header[156] = '0'.charCodeAt(0);
+  writeTarString(header, 257, 6, 'ustar'); writeTarString(header, 263, 2, '00');
+  const checksum = header.reduce((sum, value) => sum + value, 0);
+  writeTarOctal(header, 148, 8, checksum);
+  const padding = Buffer.alloc((512 - (bytes.length % 512)) % 512, 0);
+  return Buffer.concat([header, bytes, padding]);
+}
+
+async function createStableArchive(output, root, entries) {
+  const blocks = [];
+  for (const entry of [...entries].sort()) blocks.push(stableTarEntry(entry, await fsp.readFile(path.join(root, entry))));
+  blocks.push(Buffer.alloc(1024, 0));
+  // gzipSync defaults to an mtime of zero, so the compressed bytes also remain stable.
+  await fsp.writeFile(output, gzipSync(Buffer.concat(blocks), { mtime: 0 }));
+}
+
 
 if (!(await exists(sourceRoot))) throw new Error(`找不到官方来源目录：${sourceRoot}`);
 await ensureDir(outputRoot);
@@ -77,8 +103,32 @@ for (const sourceJsonPath of sourceJsonFiles) {
   const normalizedPath = path.join(sourceDir, 'normalized.md');
   if (!(await exists(normalizedPath))) continue;
   const targetDir = path.join(stagingRoot, 'sources', metadata.source_id);
+  // The public package is a content snapshot, not a transport log. Excluding
+  // request timestamps, validators and local paths prevents no-op refreshes
+  // from republishing identical knowledge merely because a check was made.
   const publishedMetadata = {
-    ...metadata,
+    schema_version: 1,
+    source_id: metadata.source_id,
+    publisher: metadata.publisher,
+    title: metadata.title,
+    title_zh: metadata.title_zh,
+    canonical_url: metadata.canonical_url,
+    final_url: metadata.final_url,
+    type: metadata.type,
+    language: metadata.language,
+    modules: metadata.modules,
+    archive_mode: metadata.archive_mode,
+    rights_status: metadata.rights_status,
+    volatility: metadata.volatility,
+    content_type: metadata.content_type,
+    content_hash: metadata.content_hash,
+    content_bytes: metadata.content_bytes,
+    status: 'current',
+    quality: {
+      usable_for_index: true,
+      normalized_chars: metadata.quality?.normalized_chars ?? null,
+      reason: null
+    },
     local_raw_path: null,
     local_normalized_path: path.posix.join('sources', metadata.source_id, 'normalized.md'),
     published_scope: 'official_public_source_snapshot'
@@ -93,6 +143,7 @@ for (const sourceJsonPath of sourceJsonFiles) {
     normalized_chars: metadata.quality?.normalized_chars ?? null
   });
 }
+packagedSources.sort((left, right) => String(left.source_id).localeCompare(String(right.source_id)));
 
 const previousManifestPath = path.join(outputRoot, 'manifest.json');
 const previousManifest = await exists(previousManifestPath) ? await readJson(previousManifestPath) : null;
@@ -102,10 +153,15 @@ if (packagedSources.length < floorFromPrevious && process.env.PUBLIC_KNOWLEDGE_A
   throw new Error(`可发布官方来源仅 ${packagedSources.length} 条，低于发布门槛 ${floorFromPrevious}；已保留旧版本，拒绝覆盖。`);
 }
 
+const sourceSnapshotHash = sha256(Buffer.from(JSON.stringify(packagedSources)));
+const sourceGeneratedAt = previousManifest?.source_snapshot_hash === sourceSnapshotHash
+  ? (previousManifest.source_generated_at || previousManifest.generated_at)
+  : isoTaipei();
 const sourceManifest = {
   schema_version: 1,
   scope: 'official_public_source_snapshot',
-  generated_at: isoTaipei(),
+  generated_at: sourceGeneratedAt,
+  snapshot_content_hash: sourceSnapshotHash,
   usable_source_count: packagedSources.length,
   sources: packagedSources
 };
@@ -113,7 +169,14 @@ await writeJsonAtomic(path.join(stagingRoot, 'source-manifest.json'), sourceMani
 
 const archivePath = path.join(outputRoot, archiveName);
 await fsp.rm(archivePath, { force: true });
-await run('tar', ['-czf', archivePath, 'sources', 'source-manifest.json'], stagingRoot);
+// Generate ustar bytes in Node rather than relying on host tar variants.
+// Identical official content therefore has stable ordering, mtime and SHA-256
+// on both GitHub Linux runners and local Windows verification.
+const archiveEntries = ['source-manifest.json'];
+for (const source of packagedSources) {
+  archiveEntries.push(`sources/${source.source_id}/normalized.md`, `sources/${source.source_id}/source.json`);
+}
+await createStableArchive(archivePath, stagingRoot, archiveEntries);
 const archiveBytes = await fsp.readFile(archivePath);
 let communityOpenSourceCatalog = null;
 let communityFrontierCatalog = null;
@@ -186,10 +249,23 @@ if (await exists(complianceRiskRegistryPath)) {
     data_handling_zh: '只含匿名聚合风险类别；不含项目标识、URL、代码或操作步骤'
   };
 }
+const snapshotContent = {
+  source_snapshot_hash: sourceSnapshotHash,
+  community_open_source_sha256: communityOpenSourceCatalog?.sha256 ?? null,
+  community_frontier_sha256: communityFrontierCatalog?.sha256 ?? null,
+  community_compliance_risk_sha256: communityComplianceRiskRegistry?.sha256 ?? null
+};
+const snapshotContentHash = sha256(Buffer.from(JSON.stringify(snapshotContent)));
+const generatedAt = previousManifest?.snapshot_content_hash === snapshotContentHash
+  ? previousManifest.generated_at
+  : isoTaipei();
 const manifest = {
   schema_version: 1,
   scope: 'Shopify × Meta 公开官方知识快照',
-  generated_at: isoTaipei(),
+  generated_at: generatedAt,
+  snapshot_content_hash: snapshotContentHash,
+  source_snapshot_hash: sourceSnapshotHash,
+  source_generated_at: sourceGeneratedAt,
   usable_source_count: packagedSources.length,
   source_floor: floorFromPrevious,
   archive: {
