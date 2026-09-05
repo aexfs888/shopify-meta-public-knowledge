@@ -3,8 +3,8 @@
   "scope_zh": "Shopify 独立站使用 Meta、Facebook、Instagram 投流的第三方开源与前沿技术发现；仅作方案与工具参考，不替代官方规则。；仅展示近 30 天更新的前沿技术候选。",
   "source_tier": "community_open_source",
   "catalog_kind": "frontier_latest_30_days",
-  "generated_at": "2026-09-06T05:40:38+08:00",
-  "parent_catalog_generated_at": "2026-09-06T05:40:38+08:00",
+  "generated_at": "2026-09-06T07:50:29+08:00",
+  "parent_catalog_generated_at": "2026-09-06T07:50:29+08:00",
   "provider": "GitHub and GitLab public repository metadata APIs",
   "metadata_only": true,
   "maximum_age_days": 30,
@@ -55,83 +55,65 @@
   },
   "repositories": [
     {
-      "source_id": "oss-ff14f1123294d797",
+      "source_id": "oss-d29e031cedd48ca3",
       "source_tier": "community_open_source",
-      "publisher": "GitHub / Anagogic-blastinggelatin157",
+      "publisher": "GitHub / loomascale",
       "provider": "GitHub",
-      "repository": "Anagogic-blastinggelatin157/hookradar-agent-skill",
-      "title_zh": "开源项目：Anagogic-blastinggelatin157/hookradar-agent-skill",
-      "description_original": "Connect your AI agent to HookRadar to automate competitive creative research and analyze ad performance data using the MCP standard.",
-      "canonical_url": "https://github.com/Anagogic-blastinggelatin157/hookradar-agent-skill",
-      "homepage_url": "https://anagogic-blastinggelatin157.github.io",
+      "repository": "loomascale/ad-events",
+      "title_zh": "开源项目：loomascale/ad-events",
+      "description_original": "One `event_id` across your browser pixels and your server Conversions APIs, so Meta, Google Ads and ChatGPT Ads each count a conversion once.",
+      "canonical_url": "https://github.com/loomascale/ad-events",
+      "homepage_url": null,
       "default_branch": "main",
-      "language": "Python",
+      "language": "TypeScript",
       "license_spdx": "MIT",
       "topics": [
-        "ai-agent",
-        "claude-code",
-        "codex",
-        "creative-intelligence",
-        "hookradar",
-        "marketing",
-        "mcp",
-        "mcp-server",
-        "meta-ads",
-        "skill-md",
-        "campaigns",
-        "creative",
-        "automation"
+        "tracking",
+        "campaigns"
       ],
       "stars": 0,
       "forks": 0,
       "hotness_score": 0,
       "open_issues": 0,
-      "created_at": "2026-06-23T03:27:18Z",
-      "project_age_days": 74,
-      "pushed_at": "2026-09-05T21:22:05Z",
-      "updated_at": "2026-09-05T21:22:08Z",
+      "created_at": "2026-09-05T23:31:57Z",
+      "project_age_days": 0,
+      "pushed_at": "2026-09-05T23:32:09Z",
+      "updated_at": "2026-09-05T23:32:13Z",
       "age_days": 0,
       "freshness": "fresh_within_30_days",
       "freshness_label_zh": "最近 30 天更新：新技术候选",
-      "quality_score": 9,
-      "discovery_priority_score": 9,
+      "quality_score": 8,
+      "discovery_priority_score": 8,
       "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
-      "metadata_evidence_score": 1,
-      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_evidence_score": 0.83,
+      "metadata_evidence_label_zh": "公开元数据部分完整",
       "metadata_verified_fields_zh": [
         "许可证",
         "足够的公开简介",
         "主要语言",
-        "主题标签",
         "默认分支",
         "更新时间和推送时间"
       ],
-      "metadata_missing_fields_zh": [],
+      "metadata_missing_fields_zh": [
+        "主题标签"
+      ],
       "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
       "public_community_signal_label_zh": "公开社区信号未形成",
       "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
       "selection_reasons_zh": [
         "许可证 MIT",
         "最近 0 天更新（新技术）",
-        "涉及 Meta 投流或信号",
-        "涉及自动化或 AI 助手"
+        "涉及 Meta 投流或信号"
       ],
-      "discovery_query": "meta ads mcp in:name,description,readme archived:false",
+      "discovery_query": "meta conversions api server side tracking in:name,description,readme archived:false",
       "discovery_queries": [
-        "meta ads mcp in:name,description,readme archived:false",
-        "meta ads creative ai open source in:name,description,readme archived:false"
+        "meta conversions api server side tracking in:name,description,readme archived:false"
       ],
       "discovery_providers": [
         "GitHub"
       ],
-      "matching_query_count": 2,
-      "capability_exposures": [
-        {
-          "id": "agent_or_mcp_integration",
-          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
-          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
-        }
-      ],
+      "matching_query_count": 1,
+      "capability_exposures": [],
       "automatic_adoption_allowed": false,
       "research_status": "research_only",
       "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
@@ -139,14 +121,13 @@
         "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
         "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
         "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
-        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        "补齐或人工核对：主题标签。"
       ],
       "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
       "status": "frontier_candidate_metadata",
       "frontier_categories_zh": [
-        "营销自动化与广告投放",
-        "广告创意与生成式 AI",
-        "AI 智能体、MCP 与工作流自动化"
+        "服务端追踪与转化信号",
+        "营销自动化与广告投放"
       ],
       "frontier_window_days": 30,
       "frontier_status_zh": "近 30 天更新的前沿技术候选；须先按官方规则和本机隔离环境核验。"
@@ -192,7 +173,7 @@
       "hotness_score": 1,
       "open_issues": 0,
       "created_at": "2026-08-24T21:58:34Z",
-      "project_age_days": 11,
+      "project_age_days": 12,
       "pushed_at": "2026-09-05T21:05:26Z",
       "updated_at": "2026-09-05T21:05:30Z",
       "age_days": 0,
