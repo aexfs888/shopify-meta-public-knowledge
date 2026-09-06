@@ -7,7 +7,8 @@
                     "publish":  "node --disable-warning=ExperimentalWarning scripts/build-public-knowledge-package.mjs",
                     "verify:published":  "node scripts/verify-published-package.mjs",
                     "refresh":  "node scripts/public-knowledge-refresh.mjs",
-                    "test":  "node --disable-warning=ExperimentalWarning --test"
+                    "test":  "node --disable-warning=ExperimentalWarning --test",
+                    "automation:shadow":  "node 自动化/official-knowledge-coordinator.mjs"
                 },
     "type":  "module",
     "engines":  {

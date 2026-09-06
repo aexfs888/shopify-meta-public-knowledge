@@ -1,0 +1,29 @@
+# 官方知识本机协调器
+
+`official-knowledge-coordinator.mjs` 默认运行影子模式。它校验当前 `published/manifest.json` 与归档 SHA-256，写入被 Git 忽略的 `临时文件/automation/` 状态和历史；不会联网刷新、发布或读取真实 Meta/Shopify 账户和经营数据。
+
+## 已验证行为
+
+- 独占锁：已有 `collector.lock` 时跳过；
+- 校验最后合格公开包的 Manifest 和归档 SHA-256；
+- 记录 source floor 与可用官方来源数量；
+- `active` 模式当前显式阻止，防止未经影子观察直接联网刷新。
+
+## 手动影子运行
+
+```text
+npm run automation:shadow
+```
+
+## 任务计划脚本
+
+`install-shadow-tasks.ps1` 创建当前 Windows 用户的交互式 30 分钟影子校验任务；`-Remove` 删除任务。它不提升权限，也不执行公开刷新。
+
+当前自动注册曾被系统以 `Access is denied` 拒绝，因此必须由拥有任务计划权限的本机用户在 PowerShell 中执行。不要通过提权或修改目录 ACL 绕过该限制。
+
+## 启用真实刷新前的硬条件
+
+1. 完成至少 48 小时影子观察；
+2. 来源分层（B0/B1/B2/B3）进入注册表并有测试；
+3. 失败保留最后合格正文、确定性发布和 Manifest 校验持续通过；
+4. 真实刷新改动单独审核与回滚。
