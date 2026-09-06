@@ -63,6 +63,24 @@ async function validatePublishedManifest() {
 
 async function main() {
   await fs.mkdir(stateDirectory, { recursive: true })
+  if (mode === 'active') {
+    const result = {
+      schemaVersion: 1,
+      project: 'official-knowledge',
+      mode,
+      runId,
+      state: 'blocked_active_not_implemented',
+      startedAt: now.toISOString(),
+      privateDataAccessed: false,
+      networkCollectionStarted: false,
+      note: '主动模式尚未启用，需先完成影子模式观察和规则分层验证。',
+    }
+    await appendHistory(result)
+    console.log(JSON.stringify(result))
+    process.exitCode = 2
+    return
+  }
+
   const previous = await readJson(stateFile, null)
   const lock = await acquireLock()
   if ('existing' in lock) {
