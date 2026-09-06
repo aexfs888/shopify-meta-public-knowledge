@@ -51,3 +51,21 @@ test('相同公开正文会生成稳定的发布快照，不因检查时间制�
   assert.equal(first.generated_at, second.generated_at);
   await run('node', ['scripts/verify-published-package.mjs'], { cwd: projectRoot, env });
 });
+
+test('刷新不会降低已有公开包的来源门槛', async (t) => {
+  const tmp = await fsp.mkdtemp(path.join(os.tmpdir(), 'publisher-floor-'));
+  t.after(async () => fsp.rm(tmp, { recursive: true, force: true }));
+  const sourceRoot = path.join(tmp, 'knowledge'); const outputRoot = path.join(tmp, 'published');
+  await writeSource(sourceRoot, 'meta-a', 'Official guidance A');
+  await writeSource(sourceRoot, 'meta-b', 'Official guidance B');
+  const env = { ...process.env, PUBLIC_KNOWLEDGE_SOURCE_ROOT: sourceRoot, PUBLIC_KNOWLEDGE_OUTPUT_ROOT: outputRoot, PUBLIC_KNOWLEDGE_MIN_SOURCES: '1', PUBLIC_COMMUNITY_CATALOG_PATH: path.join(tmp, 'missing.json'), PUBLIC_FRONTIER_CATALOG_PATH: path.join(tmp, 'missing-frontier.json'), PUBLIC_COMPLIANCE_RISK_REGISTRY_PATH: path.join(tmp, 'missing-risk.json') };
+  await run('node', ['scripts/build-public-knowledge-package.mjs'], { cwd: projectRoot, env });
+  const manifestPath = path.join(outputRoot, 'manifest.json');
+  const previous = JSON.parse(await fsp.readFile(manifestPath, 'utf8'));
+  previous.source_floor = 5;
+  await fsp.writeFile(manifestPath, JSON.stringify(previous, null, 2), 'utf8');
+  await assert.rejects(
+    run('node', ['scripts/build-public-knowledge-package.mjs'], { cwd: projectRoot, env }),
+    /低于发布门槛 5/,
+  );
+});

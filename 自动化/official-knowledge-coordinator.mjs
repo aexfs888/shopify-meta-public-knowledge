@@ -54,6 +54,16 @@ async function sha256(file) {
   return crypto.createHash('sha256').update(bytes).digest('hex')
 }
 
+function processIsAlive(pid) {
+  if (!Number.isInteger(pid) || pid <= 0) return false
+  try {
+    process.kill(pid, 0)
+    return true
+  } catch (error) {
+    return error?.code === 'EPERM'
+  }
+}
+
 async function inspectExistingLock() {
   let stat
   try {
@@ -70,24 +80,39 @@ async function inspectExistingLock() {
     metadataReadable = false
   }
   const startedAt = Date.parse(metadata?.startedAt ?? '')
+  const pid = Number.isInteger(metadata?.pid) ? metadata.pid : null
+  const ageMs = Math.max(0, Date.now() - stat.mtimeMs)
+  const ageMinutes = Math.floor(ageMs / 60_000)
+  const pidAlive = processIsAlive(pid)
+  const timedOut = ageMs > publicRefreshTimeoutMs + 5 * 60_000
   return {
     state: metadataReadable && Number.isFinite(startedAt) ? 'valid_metadata' : 'malformed_metadata',
-    ageMinutes: Math.max(0, Math.floor((Date.now() - stat.mtimeMs) / 60_000)),
+    ageMinutes,
     startedAt: Number.isFinite(startedAt) ? metadata.startedAt : null,
-    pid: Number.isInteger(metadata?.pid) ? metadata.pid : null,
+    pid,
+    pidAlive,
+    timedOut,
+    stale: !pidAlive || timedOut,
     mode: ['shadow', 'public', 'active'].includes(metadata?.mode) ? metadata.mode : null,
   }
 }
 
 async function acquireLock() {
-  try {
-    const handle = await fs.open(lockFile, 'wx')
-    await handle.writeFile(JSON.stringify({ runId, pid: process.pid, startedAt: now.toISOString(), mode }))
-    return handle
-  } catch (error) {
-    if (error?.code !== 'EEXIST') throw error
-    return { existing: await inspectExistingLock() }
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      const handle = await fs.open(lockFile, 'wx')
+      await handle.writeFile(JSON.stringify({ runId, pid: process.pid, startedAt: now.toISOString(), mode }))
+      return handle
+    } catch (error) {
+      if (error?.code !== 'EEXIST') throw error
+      const existing = await inspectExistingLock()
+      if (!existing.stale || attempt > 0) return { existing }
+      // The former owner is gone or exceeded its coordinator timeout. Remove only this
+      // stale local lock, then retry exclusive creation; no source limits are changed.
+      await fs.rm(lockFile, { force: true })
+    }
   }
+  return { existing: await inspectExistingLock() }
 }
 
 async function runPublicRefresh() {

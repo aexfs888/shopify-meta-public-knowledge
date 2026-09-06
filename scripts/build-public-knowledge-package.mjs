@@ -148,7 +148,10 @@ packagedSources.sort((left, right) => String(left.source_id).localeCompare(Strin
 const previousManifestPath = path.join(outputRoot, 'manifest.json');
 const previousManifest = await exists(previousManifestPath) ? await readJson(previousManifestPath) : null;
 const previousUsable = Number(previousManifest?.usable_source_count ?? 0);
-const floorFromPrevious = previousUsable ? Math.ceil(previousUsable * 0.95) : minimumUsable;
+// Preserve the stricter inherited floor across no-op or partial refreshes. A
+// successful refresh must not silently lower its own future acceptance bar.
+const previousFloor = Number(previousManifest?.source_floor ?? 0);
+const floorFromPrevious = Math.max(minimumUsable, previousFloor, previousUsable ? Math.ceil(previousUsable * 0.95) : 0);
 if (packagedSources.length < floorFromPrevious && process.env.PUBLIC_KNOWLEDGE_ALLOW_SHRINK !== '1') {
   throw new Error(`可发布官方来源仅 ${packagedSources.length} 条，低于发布门槛 ${floorFromPrevious}；已保留旧版本，拒绝覆盖。`);
 }
