@@ -38,6 +38,31 @@ async function sha256(file) {
   return crypto.createHash('sha256').update(bytes).digest('hex')
 }
 
+async function inspectExistingLock() {
+  let stat
+  try {
+    stat = await fs.stat(lockFile)
+  } catch {
+    return { state: 'unreadable' }
+  }
+
+  let metadata = null
+  let metadataReadable = true
+  try {
+    metadata = await readJson(lockFile, null)
+  } catch {
+    metadataReadable = false
+  }
+  const startedAt = Date.parse(metadata?.startedAt ?? '')
+  return {
+    state: metadataReadable && Number.isFinite(startedAt) ? 'valid_metadata' : 'malformed_metadata',
+    ageMinutes: Math.max(0, Math.floor((Date.now() - stat.mtimeMs) / 60_000)),
+    startedAt: Number.isFinite(startedAt) ? metadata.startedAt : null,
+    pid: Number.isInteger(metadata?.pid) ? metadata.pid : null,
+    mode: ['shadow', 'active'].includes(metadata?.mode) ? metadata.mode : null,
+  }
+}
+
 async function acquireLock() {
   try {
     const handle = await fs.open(lockFile, 'wx')
@@ -45,7 +70,7 @@ async function acquireLock() {
     return handle
   } catch (error) {
     if (error?.code !== 'EEXIST') throw error
-    return { existing: await readJson(lockFile, { state: 'unknown' }) }
+    return { existing: await inspectExistingLock() }
   }
 }
 
