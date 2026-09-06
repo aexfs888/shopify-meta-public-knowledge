@@ -18,6 +18,14 @@
 npm run automation:shadow
 ```
 
+## 48 小时影子观察
+
+```text
+npm run automation:shadow-status
+```
+
+该命令只读取本机状态与历史，输出影子观察时长、合格运行次数、异常状态数和当前安全标志。通过 48 小时及 96 次合格运行不等于可以启用主动模式；来源分层、回归测试、恢复点和单独审批仍缺一不可。
+
 ## 任务计划脚本
 
 `install-shadow-tasks.ps1` 创建当前 Windows 用户的交互式 30 分钟影子校验任务；`-Remove` 删除任务。它不提升权限，也不执行公开刷新。
