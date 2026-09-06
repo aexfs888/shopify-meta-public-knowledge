@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
+import { spawn } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -9,11 +10,14 @@ const stateFile = path.join(stateDirectory, 'collector-state.json')
 const lockFile = path.join(stateDirectory, 'collector.lock')
 const historyFile = path.join(stateDirectory, 'run-history.ndjson')
 const mode = process.env.OFFICIAL_KNOWLEDGE_AUTOMATION_MODE || 'shadow'
+const publicRefreshApproved = process.env.OFFICIAL_KNOWLEDGE_PUBLIC_REFRESH_APPROVED === '1'
+const publicRefreshTimeoutMs = 55 * 60_000
+const publicRefreshProgressFile = path.join(stateDirectory, 'public-refresh-progress.log')
 const now = new Date()
 const runId = `knowledge-${now.toISOString().replace(/[-:.TZ]/g, '')}-${process.pid}`
 const intervalMinutes = 30
 
-if (!['shadow', 'active'].includes(mode)) throw new Error('OFFICIAL_KNOWLEDGE_AUTOMATION_MODE 只能是 shadow 或 active')
+if (!['shadow', 'public', 'active'].includes(mode)) throw new Error('OFFICIAL_KNOWLEDGE_AUTOMATION_MODE 只能是 shadow、public 或 active')
 
 async function readJson(file, fallback) {
   try { return JSON.parse(await fs.readFile(file, 'utf8')) } catch (error) {
@@ -71,7 +75,7 @@ async function inspectExistingLock() {
     ageMinutes: Math.max(0, Math.floor((Date.now() - stat.mtimeMs) / 60_000)),
     startedAt: Number.isFinite(startedAt) ? metadata.startedAt : null,
     pid: Number.isInteger(metadata?.pid) ? metadata.pid : null,
-    mode: ['shadow', 'active'].includes(metadata?.mode) ? metadata.mode : null,
+    mode: ['shadow', 'public', 'active'].includes(metadata?.mode) ? metadata.mode : null,
   }
 }
 
@@ -84,6 +88,25 @@ async function acquireLock() {
     if (error?.code !== 'EEXIST') throw error
     return { existing: await inspectExistingLock() }
   }
+}
+
+async function runPublicRefresh() {
+  const command = process.platform === 'win32' ? 'cmd.exe' : 'npm'
+  const args = process.platform === 'win32'
+    ? ['/d', '/s', '/c', 'npm.cmd run update']
+    : ['run', 'update']
+  return await new Promise((resolve, reject) => {
+    let stdout = ''
+    let stderr = ''
+    let timedOut = false
+    const child = spawn(command, args, { cwd: projectRoot, windowsHide: true, env: { ...process.env, OFFICIAL_KNOWLEDGE_AUTOMATION_MODE: 'public' } })
+    const writeProgress = (chunk) => fs.appendFile(publicRefreshProgressFile, String(chunk), 'utf8').catch(() => {})
+    const timer = setTimeout(() => { timedOut = true; child.kill() }, publicRefreshTimeoutMs)
+    child.stdout.on('data', (chunk) => { stdout += String(chunk); writeProgress(chunk) })
+    child.stderr.on('data', (chunk) => { stderr += String(chunk); writeProgress(chunk) })
+    child.once('error', (error) => { clearTimeout(timer); reject(error) })
+    child.once('close', (code) => { clearTimeout(timer); resolve({ exitCode: code ?? 1, timedOut, outputBytes: Buffer.byteLength(stdout) + Buffer.byteLength(stderr) }) })
+  })
 }
 
 async function validatePublishedManifest() {
@@ -105,11 +128,11 @@ async function main() {
       project: 'official-knowledge',
       mode,
       runId,
-      state: 'blocked_active_not_implemented',
+      state: 'blocked_private_active_not_implemented',
       startedAt: now.toISOString(),
       privateDataAccessed: false,
       networkCollectionStarted: false,
-      note: '主动模式尚未启用，需先完成影子模式观察和规则分层验证。',
+      note: '私密主动模式尚未启用；不会读取真实账户、订单、客户或经营数据。',
     }
     console.log(JSON.stringify(result))
     process.exitCode = 2
@@ -140,13 +163,49 @@ async function main() {
         nextEligibleAt: previous.nextEligibleAt,
         privateDataAccessed: false,
         networkCollectionStarted: false,
-        note: '影子模式尚未到下次 30 分钟检查时间；本次不读取公开包、不联网刷新、不发布。',
+        note: mode === 'public' ? '公开刷新尚未到下次 30 分钟检查时间；本次不读取公开包、不联网刷新或发布。' : '影子模式尚未到下次 30 分钟检查时间；本次不读取公开包、不联网刷新、不发布。',
       }
       await appendHistory(result)
       console.log(JSON.stringify(result))
       return
     }
 
+    if (mode === 'public') {
+      if (!publicRefreshApproved) {
+        const result = { schemaVersion: 1, project: 'official-knowledge', mode, runId, state: 'blocked_public_refresh_not_approved', startedAt: now.toISOString(), privateDataAccessed: false, networkCollectionStarted: false, note: '公开官方资料刷新需要显式本机批准标志；未联网刷新。' }
+        await appendHistory(result)
+        console.log(JSON.stringify(result))
+        process.exitCode = 2
+        return
+      }
+      const previousPackage = await validatePublishedManifest()
+      if (!previousPackage.ok) {
+        const result = { schemaVersion: 1, project: 'official-knowledge', mode, runId, state: 'degraded', startedAt: now.toISOString(), preflight: { publishedPackage: previousPackage }, privateDataAccessed: false, networkCollectionStarted: false, note: '最后合格公开包校验失败；未联网刷新。' }
+        await atomicJson(stateFile, result)
+        await appendHistory(result)
+        console.log(JSON.stringify(result))
+        process.exitCode = 2
+        return
+      }
+      const refresh = await runPublicRefresh()
+      const packageValidation = await validatePublishedManifest()
+      const result = {
+        schemaVersion: 1, project: 'official-knowledge', mode, runId,
+        state: refresh.exitCode === 0 && packageValidation.ok ? 'public_refresh_completed' : 'public_refresh_failed',
+        startedAt: now.toISOString(), finishedAt: new Date().toISOString(), durationMs: Date.now() - startedAt,
+        intervalMinutes, previousState: previous?.state ?? null,
+        preflight: { previousPackage }, publishedPackage: packageValidation,
+        refresh: { exitCode: refresh.exitCode, timedOut: refresh.timedOut, outputBytes: refresh.outputBytes },
+        nextEligibleAt: new Date(Date.now() + intervalMinutes * 60_000).toISOString(),
+        privateDataAccessed: false, networkCollectionStarted: true,
+        note: '仅刷新白名单中的 Meta、Facebook、Instagram 和 Shopify 公开官方资料；不读取真实账户、广告、客户、订单、Cookie、Token 或其他经营数据。',
+      }
+      await atomicJson(stateFile, result)
+      await appendHistory(result)
+      console.log(JSON.stringify(result))
+      process.exitCode = result.state === 'public_refresh_completed' ? 0 : 2
+      return
+    }
     const packageValidation = await validatePublishedManifest()
     const preflightOk = packageValidation.ok
     const executable = mode === 'shadow' && preflightOk

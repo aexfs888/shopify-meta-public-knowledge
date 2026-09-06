@@ -9,7 +9,8 @@
                     "refresh":  "node scripts/public-knowledge-refresh.mjs",
                     "test":  "node --disable-warning=ExperimentalWarning --test",
                     "automation:shadow":  "node 自动化/official-knowledge-coordinator.mjs",
-                    "automation:shadow-status":  "node 自动化/shadow-observation-status.mjs"
+                    "automation:shadow-status":  "node 自动化/shadow-observation-status.mjs",
+                    "automation:public":  "set OFFICIAL_KNOWLEDGE_AUTOMATION_MODE=public&& set OFFICIAL_KNOWLEDGE_PUBLIC_REFRESH_APPROVED=1&& node 自动化/official-knowledge-coordinator.mjs"
                 },
     "type":  "module",
     "engines":  {

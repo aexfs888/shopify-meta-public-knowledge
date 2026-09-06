@@ -18,6 +18,14 @@
 npm run automation:shadow
 ```
 
+## 公开官方资料自动刷新
+
+```text
+npm run automation:public
+```
+
+该模式只刷新白名单中的 Meta、Facebook、Instagram 和 Shopify 官方公开资料，随后发布并校验公开知识包；单轮最长 55 分钟，遇到 401、403、429、登录页或异常正文时保留最后一次合格资料而不绕过限制。不读取真实账户、广告、客户、订单、Cookie、Token 或任何经营数据。私密 `active` 模式仍被显式阻止。
+
 ## 48 小时影子观察
 
 ```text
