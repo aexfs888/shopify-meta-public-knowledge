@@ -7,7 +7,8 @@
 - 独占锁：已有 `collector.lock` 时跳过；
 - 校验最后合格公开包的 Manifest 和归档 SHA-256；
 - 记录 source floor 与可用官方来源数量；
-- `active` 模式当前显式阻止，防止未经影子观察直接联网刷新。
+- 成功校验后写入 `nextEligibleAt`；30 分钟窗口内再次触发会记录 `skipped_not_due`，不重复读取公开包；
+- `active` 模式当前显式阻止并返回非零退出码，防止未经影子观察直接联网刷新。
 
 ## 手动影子运行
 

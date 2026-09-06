@@ -74,14 +74,35 @@ async function main() {
 
   const startedAt = Date.now()
   try {
+    const previousNextEligibleAt = Date.parse(previous?.nextEligibleAt ?? '')
+    if (Number.isFinite(previousNextEligibleAt) && Date.now() < previousNextEligibleAt) {
+      const result = {
+        schemaVersion: 1,
+        project: 'official-knowledge',
+        mode,
+        runId,
+        state: 'skipped_not_due',
+        startedAt: now.toISOString(),
+        previousState: previous?.state ?? null,
+        nextEligibleAt: previous.nextEligibleAt,
+        privateDataAccessed: false,
+        networkCollectionStarted: false,
+        note: '影子模式尚未到下次 30 分钟检查时间；本次不读取公开包、不联网刷新、不发布。',
+      }
+      await appendHistory(result)
+      console.log(JSON.stringify(result))
+      return
+    }
+
     const packageValidation = await validatePublishedManifest()
     const preflightOk = packageValidation.ok
+    const executable = mode === 'shadow' && preflightOk
     const result = {
       schemaVersion: 1,
       project: 'official-knowledge',
       mode,
       runId,
-      state: preflightOk ? (mode === 'shadow' ? 'shadow_completed' : 'blocked_active_not_implemented') : 'degraded',
+      state: executable ? 'shadow_completed' : (preflightOk ? 'blocked_active_not_implemented' : 'degraded'),
       startedAt: now.toISOString(),
       finishedAt: new Date().toISOString(),
       durationMs: Date.now() - startedAt,
@@ -98,7 +119,7 @@ async function main() {
     await atomicJson(stateFile, result)
     await appendHistory(result)
     console.log(JSON.stringify(result))
-    process.exitCode = preflightOk ? 0 : 2
+    process.exitCode = executable ? 0 : 2
   } finally {
     await lock.close()
     await fs.rm(lockFile, { force: true })
