@@ -3,8 +3,8 @@
   "scope_zh": "Shopify 独立站使用 Meta、Facebook、Instagram 投流的第三方开源与前沿技术发现；仅作方案与工具参考，不替代官方规则。；仅展示近 30 天更新的前沿技术候选。",
   "source_tier": "community_open_source",
   "catalog_kind": "frontier_latest_30_days",
-  "generated_at": "2026-09-16T04:16:24+08:00",
-  "parent_catalog_generated_at": "2026-09-16T04:16:24+08:00",
+  "generated_at": "2026-09-16T05:16:58+08:00",
+  "parent_catalog_generated_at": "2026-09-16T05:16:58+08:00",
   "provider": "GitHub and GitLab public repository metadata APIs",
   "metadata_only": true,
   "maximum_age_days": 30,
@@ -74,11 +74,11 @@
       "stars": 14,
       "forks": 7,
       "hotness_score": 16.45,
-      "open_issues": 6,
+      "open_issues": 5,
       "created_at": "2026-02-23T18:48:50Z",
       "project_age_days": 204,
-      "pushed_at": "2026-09-15T20:14:16Z",
-      "updated_at": "2026-09-15T18:30:32Z",
+      "pushed_at": "2026-09-15T20:16:56Z",
+      "updated_at": "2026-09-15T20:20:19Z",
       "age_days": 0,
       "freshness": "fresh_within_30_days",
       "freshness_label_zh": "最近 30 天更新：新技术候选",
@@ -107,14 +107,15 @@
         "涉及 Meta 投流或信号",
         "涉及自动化或 AI 助手"
       ],
-      "discovery_query": "meta ads creative ai open source in:name,description,readme archived:false",
+      "discovery_query": "meta ads mcp in:name,description,readme archived:false",
       "discovery_queries": [
+        "meta ads mcp in:name,description,readme archived:false",
         "meta ads creative ai open source in:name,description,readme archived:false"
       ],
       "discovery_providers": [
         "GitHub"
       ],
-      "matching_query_count": 1,
+      "matching_query_count": 2,
       "capability_exposures": [
         {
           "id": "agent_or_mcp_integration",
