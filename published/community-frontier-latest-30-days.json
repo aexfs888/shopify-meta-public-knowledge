@@ -3,8 +3,8 @@
   "scope_zh": "Shopify 独立站使用 Meta、Facebook、Instagram 投流的第三方开源与前沿技术发现；仅作方案与工具参考，不替代官方规则。；仅展示近 30 天更新的前沿技术候选。",
   "source_tier": "community_open_source",
   "catalog_kind": "frontier_latest_30_days",
-  "generated_at": "2026-09-19T13:00:06+08:00",
-  "parent_catalog_generated_at": "2026-09-19T13:00:06+08:00",
+  "generated_at": "2026-09-19T17:26:58+08:00",
+  "parent_catalog_generated_at": "2026-09-19T17:26:58+08:00",
   "provider": "GitHub and GitLab public repository metadata APIs",
   "metadata_only": true,
   "maximum_age_days": 30,
@@ -92,9 +92,9 @@
       "hotness_score": 50.45,
       "open_issues": 0,
       "created_at": "2026-05-03T08:43:16Z",
-      "project_age_days": 138,
-      "pushed_at": "2026-09-19T04:48:51Z",
-      "updated_at": "2026-09-19T04:48:54Z",
+      "project_age_days": 139,
+      "pushed_at": "2026-09-19T06:19:37Z",
+      "updated_at": "2026-09-19T06:19:41Z",
       "age_days": 0,
       "freshness": "fresh_within_30_days",
       "freshness_label_zh": "最近 30 天更新：新技术候选",
@@ -122,16 +122,14 @@
         "涉及 Meta 投流或信号",
         "涉及自动化或 AI 助手"
       ],
-      "discovery_query": "shopify meta ads in:name,description,readme archived:false",
+      "discovery_query": "shopify facebook conversions api in:name,description,readme archived:false",
       "discovery_queries": [
-        "shopify meta ads in:name,description,readme archived:false",
-        "shopify facebook conversions api in:name,description,readme archived:false",
-        "shopify web pixels in:name,description,readme archived:false"
+        "shopify facebook conversions api in:name,description,readme archived:false"
       ],
       "discovery_providers": [
         "GitHub"
       ],
-      "matching_query_count": 3,
+      "matching_query_count": 1,
       "capability_exposures": [
         {
           "id": "agent_or_mcp_integration",
