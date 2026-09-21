@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scope_zh": "Shopify 独立站使用 Meta、Facebook、Instagram 投流的第三方开源与前沿技术发现；仅作方案与工具参考，不替代官方规则。",
   "source_tier": "community_open_source",
-  "generated_at": "2026-09-22T03:44:49+08:00",
+  "generated_at": "2026-09-22T07:15:18+08:00",
   "provider": "GitHub and GitLab public repository metadata APIs",
   "metadata_only": true,
   "searched_queries": 21,
@@ -18,12 +18,12 @@
         "successful_queries": 11,
         "failed_queries": 0,
         "returned_repository_metadata": 436,
-        "reported_total_count_sum": 56165,
+        "reported_total_count_sum": 56202,
         "incomplete_query_count": 0,
-        "hard_rejected_observations": 422,
-        "below_minimum_quality_observations": 1,
+        "hard_rejected_observations": 425,
+        "below_minimum_quality_observations": 2,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 13,
+        "qualifying_candidate_observations": 9,
         "rate_limit_wait_seconds": 0,
         "rate_limit_deferred_queries": 0,
         "license_enrichment_eligible_projects": 0,
@@ -61,17 +61,17 @@
         "query": "shopify meta ads in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 4177,
+        "reported_total_count": 4181,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "7028:166250:8D87C7:1D042F6:6AB18931",
+          "request_id": "8C10:1FB034:7F0CA4:1A05D14:6AB1BA86",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 29,
-            "reset_epoch_seconds": 1790019949,
+            "reset_epoch_seconds": 1790032578,
             "resource": "search"
           }
         },
@@ -86,17 +86,17 @@
         "query": "shopify facebook conversions api in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 2324,
+        "reported_total_count": 2325,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "7028:166250:8D8EA8:1D058E2:6AB18932",
+          "request_id": "8C10:1FB034:7F1139:1A06BAD:6AB1BA87",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 28,
-            "reset_epoch_seconds": 1790019949,
+            "reset_epoch_seconds": 1790032578,
             "resource": "search"
           }
         },
@@ -111,17 +111,17 @@
         "query": "meta marketing api mcp in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 7093,
+        "reported_total_count": 7097,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "7028:166250:8D94D3:1D06C78:6AB18933",
+          "request_id": "8C10:1FB034:7F1522:1A07890:6AB1BA88",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 27,
-            "reset_epoch_seconds": 1790019949,
+            "reset_epoch_seconds": 1790032578,
             "resource": "search"
           }
         },
@@ -136,17 +136,17 @@
         "query": "shopify web pixels in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 8368,
+        "reported_total_count": 8370,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "7028:166250:8D9C3E:1D0862B:6AB18934",
+          "request_id": "8C10:1FB034:7F1996:1A0873B:6AB1BA89",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 26,
-            "reset_epoch_seconds": 1790019949,
+            "reset_epoch_seconds": 1790032578,
             "resource": "search"
           }
         },
@@ -161,17 +161,17 @@
         "query": "meta ads mcp in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 6109,
+        "reported_total_count": 6115,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "7028:166250:8DA1E4:1D0980D:6AB18935",
+          "request_id": "8C10:1FB034:7F1DE7:1A094EF:6AB1BA8A",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 25,
-            "reset_epoch_seconds": 1790019949,
+            "reset_epoch_seconds": 1790032578,
             "resource": "search"
           }
         },
@@ -186,17 +186,17 @@
         "query": "meta conversions api server side tracking in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 19333,
+        "reported_total_count": 19348,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "7028:166250:8DA6AC:1D0A775:6AB18936",
+          "request_id": "8C10:1FB034:7F21C5:1A0A19F:6AB1BA8B",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 24,
-            "reset_epoch_seconds": 1790019949,
+            "reset_epoch_seconds": 1790032578,
             "resource": "search"
           }
         },
@@ -211,17 +211,17 @@
         "query": "shopify functions marketing analytics in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 2751,
+        "reported_total_count": 2752,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "7028:166250:8DAC62:1D0B9C1:6AB18937",
+          "request_id": "8C10:1FB034:7F2632:1A0AFF5:6AB1BA8C",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 23,
-            "reset_epoch_seconds": 1790019949,
+            "reset_epoch_seconds": 1790032578,
             "resource": "search"
           }
         },
@@ -236,48 +236,48 @@
         "query": "shopify agent mcp ecommerce in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 877,
+        "reported_total_count": 879,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "7028:166250:8DB156:1D0CA8C:6AB18938",
+          "request_id": "8C10:1FB034:7F2994:1A0BAD1:6AB1BA8D",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 22,
-            "reset_epoch_seconds": 1790019949,
+            "reset_epoch_seconds": 1790032578,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 33,
+        "hard_rejected_observations": 37,
         "below_minimum_quality_observations": 1,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 6
+        "qualifying_candidate_observations": 2
       },
       {
         "provider": "GitHub",
         "query": "meta ads creative ai open source in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 4672,
+        "reported_total_count": 4674,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "7028:166250:8DB6B8:1D0DC36:6AB18939",
+          "request_id": "8C10:1FB034:7F2D9E:1A0C838:6AB1BA8E",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 21,
-            "reset_epoch_seconds": 1790019949,
+            "reset_epoch_seconds": 1790032578,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 40,
-        "below_minimum_quality_observations": 0,
+        "hard_rejected_observations": 39,
+        "below_minimum_quality_observations": 1,
         "risk_isolated_observations": 0,
         "qualifying_candidate_observations": 0
       },
@@ -291,12 +291,12 @@
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "7028:166250:8DBC33:1D0EDBC:6AB1893A",
+          "request_id": "8C10:1FB034:7F3192:1A0D53E:6AB1BA8F",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 20,
-            "reset_epoch_seconds": 1790019949,
+            "reset_epoch_seconds": 1790032578,
             "resource": "search"
           }
         },
@@ -316,12 +316,12 @@
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "7028:166250:8DC0D7:1D0FD00:6AB1893B",
+          "request_id": "8C10:1FB034:7F3631:1A0E499:6AB1BA90",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 19,
-            "reset_epoch_seconds": 1790019949,
+            "reset_epoch_seconds": 1790032578,
             "resource": "search"
           }
         },
@@ -348,7 +348,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a3eb915cdf764227-ORD",
+          "request_id": "a3ecc5adf8321132-ORD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -380,7 +380,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a3eb916ee8074227-ORD",
+          "request_id": "a3ecc5c38fe11132-ORD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -412,7 +412,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a3eb917138524227-ORD",
+          "request_id": "a3ecc5c6ba6e1132-ORD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -444,7 +444,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a3eb9178898f4227-ORD",
+          "request_id": "a3ecc5cd5fd21132-ORD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -476,7 +476,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a3eb917e3c9d4227-ORD",
+          "request_id": "a3ecc5d2bbf41132-ORD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -508,7 +508,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a3eb91894a084227-ORD",
+          "request_id": "a3ecc5e2bf1d1132-ORD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -540,7 +540,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a3eb918c8cf34227-ORD",
+          "request_id": "a3ecc5e73a731132-ORD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -572,7 +572,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a3eb918f8f454227-ORD",
+          "request_id": "a3ecc5eceeaa1132-ORD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -604,7 +604,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a3eb91970c5e4227-ORD",
+          "request_id": "a3ecc5f24a7f1132-ORD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -636,7 +636,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a3eb919dec514227-ORD",
+          "request_id": "a3ecc5f80e7e1132-ORD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -663,10 +663,10 @@
   },
   "discovery_efficiency": {
     "returned_repository_metadata": 581,
-    "hard_rejected_observations": 566,
-    "below_minimum_quality_observations": 1,
+    "hard_rejected_observations": 569,
+    "below_minimum_quality_observations": 2,
     "risk_isolated_observations": 0,
-    "qualifying_candidate_observations": 14,
+    "qualifying_candidate_observations": 10,
     "unique_candidate_count": 8,
     "note_zh": "返回条目按每条查询累计，可能含重复项目；唯一候选在硬性许可证、时效、平台关联和风险规则筛选后去重。"
   },
@@ -780,15 +780,14 @@
         "直接涉及 Shopify",
         "涉及自动化或 AI 助手"
       ],
-      "discovery_query": "shopify agent mcp ecommerce in:name,description,readme archived:false",
+      "discovery_query": "shopify product feed catalog advertising in:name,description,readme archived:false",
       "discovery_queries": [
-        "shopify agent mcp ecommerce in:name,description,readme archived:false",
         "shopify product feed catalog advertising in:name,description,readme archived:false"
       ],
       "discovery_providers": [
         "GitHub"
       ],
-      "matching_query_count": 2,
+      "matching_query_count": 1,
       "capability_exposures": [],
       "automatic_adoption_allowed": false,
       "research_status": "research_only",
@@ -836,9 +835,9 @@
       "project_age_days": 65,
       "pushed_at": "2026-07-18T21:16:07Z",
       "updated_at": "2026-07-18T21:16:11Z",
-      "age_days": 64,
+      "age_days": 65,
       "freshness": "updated_within_180_days",
-      "freshness_label_zh": "超过一个月、半年内：最后更新距今 64 天",
+      "freshness_label_zh": "超过一个月、半年内：最后更新距今 65 天",
       "quality_score": 8,
       "discovery_priority_score": 8,
       "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
@@ -859,7 +858,7 @@
       "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
       "selection_reasons_zh": [
         "许可证 MIT",
-        "最后更新距今 64 天（超过一个月，半年内）",
+        "最后更新距今 65 天（超过一个月，半年内）",
         "涉及 Meta 投流或信号",
         "涉及自动化或 AI 助手"
       ],
@@ -1122,15 +1121,14 @@
         "直接涉及 Shopify",
         "涉及自动化或 AI 助手"
       ],
-      "discovery_query": "shopify agent mcp ecommerce in:name,description,readme archived:false",
+      "discovery_query": "shopify product feed catalog advertising in:name,description,readme archived:false",
       "discovery_queries": [
-        "shopify agent mcp ecommerce in:name,description,readme archived:false",
         "shopify product feed catalog advertising in:name,description,readme archived:false"
       ],
       "discovery_providers": [
         "GitHub"
       ],
-      "matching_query_count": 2,
+      "matching_query_count": 1,
       "capability_exposures": [],
       "automatic_adoption_allowed": false,
       "research_status": "research_only",
@@ -1206,15 +1204,14 @@
         "直接涉及 Shopify",
         "涉及自动化或 AI 助手"
       ],
-      "discovery_query": "shopify agent mcp ecommerce in:name,description,readme archived:false",
+      "discovery_query": "shopify product feed catalog advertising in:name,description,readme archived:false",
       "discovery_queries": [
-        "shopify agent mcp ecommerce in:name,description,readme archived:false",
         "shopify product feed catalog advertising in:name,description,readme archived:false"
       ],
       "discovery_providers": [
         "GitHub"
       ],
-      "matching_query_count": 2,
+      "matching_query_count": 1,
       "capability_exposures": [],
       "automatic_adoption_allowed": false,
       "research_status": "research_only",
@@ -1290,15 +1287,14 @@
         "直接涉及 Shopify",
         "涉及自动化或 AI 助手"
       ],
-      "discovery_query": "shopify agent mcp ecommerce in:name,description,readme archived:false",
+      "discovery_query": "shopify product feed catalog advertising in:name,description,readme archived:false",
       "discovery_queries": [
-        "shopify agent mcp ecommerce in:name,description,readme archived:false",
         "shopify product feed catalog advertising in:name,description,readme archived:false"
       ],
       "discovery_providers": [
         "GitHub"
       ],
-      "matching_query_count": 2,
+      "matching_query_count": 1,
       "capability_exposures": [],
       "automatic_adoption_allowed": false,
       "research_status": "research_only",
@@ -1332,7 +1328,7 @@
       "hotness_score": 0,
       "open_issues": 0,
       "created_at": "2026-06-25T21:17:47.258Z",
-      "project_age_days": 87,
+      "project_age_days": 88,
       "pushed_at": "2026-09-19T01:32:25.027Z",
       "updated_at": "2026-09-19T01:32:25.027Z",
       "age_days": 2,
