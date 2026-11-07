@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scope_zh": "Shopify 独立站使用 Meta、Facebook、Instagram 投流的第三方开源与前沿技术发现；仅作方案与工具参考，不替代官方规则。",
   "source_tier": "community_open_source",
-  "generated_at": "2026-11-07T23:54:35+08:00",
+  "generated_at": "2026-11-08T04:11:16+08:00",
   "provider": "GitHub and GitLab public repository metadata APIs",
   "metadata_only": true,
   "searched_queries": 21,
@@ -18,12 +18,12 @@
         "successful_queries": 11,
         "failed_queries": 0,
         "returned_repository_metadata": 440,
-        "reported_total_count_sum": 68978,
+        "reported_total_count_sum": 69013,
         "incomplete_query_count": 0,
-        "hard_rejected_observations": 437,
+        "hard_rejected_observations": 410,
         "below_minimum_quality_observations": 1,
-        "risk_isolated_observations": 1,
-        "qualifying_candidate_observations": 2,
+        "risk_isolated_observations": 0,
+        "qualifying_candidate_observations": 29,
         "rate_limit_wait_seconds": 0,
         "rate_limit_deferred_queries": 0,
         "license_enrichment_eligible_projects": 0,
@@ -39,7 +39,7 @@
         "successful_queries": 10,
         "failed_queries": 0,
         "returned_repository_metadata": 148,
-        "reported_total_count_sum": 1816,
+        "reported_total_count_sum": 1817,
         "incomplete_query_count": 0,
         "hard_rejected_observations": 146,
         "below_minimum_quality_observations": 0,
@@ -61,25 +61,25 @@
         "query": "shopify meta ads in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 5392,
+        "reported_total_count": 5393,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "62C0:2CF921:450676:DD8A55:6AEF49BB",
+          "request_id": "0400:2774:15FFD9:483F40:6AEF85E4",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 29,
-            "reset_epoch_seconds": 1794066935,
+            "reset_epoch_seconds": 1794082336,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 40,
+        "hard_rejected_observations": 37,
         "below_minimum_quality_observations": 0,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 0
+        "qualifying_candidate_observations": 3
       },
       {
         "provider": "GitHub",
@@ -91,195 +91,195 @@
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "62C0:2CF921:450D3B:DD9FFC:6AEF49BC",
+          "request_id": "0400:2774:160548:485144:6AEF85E5",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 28,
-            "reset_epoch_seconds": 1794066935,
+            "reset_epoch_seconds": 1794082336,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 40,
+        "hard_rejected_observations": 39,
         "below_minimum_quality_observations": 0,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 0
+        "qualifying_candidate_observations": 1
       },
       {
         "provider": "GitHub",
         "query": "meta marketing api mcp in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 9283,
+        "reported_total_count": 9299,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "62C0:2CF921:45126A:DDB0C8:6AEF49BD",
+          "request_id": "0400:2774:160A0A:486053:6AEF85E6",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 27,
-            "reset_epoch_seconds": 1794066935,
+            "reset_epoch_seconds": 1794082336,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 39,
-        "below_minimum_quality_observations": 1,
+        "hard_rejected_observations": 38,
+        "below_minimum_quality_observations": 0,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 0
+        "qualifying_candidate_observations": 2
       },
       {
         "provider": "GitHub",
         "query": "shopify web pixels in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 9374,
+        "reported_total_count": 9377,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "62C0:2CF921:4517C0:DDC197:6AEF49BD",
+          "request_id": "0400:2774:160EEE:486FFE:6AEF85E8",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 26,
-            "reset_epoch_seconds": 1794066935,
+            "reset_epoch_seconds": 1794082336,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 40,
+        "hard_rejected_observations": 38,
         "below_minimum_quality_observations": 0,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 0
+        "qualifying_candidate_observations": 2
       },
       {
         "provider": "GitHub",
         "query": "meta ads mcp in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 8366,
+        "reported_total_count": 8370,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "62C0:2CF921:451D85:DDD440:6AEF49BE",
+          "request_id": "0400:2774:161388:487F12:6AEF85E9",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 25,
-            "reset_epoch_seconds": 1794066935,
+            "reset_epoch_seconds": 1794082336,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 40,
+        "hard_rejected_observations": 34,
         "below_minimum_quality_observations": 0,
-        "risk_isolated_observations": 1,
-        "qualifying_candidate_observations": 0
+        "risk_isolated_observations": 0,
+        "qualifying_candidate_observations": 6
       },
       {
         "provider": "GitHub",
         "query": "meta conversions api server side tracking in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 23319,
+        "reported_total_count": 23326,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "62C0:2CF921:4522BB:DDE4F0:6AEF49BF",
+          "request_id": "0400:2774:161791:488C38:6AEF85E9",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 24,
-            "reset_epoch_seconds": 1794066935,
+            "reset_epoch_seconds": 1794082336,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 40,
+        "hard_rejected_observations": 39,
         "below_minimum_quality_observations": 0,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 0
+        "qualifying_candidate_observations": 1
       },
       {
         "provider": "GitHub",
         "query": "shopify functions marketing analytics in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 3128,
+        "reported_total_count": 3132,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "62C0:2CF921:4528E9:DDF911:6AEF49C0",
+          "request_id": "0400:2774:161C82:489C0B:6AEF85EA",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 23,
-            "reset_epoch_seconds": 1794066935,
+            "reset_epoch_seconds": 1794082336,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 40,
+        "hard_rejected_observations": 39,
         "below_minimum_quality_observations": 0,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 0
+        "qualifying_candidate_observations": 1
       },
       {
         "provider": "GitHub",
         "query": "shopify agent mcp ecommerce in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 1190,
+        "reported_total_count": 1191,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "62C0:2CF921:452FA4:DE0EDF:6AEF49C1",
+          "request_id": "0400:2774:162165:48ABE0:6AEF85EB",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 22,
-            "reset_epoch_seconds": 1794066935,
+            "reset_epoch_seconds": 1794082336,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 40,
+        "hard_rejected_observations": 38,
         "below_minimum_quality_observations": 0,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 0
+        "qualifying_candidate_observations": 2
       },
       {
         "provider": "GitHub",
         "query": "meta ads creative ai open source in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 5759,
+        "reported_total_count": 5758,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "62C0:2CF921:45360B:DE22A9:6AEF49C2",
+          "request_id": "0400:2774:1625AE:48B9B8:6AEF85EC",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 21,
-            "reset_epoch_seconds": 1794066935,
+            "reset_epoch_seconds": 1794082336,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 40,
-        "below_minimum_quality_observations": 0,
+        "hard_rejected_observations": 32,
+        "below_minimum_quality_observations": 1,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 0
+        "qualifying_candidate_observations": 7
       },
       {
         "provider": "GitHub",
@@ -291,20 +291,20 @@
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "62C0:2CF921:453B7E:DE33FD:6AEF49C3",
+          "request_id": "0400:2774:162A09:48C79C:6AEF85ED",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 20,
-            "reset_epoch_seconds": 1794066935,
+            "reset_epoch_seconds": 1794082336,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 40,
+        "hard_rejected_observations": 38,
         "below_minimum_quality_observations": 0,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 0
+        "qualifying_candidate_observations": 2
       },
       {
         "provider": "GitHub",
@@ -316,12 +316,12 @@
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "62C0:2CF921:4541BC:DE4786:6AEF49C4",
+          "request_id": "0400:2774:162F10:48D76D:6AEF85EF",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 19,
-            "reset_epoch_seconds": 1794066935,
+            "reset_epoch_seconds": 1794082336,
             "resource": "search"
           }
         },
@@ -348,7 +348,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a56d84b6d8134cb8-MSP",
+          "request_id": "a56efcbe1c93a21b-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -380,7 +380,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a56d8568fc83acea-MSP",
+          "request_id": "a56efcd6cdeca21b-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -412,7 +412,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a56d856b4f87acea-MSP",
+          "request_id": "a56efcd989eaa21b-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -444,7 +444,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a56d8571f86cacea-MSP",
+          "request_id": "a56efce579b4a21b-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -476,7 +476,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a56d8576df59acea-MSP",
+          "request_id": "a56efceddcb9a21b-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -508,7 +508,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a56d8583292dacea-MSP",
+          "request_id": "a56efd05aaeea21b-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -540,7 +540,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a56d85886992acea-MSP",
+          "request_id": "a56efd0aa968a21b-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -572,7 +572,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a56d858b7e4aacea-MSP",
+          "request_id": "a56efd0fa80ba21b-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -604,7 +604,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a56d858fcc76acea-MSP",
+          "request_id": "a56efd17496fa21b-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -624,7 +624,7 @@
         "query": "ad creative ai",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 1651,
+        "reported_total_count": 1652,
         "incomplete_results": false,
         "license_enrichment": {
           "eligible_projects": 1,
@@ -636,7 +636,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a56d8594aaedacea-MSP",
+          "request_id": "a56efd1e2a7da21b-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -663,14 +663,14 @@
   },
   "discovery_efficiency": {
     "returned_repository_metadata": 588,
-    "hard_rejected_observations": 583,
+    "hard_rejected_observations": 556,
     "below_minimum_quality_observations": 1,
-    "risk_isolated_observations": 1,
-    "qualifying_candidate_observations": 4,
-    "unique_candidate_count": 4,
+    "risk_isolated_observations": 0,
+    "qualifying_candidate_observations": 31,
+    "unique_candidate_count": 18,
     "note_zh": "返回条目按每条查询累计，可能含重复项目；唯一候选在硬性许可证、时效、平台关联和风险规则筛选后去重。"
   },
-  "repository_count": 4,
+  "repository_count": 18,
   "warnings": [],
   "safety": {
     "never_clone_or_execute": true,
@@ -718,6 +718,1030 @@
   },
   "repositories": [
     {
+      "source_id": "oss-a40a62b35f013357",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / chattermate",
+      "provider": "GitHub",
+      "repository": "chattermate/chattermate.chat",
+      "title_zh": "开源项目：chattermate/chattermate.chat",
+      "description_original": "Open-source AI customer support chatbot with human handoff — omnichannel inbox (web, WhatsApp, Instagram, Messenger, Slack, email), AI lead capture, AI-generated help center, MCP tools and bring-your-own LLM. Self-hosted alternative to Intercom, Zendesk & Chatbase. Apache-2.0.",
+      "canonical_url": "https://github.com/chattermate/chattermate.chat",
+      "homepage_url": "https://chattermate.chat",
+      "default_branch": "main",
+      "language": "Python",
+      "license_spdx": "Apache-2.0",
+      "topics": [
+        "ai",
+        "ai-agents",
+        "chatbase-alternative",
+        "chatbot",
+        "customer-service",
+        "customer-support",
+        "fastapi",
+        "help-desk",
+        "human-handoff",
+        "intercom-alternative",
+        "lead-generation",
+        "live-chat",
+        "llm",
+        "mcp",
+        "open-source",
+        "self-hosted",
+        "shopify",
+        "vue",
+        "whatsapp",
+        "zendesk-alternative",
+        "campaigns",
+        "automation"
+      ],
+      "stars": 156,
+      "forks": 60,
+      "hotness_score": 177,
+      "open_issues": 6,
+      "created_at": "2025-02-01T10:05:57Z",
+      "project_age_days": 644,
+      "pushed_at": "2026-11-07T16:44:54Z",
+      "updated_at": "2026-11-07T16:36:58Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 13,
+      "discovery_priority_score": 13,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "已有基础公开社区信号",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 Apache-2.0",
+        "最近 0 天更新（新技术）",
+        "有基础社区关注",
+        "直接涉及 Shopify",
+        "涉及 Meta 投流或信号",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "shopify agent mcp ecommerce in:name,description,readme archived:false",
+      "discovery_queries": [
+        "shopify agent mcp ecommerce in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 1,
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
+      "source_id": "oss-5b7a2c0d32e1fdb2",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / hyperfx-ai",
+      "provider": "GitHub",
+      "repository": "hyperfx-ai/marketing-skills",
+      "title_zh": "开源项目：hyperfx-ai/marketing-skills",
+      "description_original": "Marketing skills for AI agents — paid ads, social media, SEO, competitor research, creative generation, email, analytics, and more. Powered by Hyper MCP.",
+      "canonical_url": "https://github.com/hyperfx-ai/marketing-skills",
+      "homepage_url": "https://www.hyperfx.ai/mcp",
+      "default_branch": "main",
+      "language": "Python",
+      "license_spdx": "MIT",
+      "topics": [
+        "agent-skills",
+        "ai-agent",
+        "claude",
+        "claude-code",
+        "claude-skills",
+        "codex",
+        "cursor",
+        "google-ads",
+        "hermes",
+        "marketing",
+        "mcp",
+        "meta-ads",
+        "openclaw",
+        "seo",
+        "campaigns",
+        "creative",
+        "reporting",
+        "automation"
+      ],
+      "stars": 112,
+      "forks": 21,
+      "hotness_score": 119.35,
+      "open_issues": 8,
+      "created_at": "2026-04-27T20:08:18Z",
+      "project_age_days": 194,
+      "pushed_at": "2026-11-07T16:46:26Z",
+      "updated_at": "2026-11-07T16:46:32Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 11,
+      "discovery_priority_score": 11,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "已有基础公开社区信号",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最近 0 天更新（新技术）",
+        "有基础社区关注",
+        "涉及 Meta 投流或信号",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "shopify functions marketing analytics in:name,description,readme archived:false",
+      "discovery_queries": [
+        "shopify functions marketing analytics in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 1,
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
+      "source_id": "oss-0dfdb2e89513f630",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / scavio-ai",
+      "provider": "GitHub",
+      "repository": "scavio-ai/skills",
+      "title_zh": "开源项目：scavio-ai/skills",
+      "description_original": "51 Agent Skills for the Scavio web data API: one umbrella skill plus one per platform for Google, Amazon, TikTok, LinkedIn, YouTube, Instagram, Reddit and 40 more, as structured JSON",
+      "canonical_url": "https://github.com/scavio-ai/skills",
+      "homepage_url": "https://scavio.dev",
+      "default_branch": "main",
+      "language": "Python",
+      "license_spdx": "MIT",
+      "topics": [
+        "agent-skills",
+        "ai-agents",
+        "api",
+        "api-mercado-livre",
+        "claude",
+        "serp-api",
+        "structured-data",
+        "web-data",
+        "web-scraping",
+        "automation"
+      ],
+      "stars": 45,
+      "forks": 0,
+      "hotness_score": 45,
+      "open_issues": 0,
+      "created_at": "2026-08-19T12:15:37Z",
+      "project_age_days": 80,
+      "pushed_at": "2026-11-07T20:04:26Z",
+      "updated_at": "2026-11-07T20:04:30Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 9,
+      "discovery_priority_score": 9,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "已有基础公开社区信号",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最近 0 天更新（新技术）",
+        "有基础社区关注",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "meta ads mcp in:name,description,readme archived:false",
+      "discovery_queries": [
+        "meta ads mcp in:name,description,readme archived:false",
+        "meta ads creative ai open source in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 2,
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
+      "source_id": "oss-3633c747eb42e1e2",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / Synter-Media-AI",
+      "provider": "GitHub",
+      "repository": "Synter-Media-AI/mcp-server",
+      "title_zh": "开源项目：Synter-Media-AI/mcp-server",
+      "description_original": "Open-source MCP server for AI agents: read across 43 ad platforms, with verified write and create across 16 core platforms (Google, Meta, LinkedIn, Microsoft, Reddit, TikTok, X, Amazon, TTD, DV360, StackAdapt & more). Free reads (zsh/mo), /mo Solo for writes, multi-tenant OAuth & REST/SDKs.",
+      "canonical_url": "https://github.com/Synter-Media-AI/mcp-server",
+      "homepage_url": "https://synterai.com/mcp",
+      "default_branch": "main",
+      "language": "TypeScript",
+      "license_spdx": "MIT",
+      "topics": [
+        "adtech",
+        "advertising",
+        "ai-agents",
+        "chatgpt",
+        "claude",
+        "cursor",
+        "google-ads",
+        "linkedin-ads",
+        "marketing-automation",
+        "mcp",
+        "mcp-server",
+        "meta-ads",
+        "model-context-protocol",
+        "npm",
+        "ppc",
+        "reddit-ads",
+        "tiktok-ads",
+        "typescript",
+        "campaigns",
+        "automation"
+      ],
+      "stars": 21,
+      "forks": 4,
+      "hotness_score": 22.4,
+      "open_issues": 7,
+      "created_at": "2026-01-29T18:38:29Z",
+      "project_age_days": 282,
+      "pushed_at": "2026-11-07T19:23:32Z",
+      "updated_at": "2026-11-07T19:23:33Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 11,
+      "discovery_priority_score": 11,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "已有基础公开社区信号",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最近 0 天更新（新技术）",
+        "有基础社区关注",
+        "涉及 Meta 投流或信号",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "meta ads creative ai open source in:name,description,readme archived:false",
+      "discovery_queries": [
+        "meta ads creative ai open source in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 1,
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
+      "source_id": "oss-7a93e3e002071880",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / scavio-ai",
+      "provider": "GitHub",
+      "repository": "scavio-ai/scavio-mcp",
+      "title_zh": "开源项目：scavio-ai/scavio-mcp",
+      "description_original": "Production ready MCP server with real-time search & extract in Google, Amazon, YouTube, Walmart, Reddit, TikTok and Instagram",
+      "canonical_url": "https://github.com/scavio-ai/scavio-mcp",
+      "homepage_url": "https://scavio.dev",
+      "default_branch": "main",
+      "language": "TypeScript",
+      "license_spdx": "MIT",
+      "topics": [
+        "ai",
+        "amazon",
+        "claude",
+        "cursor",
+        "google-search",
+        "instagram",
+        "mcp",
+        "mcp-server",
+        "model-context-protocol",
+        "search-api",
+        "tiktok",
+        "typescript",
+        "walmart",
+        "windsurf",
+        "youtube",
+        "automation"
+      ],
+      "stars": 8,
+      "forks": 1,
+      "hotness_score": 8.35,
+      "open_issues": 0,
+      "created_at": "2026-04-04T18:52:04Z",
+      "project_age_days": 217,
+      "pushed_at": "2026-11-07T20:04:18Z",
+      "updated_at": "2026-11-07T20:04:22Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 8,
+      "discovery_priority_score": 8,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "已有有限公开社区信号",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最近 0 天更新（新技术）",
+        "已有公开使用者关注",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "meta ads mcp in:name,description,readme archived:false",
+      "discovery_queries": [
+        "meta ads mcp in:name,description,readme archived:false",
+        "meta ads creative ai open source in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 2,
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
+      "source_id": "oss-e488f8123e7497db",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / hermoso-ai",
+      "provider": "GitHub",
+      "repository": "hermoso-ai/hermoso",
+      "title_zh": "开源项目：hermoso-ai/hermoso",
+      "description_original": "MCP server and CLI for Hermoso, the AI marketing agent and AI ad generator. Research winning ads, create image and video ads, publish to your channels and run paid campaigns from your AI agent.",
+      "canonical_url": "https://github.com/hermoso-ai/hermoso",
+      "homepage_url": "https://hermoso.ai/mcp/",
+      "default_branch": "main",
+      "language": "JavaScript",
+      "license_spdx": "MIT",
+      "topics": [
+        "ad-generation",
+        "ads",
+        "advertising",
+        "ai",
+        "ai-ad-generator",
+        "ai-marketing-agent",
+        "chatgpt",
+        "claude",
+        "claude-code",
+        "cursor",
+        "facebook-ads",
+        "gemini-cli-extension",
+        "google-ads",
+        "marketing",
+        "marketing-agent",
+        "mcp",
+        "mcp-server",
+        "meta-ads",
+        "model-context-protocol",
+        "tiktok-ads",
+        "campaigns",
+        "automation"
+      ],
+      "stars": 6,
+      "forks": 0,
+      "hotness_score": 6,
+      "open_issues": 3,
+      "created_at": "2026-07-06T12:54:02Z",
+      "project_age_days": 124,
+      "pushed_at": "2026-11-07T20:06:36Z",
+      "updated_at": "2026-11-07T20:06:38Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 10,
+      "discovery_priority_score": 10,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "已有有限公开社区信号",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最近 0 天更新（新技术）",
+        "已有公开使用者关注",
+        "涉及 Meta 投流或信号",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "meta marketing api mcp in:name,description,readme archived:false",
+      "discovery_queries": [
+        "meta marketing api mcp in:name,description,readme archived:false",
+        "meta ads mcp in:name,description,readme archived:false",
+        "meta conversions api server side tracking in:name,description,readme archived:false",
+        "meta ads creative ai open source in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 4,
+      "capability_exposures": [
+        {
+          "id": "potential_external_write",
+          "label_zh": "公开元数据提示可能具有对外发布、排程或评论管理能力",
+          "review_zh": "若后续评估，先逐项确认是否会发布、排程、创建草稿或管理评论；未获得单次书面授权不得连接真实主页。"
+        },
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "若后续评估，先逐项确认是否会发布、排程、创建草稿或管理评论；未获得单次书面授权不得连接真实主页。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
+      "source_id": "oss-95dadcbe1389772e",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / getDynamoi",
+      "provider": "GitHub",
+      "repository": "getDynamoi/dynamoi",
+      "title_zh": "开源项目：getDynamoi/dynamoi",
+      "description_original": "Dynamoi MCP server and CLI: music promotion and distribution, built for AI agents. Run Spotify and YouTube ad campaigns and free Smart Links from Claude, ChatGPT, Codex or Cursor.",
+      "canonical_url": "https://github.com/getDynamoi/dynamoi",
+      "homepage_url": "https://dynamoi.com/mcp-server",
+      "default_branch": "main",
+      "language": "TypeScript",
+      "license_spdx": "MIT",
+      "topics": [
+        "ai-agents",
+        "artist-marketing",
+        "chatgpt-app",
+        "claude",
+        "cli",
+        "codex",
+        "cursor",
+        "google-ads",
+        "mcp",
+        "mcp-server",
+        "meta-ads",
+        "model-context-protocol",
+        "music-analytics",
+        "music-distribution",
+        "music-promotion",
+        "oauth2",
+        "remote-mcp",
+        "smart-links",
+        "spotify-promotion",
+        "youtube-promotion",
+        "campaigns",
+        "reporting",
+        "automation"
+      ],
+      "stars": 3,
+      "forks": 1,
+      "hotness_score": 3.35,
+      "open_issues": 0,
+      "created_at": "2026-02-10T23:24:07Z",
+      "project_age_days": 269,
+      "pushed_at": "2026-11-07T19:51:35Z",
+      "updated_at": "2026-11-07T19:51:39Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 10,
+      "discovery_priority_score": 10,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "已有有限公开社区信号",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最近 0 天更新（新技术）",
+        "已有公开使用者关注",
+        "涉及 Meta 投流或信号",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "meta ads mcp in:name,description,readme archived:false",
+      "discovery_queries": [
+        "meta ads mcp in:name,description,readme archived:false",
+        "meta ads creative ai open source in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 2,
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
+      "source_id": "oss-05af8900aded1b59",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / scavio-ai",
+      "provider": "GitHub",
+      "repository": "scavio-ai/scavio-js",
+      "title_zh": "开源项目：scavio-ai/scavio-js",
+      "description_original": "TypeScript SDK for the Scavio Search API — real-time Google, Amazon, Walmart, YouTube, Reddit, TikTok, and Instagram data",
+      "canonical_url": "https://github.com/scavio-ai/scavio-js",
+      "homepage_url": "https://scavio.dev",
+      "default_branch": "main",
+      "language": "TypeScript",
+      "license_spdx": "MIT",
+      "topics": [
+        "instagram",
+        "scavio",
+        "tiktok"
+      ],
+      "stars": 3,
+      "forks": 0,
+      "hotness_score": 3,
+      "open_issues": 0,
+      "created_at": "2026-05-29T11:13:51Z",
+      "project_age_days": 162,
+      "pushed_at": "2026-11-07T20:04:22Z",
+      "updated_at": "2026-11-07T20:04:26Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 7,
+      "discovery_priority_score": 7,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "已有有限公开社区信号",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最近 0 天更新（新技术）",
+        "已有公开使用者关注"
+      ],
+      "discovery_query": "meta ads creative ai open source in:name,description,readme archived:false",
+      "discovery_queries": [
+        "meta ads creative ai open source in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 1,
+      "capability_exposures": [],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
+      "source_id": "oss-b5cad50bb2dda72c",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / umerkhan95",
+      "provider": "GitHub",
+      "repository": "umerkhan95/shopextract",
+      "title_zh": "开源项目：umerkhan95/shopextract",
+      "description_original": "Extract, compare, and monitor product data from any e-commerce store. Supports Shopify, WooCommerce, Magento, BigCommerce, Shopware, and generic stores. Zero config — just give a URL, get products.",
+      "canonical_url": "https://github.com/umerkhan95/shopextract",
+      "homepage_url": null,
+      "default_branch": "main",
+      "language": "Python",
+      "license_spdx": "MIT",
+      "topics": [
+        "cli",
+        "competitive-intelligence",
+        "crawl4ai",
+        "data-extraction",
+        "ecommerce",
+        "magento",
+        "marketplace",
+        "price-comparison",
+        "price-monitoring",
+        "product-data",
+        "pypi",
+        "python",
+        "shopify",
+        "web-scraping",
+        "woocommerce",
+        "automation"
+      ],
+      "stars": 2,
+      "forks": 2,
+      "hotness_score": 2.7,
+      "open_issues": 32,
+      "created_at": "2026-03-15T05:52:04Z",
+      "project_age_days": 237,
+      "pushed_at": "2026-11-07T19:40:03Z",
+      "updated_at": "2026-11-07T19:33:50Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 9,
+      "discovery_priority_score": 9,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "已有有限公开社区信号",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最近 0 天更新（新技术）",
+        "直接涉及 Shopify",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "shopify product feed catalog advertising in:name,description,readme archived:false",
+      "discovery_queries": [
+        "shopify product feed catalog advertising in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 1,
+      "capability_exposures": [],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
+      "source_id": "oss-f3f187a38141843c",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / scavio-ai",
+      "provider": "GitHub",
+      "repository": "scavio-ai/scavio-python",
+      "title_zh": "开源项目：scavio-ai/scavio-python",
+      "description_original": "Python SDK for the Scavio Search API - real-time Google, Amazon, Walmart, YouTube, Reddit, TikTok & Instagram data for AI agents and apps",
+      "canonical_url": "https://github.com/scavio-ai/scavio-python",
+      "homepage_url": "https://scavio.dev",
+      "default_branch": "main",
+      "language": "Python",
+      "license_spdx": "MIT",
+      "topics": [
+        "ai-agents",
+        "amazon",
+        "api-wrapper",
+        "ecommerce",
+        "google-search",
+        "instagram",
+        "knowledge-graph",
+        "langchain",
+        "llm",
+        "python",
+        "reddit",
+        "sdk",
+        "search-api",
+        "search-engine",
+        "serp",
+        "tavily-alternative",
+        "tiktok",
+        "walmart",
+        "web-search",
+        "youtube",
+        "automation"
+      ],
+      "stars": 2,
+      "forks": 2,
+      "hotness_score": 2.7,
+      "open_issues": 2,
+      "created_at": "2026-05-28T04:15:03Z",
+      "project_age_days": 163,
+      "pushed_at": "2026-11-07T20:04:20Z",
+      "updated_at": "2026-11-07T20:04:24Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 7,
+      "discovery_priority_score": 7,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "已有有限公开社区信号",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最近 0 天更新（新技术）",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "meta ads mcp in:name,description,readme archived:false",
+      "discovery_queries": [
+        "meta ads mcp in:name,description,readme archived:false",
+        "meta ads creative ai open source in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 2,
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
+      "source_id": "oss-d0ee2d626734b715",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / Insightful-Pipe",
+      "provider": "GitHub",
+      "repository": "Insightful-Pipe/paid-media-skills",
+      "title_zh": "开源项目：Insightful-Pipe/paid-media-skills",
+      "description_original": "Free Claude skills for paid media beyond Google and Meta: TikTok, Pinterest, Snapchat, X, Microsoft and ChatGPT Ads, media plans, benchmarks, and CTV, programmatic, native and audio ads. Install with npx skills add or as a Claude Code plugin.",
+      "canonical_url": "https://github.com/Insightful-Pipe/paid-media-skills",
+      "homepage_url": "https://insightfulpipe.com/marketing-claude-skills",
+      "default_branch": "main",
+      "language": "Python",
+      "license_spdx": "MIT",
+      "topics": [
+        "agent-skills",
+        "claude",
+        "claude-code-plugin",
+        "claude-skills",
+        "insightfulpipe",
+        "marketing",
+        "microsoft-ads",
+        "paid-media",
+        "pinterest-ads",
+        "skill-md",
+        "tiktok-ads",
+        "campaigns",
+        "reporting",
+        "automation"
+      ],
+      "stars": 1,
+      "forks": 0,
+      "hotness_score": 1,
+      "open_issues": 0,
+      "created_at": "2026-10-30T05:44:02Z",
+      "project_age_days": 8,
+      "pushed_at": "2026-11-07T19:05:47Z",
+      "updated_at": "2026-11-07T19:05:51Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 9,
+      "discovery_priority_score": 9,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "公开社区信号未形成",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最近 0 天更新（新技术）",
+        "涉及 Meta 投流或信号",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "shopify meta ads in:name,description,readme archived:false",
+      "discovery_queries": [
+        "shopify meta ads in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 1,
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
       "source_id": "oss-4a5ac1b0cabef293",
       "source_tier": "community_open_source",
       "publisher": "GitHub / rghrmkr1993",
@@ -749,7 +1773,7 @@
       "hotness_score": 1,
       "open_issues": 0,
       "created_at": "2026-07-18T16:00:45Z",
-      "project_age_days": 111,
+      "project_age_days": 112,
       "pushed_at": "2026-10-09T08:53:24Z",
       "updated_at": "2026-10-09T08:53:29Z",
       "age_days": 29,
@@ -808,6 +1832,266 @@
       "status": "candidate_verified_metadata"
     },
     {
+      "source_id": "oss-58e63171b81c3ecb",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / jbauman-26",
+      "provider": "GitHub",
+      "repository": "jbauman-26/cosmic-lifecycle",
+      "title_zh": "开源项目：jbauman-26/cosmic-lifecycle",
+      "description_original": "Lifecycle marketing data your agent can trust. Shopify and Klaviyo in your own database, with numbers that prove themselves.",
+      "canonical_url": "https://github.com/jbauman-26/cosmic-lifecycle",
+      "homepage_url": "https://store.jakebauman.io/community",
+      "default_branch": "main",
+      "language": "TypeScript",
+      "license_spdx": "MIT",
+      "topics": [
+        "shopify",
+        "automation"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "hotness_score": 0,
+      "open_issues": 0,
+      "created_at": "2026-11-07T00:08:56Z",
+      "project_age_days": 0,
+      "pushed_at": "2026-11-07T20:10:03Z",
+      "updated_at": "2026-11-07T20:10:07Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 9,
+      "discovery_priority_score": 9,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 0.83,
+      "metadata_evidence_label_zh": "公开元数据部分完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [
+        "主题标签"
+      ],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "公开社区信号未形成",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最近 0 天更新（新技术）",
+        "直接涉及 Shopify",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "shopify meta ads in:name,description,readme archived:false",
+      "discovery_queries": [
+        "shopify meta ads in:name,description,readme archived:false",
+        "meta marketing api mcp in:name,description,readme archived:false",
+        "meta ads mcp in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 3,
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "补齐或人工核对：主题标签。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
+      "source_id": "oss-f76367e59b927d0d",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / Insightful-Pipe",
+      "provider": "GitHub",
+      "repository": "Insightful-Pipe/marketing-skills",
+      "title_zh": "开源项目：Insightful-Pipe/marketing-skills",
+      "description_original": "Free Claude marketing skills for ads, analytics, SEO, content, email, social, PR, sales, e-commerce and app growth, with live data through InsightfulPipe MCP servers.",
+      "canonical_url": "https://github.com/Insightful-Pipe/marketing-skills",
+      "homepage_url": "https://insightfulpipe.com/marketing-claude-skills",
+      "default_branch": "main",
+      "language": "Python",
+      "license_spdx": "MIT",
+      "topics": [
+        "agent-skills",
+        "anthropic",
+        "claude",
+        "claude-code",
+        "claude-code-plugin",
+        "claude-skills",
+        "free",
+        "ga4",
+        "google-ads",
+        "marketing",
+        "marketing-automation",
+        "marketing-skills",
+        "mcp",
+        "meta-ads",
+        "seo",
+        "skill-md",
+        "campaigns",
+        "reporting",
+        "automation"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "hotness_score": 0,
+      "open_issues": 0,
+      "created_at": "2026-10-10T06:10:17Z",
+      "project_age_days": 28,
+      "pushed_at": "2026-11-07T18:47:35Z",
+      "updated_at": "2026-11-07T18:47:38Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 9,
+      "discovery_priority_score": 9,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "公开社区信号未形成",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最近 0 天更新（新技术）",
+        "涉及 Meta 投流或信号",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "shopify meta ads in:name,description,readme archived:false",
+      "discovery_queries": [
+        "shopify meta ads in:name,description,readme archived:false",
+        "shopify facebook conversions api in:name,description,readme archived:false",
+        "shopify web pixels in:name,description,readme archived:false",
+        "shopify agent mcp ecommerce in:name,description,readme archived:false",
+        "shopify product feed catalog advertising in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 5,
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
+      "source_id": "oss-5a038fdf40809c7d",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / pisan-labs",
+      "provider": "GitHub",
+      "repository": "pisan-labs/popup-check",
+      "title_zh": "开源项目：pisan-labs/popup-check",
+      "description_original": "For small online-store owners: a free bookmark that tests your email popups, age gates, cookie banners and chat buttons with the keyboard and a screen-reader view, then gives a dated report with plain fixes and a message for the app's support. Runs in your browser. Built with Claude Code.",
+      "canonical_url": "https://github.com/pisan-labs/popup-check",
+      "homepage_url": "https://popup-check.pisan.me",
+      "default_branch": "main",
+      "language": "TypeScript",
+      "license_spdx": "MIT",
+      "topics": [
+        "accessibility",
+        "bookmarklet",
+        "claude-code",
+        "popups",
+        "screen-reader",
+        "shopify",
+        "small-business",
+        "typescript",
+        "wcag",
+        "woocommerce",
+        "reporting"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "hotness_score": 0,
+      "open_issues": 0,
+      "created_at": "2026-11-05T12:13:50Z",
+      "project_age_days": 2,
+      "pushed_at": "2026-11-07T18:47:49Z",
+      "updated_at": "2026-11-07T18:47:52Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 8,
+      "discovery_priority_score": 8,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "公开社区信号未形成",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最近 0 天更新（新技术）",
+        "直接涉及 Shopify"
+      ],
+      "discovery_query": "shopify web pixels in:name,description,readme archived:false",
+      "discovery_queries": [
+        "shopify web pixels in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 1,
+      "capability_exposures": [],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
       "source_id": "oss-58c49fe3d7225f2a",
       "source_tier": "community_open_source",
       "publisher": "GitLab / littlewonders",
@@ -828,10 +2112,10 @@
       "hotness_score": 0,
       "open_issues": 0,
       "created_at": "2023-01-05T19:16:06.395Z",
-      "project_age_days": 1401,
+      "project_age_days": 1402,
       "pushed_at": "2026-10-25T16:05:18.758Z",
       "updated_at": "2026-10-25T16:05:18.758Z",
-      "age_days": 12,
+      "age_days": 13,
       "freshness": "fresh_within_30_days",
       "freshness_label_zh": "最近 30 天更新：新技术候选",
       "quality_score": 8,
@@ -854,7 +2138,7 @@
       "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
       "selection_reasons_zh": [
         "许可证 MIT",
-        "最近 12 天更新（新技术）",
+        "最近 13 天更新（新技术）",
         "涉及 Meta 投流或信号"
       ],
       "discovery_query": "facebook pixel",
@@ -911,7 +2195,7 @@
       "project_age_days": 22,
       "pushed_at": "2026-10-24T18:16:08Z",
       "updated_at": "2026-10-24T18:16:13Z",
-      "age_days": 13,
+      "age_days": 14,
       "freshness": "fresh_within_30_days",
       "freshness_label_zh": "最近 30 天更新：新技术候选",
       "quality_score": 8,
@@ -933,7 +2217,7 @@
       "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
       "selection_reasons_zh": [
         "许可证 MIT",
-        "最近 13 天更新（新技术）",
+        "最近 14 天更新（新技术）",
         "涉及 Meta 投流或信号"
       ],
       "discovery_query": "marketing attribution incrementality mmm shopify in:name,description,readme archived:false",
