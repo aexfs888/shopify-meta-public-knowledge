@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scope_zh": "Shopify 独立站使用 Meta、Facebook、Instagram 投流的第三方开源与前沿技术发现；仅作方案与工具参考，不替代官方规则。",
   "source_tier": "community_open_source",
-  "generated_at": "2026-11-15T04:43:13+08:00",
+  "generated_at": "2026-11-15T05:24:44+08:00",
   "provider": "GitHub and GitLab public repository metadata APIs",
   "metadata_only": true,
   "searched_queries": 21,
@@ -18,12 +18,12 @@
         "successful_queries": 11,
         "failed_queries": 0,
         "returned_repository_metadata": 440,
-        "reported_total_count_sum": 70906,
+        "reported_total_count_sum": 70913,
         "incomplete_query_count": 0,
-        "hard_rejected_observations": 430,
+        "hard_rejected_observations": 431,
         "below_minimum_quality_observations": 0,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 10,
+        "qualifying_candidate_observations": 9,
         "rate_limit_wait_seconds": 0,
         "rate_limit_deferred_queries": 0,
         "license_enrichment_eligible_projects": 0,
@@ -61,17 +61,17 @@
         "query": "shopify meta ads in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 5561,
+        "reported_total_count": 5563,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "83C0:AAEEC:8B58833:1B8A3F37:6AF8C7E1",
+          "request_id": "4C30:1F12:CCB193:28F6959:6AF8D19C",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 29,
-            "reset_epoch_seconds": 1794689053,
+            "reset_epoch_seconds": 1794691544,
             "resource": "search"
           }
         },
@@ -86,17 +86,17 @@
         "query": "shopify facebook conversions api in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 2632,
+        "reported_total_count": 2633,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "83C0:AAEEC:8B58D6E:1B8A4F69:6AF8C7E2",
+          "request_id": "4C30:1F12:CCB665:28F78B7:6AF8D19D",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 28,
-            "reset_epoch_seconds": 1794689053,
+            "reset_epoch_seconds": 1794691544,
             "resource": "search"
           }
         },
@@ -116,12 +116,12 @@
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "83C0:AAEEC:8B59287:1B8A5F30:6AF8C7E3",
+          "request_id": "4C30:1F12:CCBB04:28F8753:6AF8D19E",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 27,
-            "reset_epoch_seconds": 1794689053,
+            "reset_epoch_seconds": 1794691544,
             "resource": "search"
           }
         },
@@ -141,12 +141,12 @@
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "83C0:AAEEC:8B599FD:1B8A7683:6AF8C7E5",
+          "request_id": "4C30:1F12:CCBF86:28F954A:6AF8D19F",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 26,
-            "reset_epoch_seconds": 1794689053,
+            "reset_epoch_seconds": 1794691544,
             "resource": "search"
           }
         },
@@ -161,17 +161,17 @@
         "query": "meta ads mcp in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 8722,
+        "reported_total_count": 8724,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "83C0:AAEEC:8B59EEA:1B8A862E:6AF8C7E6",
+          "request_id": "4C30:1F12:CCC3F3:28FA34A:6AF8D1A0",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 25,
-            "reset_epoch_seconds": 1794689053,
+            "reset_epoch_seconds": 1794691544,
             "resource": "search"
           }
         },
@@ -186,17 +186,17 @@
         "query": "meta conversions api server side tracking in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 23903,
+        "reported_total_count": 23905,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "83C0:AAEEC:8B5A476:1B8A9793:6AF8C7E7",
+          "request_id": "4C30:1F12:CCC8A6:28FB1C7:6AF8D1A1",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 24,
-            "reset_epoch_seconds": 1794689053,
+            "reset_epoch_seconds": 1794691544,
             "resource": "search"
           }
         },
@@ -216,12 +216,12 @@
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "83C0:AAEEC:8B5AA5E:1B8AA9D8:6AF8C7E8",
+          "request_id": "4C30:1F12:CCCE29:28FC2DB:6AF8D1A3",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 23,
-            "reset_epoch_seconds": 1794689053,
+            "reset_epoch_seconds": 1794691544,
             "resource": "search"
           }
         },
@@ -241,12 +241,12 @@
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "83C0:AAEEC:8B5AF63:1B8AB996:6AF8C7E9",
+          "request_id": "4C30:1F12:CCD2FA:28FD229:6AF8D1A4",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 22,
-            "reset_epoch_seconds": 1794689053,
+            "reset_epoch_seconds": 1794691544,
             "resource": "search"
           }
         },
@@ -266,20 +266,20 @@
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "83C0:AAEEC:8B5B462:1B8AC8D8:6AF8C7EA",
+          "request_id": "4C30:1F12:CCD7C8:28FE20B:6AF8D1A5",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 21,
-            "reset_epoch_seconds": 1794689053,
+            "reset_epoch_seconds": 1794691544,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 39,
+        "hard_rejected_observations": 40,
         "below_minimum_quality_observations": 0,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 1
+        "qualifying_candidate_observations": 0
       },
       {
         "provider": "GitHub",
@@ -291,12 +291,12 @@
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "83C0:AAEEC:8B5BA81:1B8ADC7A:6AF8C7EB",
+          "request_id": "4C30:1F12:CCDC55:28FF064:6AF8D1A5",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 20,
-            "reset_epoch_seconds": 1794689053,
+            "reset_epoch_seconds": 1794691544,
             "resource": "search"
           }
         },
@@ -316,12 +316,12 @@
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "83C0:AAEEC:8B5C0B4:1B8AEF55:6AF8C7EC",
+          "request_id": "4C30:1F12:CCE11D:28FFEE6:6AF8D1A6",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 19,
-            "reset_epoch_seconds": 1794689053,
+            "reset_epoch_seconds": 1794691544,
             "resource": "search"
           }
         },
@@ -348,7 +348,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5a8d931ace0aff5-ORD",
+          "request_id": "a5a915fafe02ad18-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -380,7 +380,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5a8d94ae9e6aff5-ORD",
+          "request_id": "a5a9160a5d43ad18-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -412,7 +412,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5a8d94d397aaff5-ORD",
+          "request_id": "a5a9160c684cad18-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -444,7 +444,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5a8d9598ae3aff5-ORD",
+          "request_id": "a5a91612d9f8ad18-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -476,7 +476,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5a8d9614d73aff5-ORD",
+          "request_id": "a5a916170880ad18-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -508,7 +508,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5a8d9778f33aff5-ORD",
+          "request_id": "a5a916208df0ad18-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -540,7 +540,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5a8d97bbbebaff5-ORD",
+          "request_id": "a5a916256d25ad18-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -572,7 +572,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5a8d980194faff5-ORD",
+          "request_id": "a5a9162edb06ad18-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -604,7 +604,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5a8d9889cb1aff5-ORD",
+          "request_id": "a5a916342af7ad18-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -636,7 +636,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5a8d98dad7daff5-ORD",
+          "request_id": "a5a9163a9cb9ad18-MSP",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -663,10 +663,10 @@
   },
   "discovery_efficiency": {
     "returned_repository_metadata": 588,
-    "hard_rejected_observations": 576,
+    "hard_rejected_observations": 577,
     "below_minimum_quality_observations": 0,
     "risk_isolated_observations": 0,
-    "qualifying_candidate_observations": 12,
+    "qualifying_candidate_observations": 11,
     "unique_candidate_count": 7,
     "note_zh": "返回条目按每条查询累计，可能含重复项目；唯一候选在硬性许可证、时效、平台关联和风险规则筛选后去重。"
   },
@@ -1063,13 +1063,12 @@
         "shopify facebook conversions api in:name,description,readme archived:false",
         "shopify web pixels in:name,description,readme archived:false",
         "shopify agent mcp ecommerce in:name,description,readme archived:false",
-        "meta ads creative ai open source in:name,description,readme archived:false",
         "shopify product feed catalog advertising in:name,description,readme archived:false"
       ],
       "discovery_providers": [
         "GitHub"
       ],
-      "matching_query_count": 6,
+      "matching_query_count": 5,
       "capability_exposures": [
         {
           "id": "agent_or_mcp_integration",
@@ -1259,7 +1258,7 @@
       "hotness_score": 0,
       "open_issues": 0,
       "created_at": "2026-06-25T21:17:47.258Z",
-      "project_age_days": 141,
+      "project_age_days": 142,
       "pushed_at": "2026-09-24T22:44:16.545Z",
       "updated_at": "2026-09-24T22:44:16.545Z",
       "age_days": 50,
