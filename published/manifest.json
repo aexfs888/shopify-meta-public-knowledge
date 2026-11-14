@@ -1,38 +1,38 @@
 {
   "schema_version": 1,
   "scope": "Shopify × Meta 公开官方知识快照",
-  "generated_at": "2026-11-15T01:01:25+08:00",
-  "snapshot_content_hash": "54e36689f6461dd342d45d57c3f77c9785754c57b92410bd1932a340109ddc6d",
-  "source_snapshot_hash": "e5536b5ff9da8191780cfe18b8a09b4411c2b25bef0782b9119b0d924419b628",
-  "source_generated_at": "2026-11-15T01:01:25+08:00",
+  "generated_at": "2026-11-15T04:43:42+08:00",
+  "snapshot_content_hash": "e52a2e4cd506496749412d6d2695085c434bd3451c7a9019fd968a2ace6a36ad",
+  "source_snapshot_hash": "2aa6a8366d9318ba732db86b3204433c68dddf53b7448993f6a612ff08ee6a3b",
+  "source_generated_at": "2026-11-15T04:43:42+08:00",
   "usable_source_count": 99,
   "source_floor": 95,
   "archive": {
     "file": "meta-shopify-official-source-pack.tar.gz",
-    "sha256": "d43ebed4909fb26019d074189b0baac28938927a00ee9b26b156493103165c03",
-    "bytes": 344062,
+    "sha256": "eca65aaec3e9ecc4ba0fe92701a62bbe6121b8324f4aceb137ed198f6b3aa9f3",
+    "bytes": 339100,
     "format": "tar.gz"
   },
   "community_open_source_catalog": {
     "file": "community-open-source-catalog.json",
-    "sha256": "6e7ae42347b38807f8d9f95f67d2acf4c659fb6272048874bebd15cb54ca0c56",
-    "bytes": 44546,
-    "repository_count": 5,
+    "sha256": "a6d16e2d49781f7a93d65b91e5dd5e4a9012531da27ac3a5f8616c5d65ac3705",
+    "bytes": 53627,
+    "repository_count": 7,
     "maximum_age_days": 180,
     "scope_zh": "第三方开源技术参考；不替代官方规则"
   },
   "community_frontier_catalog": {
     "file": "community-frontier-latest-30-days.json",
-    "sha256": "9d68ce36ebff9bf49694405af2c177047ef0488e2fa6817efac34bbf93c255d9",
-    "bytes": 15100,
-    "repository_count": 3,
+    "sha256": "fbddc10cb12d436d451b3ae8a8b4b6fd9f417dad7dbcd5b3aa3775da0430cb4d",
+    "bytes": 24854,
+    "repository_count": 5,
     "maximum_age_days": 30,
     "sort_order_zh": "更新时间优先，其次为质量与公开热度",
     "scope_zh": "第三方开源前沿技术参考；不替代官方规则"
   },
   "community_compliance_risk_registry": {
     "file": "community-compliance-risk-registry.json",
-    "sha256": "d06bbce791ac43e21efedd54a12eeead1bf42a7728280f7d70a869a4b250058b",
+    "sha256": "23543ae2870ed00e47e70bd6de57578d8810368d275d4ec0d927a1391873244a",
     "bytes": 9234,
     "observed_candidate_count": 0,
     "data_handling_zh": "只含匿名聚合风险类别；不含项目标识、URL、代码或操作步骤"
