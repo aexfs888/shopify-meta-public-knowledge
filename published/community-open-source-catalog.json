@@ -2,7 +2,7 @@
   "schema_version": 1,
   "scope_zh": "Shopify 独立站使用 Meta、Facebook、Instagram 投流的第三方开源与前沿技术发现；仅作方案与工具参考，不替代官方规则。",
   "source_tier": "community_open_source",
-  "generated_at": "2026-11-21T14:57:37+08:00",
+  "generated_at": "2026-11-21T19:47:57+08:00",
   "provider": "GitHub and GitLab public repository metadata APIs",
   "metadata_only": true,
   "searched_queries": 21,
@@ -18,12 +18,12 @@
         "successful_queries": 11,
         "failed_queries": 0,
         "returned_repository_metadata": 440,
-        "reported_total_count_sum": 72795,
+        "reported_total_count_sum": 72832,
         "incomplete_query_count": 0,
-        "hard_rejected_observations": 428,
-        "below_minimum_quality_observations": 1,
+        "hard_rejected_observations": 432,
+        "below_minimum_quality_observations": 0,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 11,
+        "qualifying_candidate_observations": 8,
         "rate_limit_wait_seconds": 0,
         "rate_limit_deferred_queries": 0,
         "license_enrichment_eligible_projects": 0,
@@ -47,10 +47,10 @@
         "qualifying_candidate_observations": 2,
         "rate_limit_wait_seconds": 0,
         "rate_limit_deferred_queries": 0,
-        "license_enrichment_eligible_projects": 11,
-        "license_detail_requests": 11,
+        "license_enrichment_eligible_projects": 10,
+        "license_detail_requests": 10,
         "license_detail_cache_hits": 0,
-        "license_detail_resolved_projects": 11,
+        "license_detail_resolved_projects": 10,
         "license_detail_not_found_projects": 0,
         "license_detail_failed_projects": 0
       }
@@ -61,67 +61,67 @@
         "query": "shopify meta ads in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 5707,
+        "reported_total_count": 5709,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "5C10:157947:2B49CC9:8AAE161:6B0140E1",
+          "request_id": "D400:3A4726:394EB55:B6B3847:6B0184ED",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 29,
-            "reset_epoch_seconds": 1795244317,
+            "reset_epoch_seconds": 1795261737,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 38,
-        "below_minimum_quality_observations": 1,
+        "hard_rejected_observations": 40,
+        "below_minimum_quality_observations": 0,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 1
+        "qualifying_candidate_observations": 0
       },
       {
         "provider": "GitHub",
         "query": "shopify facebook conversions api in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 2669,
+        "reported_total_count": 2668,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "5C10:157947:2B4A151:8AAEFEC:6B0140E2",
+          "request_id": "D400:3A4726:394EF7F:B6B4596:6B0184EE",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 28,
-            "reset_epoch_seconds": 1795244317,
+            "reset_epoch_seconds": 1795261737,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 39,
+        "hard_rejected_observations": 40,
         "below_minimum_quality_observations": 0,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 1
+        "qualifying_candidate_observations": 0
       },
       {
         "provider": "GitHub",
         "query": "meta marketing api mcp in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 9962,
+        "reported_total_count": 9971,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "5C10:157947:2B4A4E5:8AAFB3D:6B0140E3",
+          "request_id": "D400:3A4726:394F39D:B6B5286:6B0184EF",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 27,
-            "reset_epoch_seconds": 1795244317,
+            "reset_epoch_seconds": 1795261737,
             "resource": "search"
           }
         },
@@ -136,17 +136,42 @@
         "query": "shopify web pixels in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 9690,
+        "reported_total_count": 9692,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "5C10:157947:2B4A96D:8AB0AA2:6B0140E4",
+          "request_id": "D400:3A4726:394F7B7:B6B6015:6B0184F0",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 26,
-            "reset_epoch_seconds": 1795244317,
+            "reset_epoch_seconds": 1795261737,
+            "resource": "search"
+          }
+        },
+        "rate_limit_wait_seconds": 0,
+        "hard_rejected_observations": 40,
+        "below_minimum_quality_observations": 0,
+        "risk_isolated_observations": 0,
+        "qualifying_candidate_observations": 0
+      },
+      {
+        "provider": "GitHub",
+        "query": "meta ads mcp in:name,description,readme archived:false",
+        "outcome": "completed",
+        "returned_repository_metadata": 40,
+        "reported_total_count": 9086,
+        "incomplete_results": false,
+        "license_enrichment": null,
+        "response": {
+          "http_status": 200,
+          "request_id": "D400:3A4726:394FBA1:B6B6CE7:6B0184F1",
+          "retry_after_seconds": null,
+          "rate_limit": {
+            "limit": 30,
+            "remaining": 25,
+            "reset_epoch_seconds": 1795261737,
             "resource": "search"
           }
         },
@@ -158,45 +183,20 @@
       },
       {
         "provider": "GitHub",
-        "query": "meta ads mcp in:name,description,readme archived:false",
-        "outcome": "completed",
-        "returned_repository_metadata": 40,
-        "reported_total_count": 9083,
-        "incomplete_results": false,
-        "license_enrichment": null,
-        "response": {
-          "http_status": 200,
-          "request_id": "5C10:157947:2B4ADAE:8AB18A8:6B0140E5",
-          "retry_after_seconds": null,
-          "rate_limit": {
-            "limit": 30,
-            "remaining": 25,
-            "reset_epoch_seconds": 1795244317,
-            "resource": "search"
-          }
-        },
-        "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 38,
-        "below_minimum_quality_observations": 0,
-        "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 2
-      },
-      {
-        "provider": "GitHub",
         "query": "meta conversions api server side tracking in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 24499,
+        "reported_total_count": 24516,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "5C10:157947:2B4B2E6:8AB2976:6B0140E6",
+          "request_id": "D400:3A4726:394FF84:B6B79C3:6B0184F2",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 24,
-            "reset_epoch_seconds": 1795244317,
+            "reset_epoch_seconds": 1795261737,
             "resource": "search"
           }
         },
@@ -211,17 +211,17 @@
         "query": "shopify functions marketing analytics in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 3221,
+        "reported_total_count": 3220,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "5C10:157947:2B4B6EA:8AB36FA:6B0140E7",
+          "request_id": "D400:3A4726:3950382:B6B8697:6B0184F3",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 23,
-            "reset_epoch_seconds": 1795244317,
+            "reset_epoch_seconds": 1795261737,
             "resource": "search"
           }
         },
@@ -236,42 +236,42 @@
         "query": "shopify agent mcp ecommerce in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 1275,
+        "reported_total_count": 1274,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "5C10:157947:2B4BA6D:8AB4206:6B0140E8",
+          "request_id": "D400:3A4726:39507B7:B6B9428:6B0184F4",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 22,
-            "reset_epoch_seconds": 1795244317,
+            "reset_epoch_seconds": 1795261737,
             "resource": "search"
           }
         },
         "rate_limit_wait_seconds": 0,
-        "hard_rejected_observations": 39,
+        "hard_rejected_observations": 38,
         "below_minimum_quality_observations": 0,
         "risk_isolated_observations": 0,
-        "qualifying_candidate_observations": 1
+        "qualifying_candidate_observations": 2
       },
       {
         "provider": "GitHub",
         "query": "meta ads creative ai open source in:name,description,readme archived:false",
         "outcome": "completed",
         "returned_repository_metadata": 40,
-        "reported_total_count": 6087,
+        "reported_total_count": 6094,
         "incomplete_results": false,
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "5C10:157947:2B4BE8F:8AB4FEC:6B0140E9",
+          "request_id": "D400:3A4726:3950AFD:B6B9EAF:6B0184F5",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 21,
-            "reset_epoch_seconds": 1795244317,
+            "reset_epoch_seconds": 1795261737,
             "resource": "search"
           }
         },
@@ -291,12 +291,12 @@
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "5C10:157947:2B4C2DA:8AB5D6D:6B0140EA",
+          "request_id": "D400:3A4726:3950F06:B6BABF9:6B0184F6",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 20,
-            "reset_epoch_seconds": 1795244317,
+            "reset_epoch_seconds": 1795261737,
             "resource": "search"
           }
         },
@@ -316,12 +316,12 @@
         "license_enrichment": null,
         "response": {
           "http_status": 200,
-          "request_id": "5C10:157947:2B4C79B:8AB6CD4:6B0140EB",
+          "request_id": "D400:3A4726:39512E6:B6BB86A:6B0184F7",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": 30,
             "remaining": 19,
-            "reset_epoch_seconds": 1795244317,
+            "reset_epoch_seconds": 1795261737,
             "resource": "search"
           }
         },
@@ -339,16 +339,16 @@
         "reported_total_count": 98,
         "incomplete_results": false,
         "license_enrichment": {
-          "eligible_projects": 7,
-          "detail_requests": 7,
+          "eligible_projects": 6,
+          "detail_requests": 6,
           "cache_hits": 0,
-          "resolved_projects": 7,
+          "resolved_projects": 6,
           "not_found_projects": 0,
           "failed_projects": 0
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5ddcd6c3effa1d6-MSP",
+          "request_id": "a5df76b4a9c6c8e7-IAD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -380,7 +380,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5ddcd7abc92a1d6-MSP",
+          "request_id": "a5df76cd3eeac8e7-IAD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -412,7 +412,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5ddcd7c6e7ea1d6-MSP",
+          "request_id": "a5df76cf3f6ac8e7-IAD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -444,7 +444,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5ddcd82fc6fa1d6-MSP",
+          "request_id": "a5df76d86f2ec8e7-IAD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -476,7 +476,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5ddcd8828bea1d6-MSP",
+          "request_id": "a5df76de2f9ec8e7-IAD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -508,7 +508,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5ddcd8f2fc9a1d6-MSP",
+          "request_id": "a5df76f34ce2c8e7-IAD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -540,7 +540,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5ddcd938bffa1d6-MSP",
+          "request_id": "a5df76f72d2bc8e7-IAD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -572,7 +572,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5ddcd965e5ca1d6-MSP",
+          "request_id": "a5df76fb0d4bc8e7-IAD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -604,7 +604,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5ddcd9b7b1aa1d6-MSP",
+          "request_id": "a5df77012ec0c8e7-IAD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -636,7 +636,7 @@
         },
         "response": {
           "http_status": 200,
-          "request_id": "a5ddcda09909a1d6-MSP",
+          "request_id": "a5df7705c9cec8e7-IAD",
           "retry_after_seconds": null,
           "rate_limit": {
             "limit": null,
@@ -663,14 +663,14 @@
   },
   "discovery_efficiency": {
     "returned_repository_metadata": 588,
-    "hard_rejected_observations": 574,
-    "below_minimum_quality_observations": 1,
+    "hard_rejected_observations": 578,
+    "below_minimum_quality_observations": 0,
     "risk_isolated_observations": 0,
-    "qualifying_candidate_observations": 13,
-    "unique_candidate_count": 8,
+    "qualifying_candidate_observations": 10,
+    "unique_candidate_count": 10,
     "note_zh": "返回条目按每条查询累计，可能含重复项目；唯一候选在硬性许可证、时效、平台关联和风险规则筛选后去重。"
   },
-  "repository_count": 8,
+  "repository_count": 10,
   "warnings": [],
   "safety": {
     "never_clone_or_execute": true,
@@ -718,6 +718,191 @@
   },
   "repositories": [
     {
+      "source_id": "oss-a449e28e785db1fd",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / proxy-intell",
+      "provider": "GitHub",
+      "repository": "proxy-intell/facebook-ads-library-mcp",
+      "title_zh": "开源项目：proxy-intell/facebook-ads-library-mcp",
+      "description_original": "MCP Server for Facebook ADs Library - Get instant answers from FB's ad library",
+      "canonical_url": "https://github.com/proxy-intell/facebook-ads-library-mcp",
+      "homepage_url": "https://useproxy.dev/",
+      "default_branch": "main",
+      "language": "Python",
+      "license_spdx": "MIT",
+      "topics": [
+        "ad-library",
+        "ai",
+        "analytics",
+        "api",
+        "chatgpt",
+        "claude",
+        "competitor-analysis",
+        "cursor",
+        "facebook",
+        "facebook-api",
+        "github",
+        "llm",
+        "marketing",
+        "marketing-analytics",
+        "marketing-automation",
+        "mcp",
+        "mcp-server",
+        "open-source",
+        "python",
+        "python3",
+        "campaigns",
+        "reporting",
+        "automation"
+      ],
+      "stars": 332,
+      "forks": 45,
+      "hotness_score": 347.75,
+      "open_issues": 1,
+      "created_at": "2025-06-05T15:26:58Z",
+      "project_age_days": 533,
+      "pushed_at": "2026-11-21T10:22:14Z",
+      "updated_at": "2026-11-20T18:34:13Z",
+      "age_days": 0,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 11,
+      "discovery_priority_score": 11,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "已有基础公开社区信号",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 MIT",
+        "最近 0 天更新（新技术）",
+        "有基础社区关注",
+        "涉及 Meta 投流或信号",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "meta ads creative ai open source in:name,description,readme archived:false",
+      "discovery_queries": [
+        "meta ads creative ai open source in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 1,
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
+      "source_id": "oss-717ee7c8458b0f02",
+      "source_tier": "community_open_source",
+      "publisher": "GitHub / ynnickw",
+      "provider": "GitHub",
+      "repository": "ynnickw/adport",
+      "title_zh": "开源项目：ynnickw/adport",
+      "description_original": "Open-source multi-platform ads management for AI agents — connect your ad accounts, manage them via MCP + CLI with policy-guarded writes",
+      "canonical_url": "https://github.com/ynnickw/adport",
+      "homepage_url": "https://adport.dev",
+      "default_branch": "main",
+      "language": "TypeScript",
+      "license_spdx": "Apache-2.0",
+      "topics": [
+        "advertising",
+        "ai-agents",
+        "cli",
+        "google-ads",
+        "mcp",
+        "meta-ads",
+        "campaigns",
+        "automation"
+      ],
+      "stars": 19,
+      "forks": 9,
+      "hotness_score": 22.15,
+      "open_issues": 6,
+      "created_at": "2026-08-06T18:23:34Z",
+      "project_age_days": 106,
+      "pushed_at": "2026-11-21T10:36:43Z",
+      "updated_at": "2026-11-10T11:24:02Z",
+      "age_days": 11,
+      "freshness": "fresh_within_30_days",
+      "freshness_label_zh": "最近 30 天更新：新技术候选",
+      "quality_score": 10,
+      "discovery_priority_score": 10,
+      "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
+      "metadata_verified_fields_zh": [
+        "许可证",
+        "足够的公开简介",
+        "主要语言",
+        "主题标签",
+        "默认分支",
+        "更新时间和推送时间"
+      ],
+      "metadata_missing_fields_zh": [],
+      "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
+      "public_community_signal_label_zh": "已有基础公开社区信号",
+      "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
+      "selection_reasons_zh": [
+        "许可证 Apache-2.0",
+        "最近 11 天更新（新技术）",
+        "已有公开使用者关注",
+        "涉及 Meta 投流或信号",
+        "涉及自动化或 AI 助手"
+      ],
+      "discovery_query": "meta ads creative ai open source in:name,description,readme archived:false",
+      "discovery_queries": [
+        "meta ads creative ai open source in:name,description,readme archived:false"
+      ],
+      "discovery_providers": [
+        "GitHub"
+      ],
+      "matching_query_count": 1,
+      "capability_exposures": [
+        {
+          "id": "agent_or_mcp_integration",
+          "label_zh": "公开元数据提示可能与 Agent 或 MCP 工具连接有关",
+          "review_zh": "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+        }
+      ],
+      "automatic_adoption_allowed": false,
+      "research_status": "research_only",
+      "research_status_zh": "仅限公开元数据研究；尚未安装、执行、审计或授权接入。",
+      "manual_review_requirements_zh": [
+        "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
+        "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
+        "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
+        "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
+      ],
+      "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
+      "status": "candidate_verified_metadata"
+    },
+    {
       "source_id": "oss-e488f8123e7497db",
       "source_tier": "community_open_source",
       "publisher": "GitHub / hermoso-ai",
@@ -762,7 +947,7 @@
       "project_age_days": 137,
       "pushed_at": "2026-11-21T05:32:51Z",
       "updated_at": "2026-11-20T10:22:22Z",
-      "age_days": 0,
+      "age_days": 1,
       "freshness": "fresh_within_30_days",
       "freshness_label_zh": "最近 30 天更新：新技术候选",
       "quality_score": 10,
@@ -784,23 +969,19 @@
       "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
       "selection_reasons_zh": [
         "许可证 MIT",
-        "最近 0 天更新（新技术）",
+        "最近 1 天更新（新技术）",
         "已有公开使用者关注",
         "涉及 Meta 投流或信号",
         "涉及自动化或 AI 助手"
       ],
-      "discovery_query": "shopify meta ads in:name,description,readme archived:false",
+      "discovery_query": "shopify product feed catalog advertising in:name,description,readme archived:false",
       "discovery_queries": [
-        "shopify meta ads in:name,description,readme archived:false",
-        "shopify facebook conversions api in:name,description,readme archived:false",
-        "shopify web pixels in:name,description,readme archived:false",
-        "meta ads creative ai open source in:name,description,readme archived:false",
         "shopify product feed catalog advertising in:name,description,readme archived:false"
       ],
       "discovery_providers": [
         "GitHub"
       ],
-      "matching_query_count": 5,
+      "matching_query_count": 1,
       "capability_exposures": [
         {
           "id": "potential_external_write",
@@ -861,9 +1042,9 @@
       "project_age_days": 125,
       "pushed_at": "2026-10-09T08:53:24Z",
       "updated_at": "2026-10-09T08:53:29Z",
-      "age_days": 42,
+      "age_days": 43,
       "freshness": "updated_within_180_days",
-      "freshness_label_zh": "超过一个月、半年内：最后更新距今 42 天",
+      "freshness_label_zh": "超过一个月、半年内：最后更新距今 43 天",
       "quality_score": 8,
       "discovery_priority_score": 8,
       "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
@@ -884,7 +1065,7 @@
       "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
       "selection_reasons_zh": [
         "许可证 MIT",
-        "最后更新距今 42 天（超过一个月，半年内）",
+        "最后更新距今 43 天（超过一个月，半年内）",
         "涉及 Meta 投流或信号",
         "涉及自动化或 AI 助手"
       ],
@@ -951,7 +1132,7 @@
       "open_issues": 0,
       "created_at": "2026-11-20T17:12:34Z",
       "project_age_days": 0,
-      "pushed_at": "2026-11-21T06:38:20Z",
+      "pushed_at": "2026-11-21T08:01:28Z",
       "updated_at": "2026-11-20T23:12:09Z",
       "age_days": 0,
       "freshness": "fresh_within_30_days",
@@ -1008,78 +1189,73 @@
       "status": "candidate_verified_metadata"
     },
     {
-      "source_id": "oss-7e63d065aa90fe0a",
+      "source_id": "oss-b319cb5f8fd30dbf",
       "source_tier": "community_open_source",
-      "publisher": "GitHub / adswipefile",
+      "publisher": "GitHub / kkhomej33-netizen",
       "provider": "GitHub",
-      "repository": "adswipefile/creative-strategy-skills",
-      "title_zh": "开源项目：adswipefile/creative-strategy-skills",
-      "description_original": "Creative strategy skills for Meta ads: competitor research, ad concepts, hooks, creative mechanics and ad audits, built on real Facebook and Instagram ads from the Ad Swipe File ad library. For Claude Code, Codex, Cursor and more.",
-      "canonical_url": "https://github.com/adswipefile/creative-strategy-skills",
-      "homepage_url": "https://adswipefile.com/docs/mcp?utm_source=github&utm_medium=referral&utm_campaign=creative-strategy-skills",
+      "repository": "kkhomej33-netizen/noctua-b2b-mcp",
+      "title_zh": "开源项目：kkhomej33-netizen/noctua-b2b-mcp",
+      "description_original": "Lightweight B2B GTM, Ecommerce & ATS Hiring Intelligence tools for Claude/Cursor MCP, Clay & n8n (256MB serverless)",
+      "canonical_url": "https://github.com/kkhomej33-netizen/noctua-b2b-mcp",
+      "homepage_url": "https://apify.com/kkhome",
       "default_branch": "main",
-      "language": null,
+      "language": "Python",
       "license_spdx": "MIT",
       "topics": [
-        "ad-creative",
-        "agent-skills",
-        "claude-code",
-        "claude-skills",
-        "codex",
-        "creative-strategist",
-        "creative-strategy",
-        "cursor",
-        "facebook-ads",
+        "apify",
+        "b2b-leads",
+        "clay",
         "mcp",
-        "meta-ads",
+        "mcp-server",
+        "n8n",
+        "shopify",
+        "woocommerce",
         "campaigns",
-        "creative",
         "automation"
       ],
       "stars": 0,
       "forks": 0,
       "hotness_score": 0,
       "open_issues": 0,
-      "created_at": "2026-11-15T12:47:07Z",
-      "project_age_days": 5,
-      "pushed_at": "2026-11-21T06:55:17Z",
-      "updated_at": "2026-11-15T12:52:39Z",
-      "age_days": 5,
+      "created_at": "2026-11-17T03:39:23Z",
+      "project_age_days": 4,
+      "pushed_at": "2026-11-21T09:40:48Z",
+      "updated_at": "2026-11-17T18:33:18Z",
+      "age_days": 3,
       "freshness": "fresh_within_30_days",
       "freshness_label_zh": "最近 30 天更新：新技术候选",
-      "quality_score": 9,
-      "discovery_priority_score": 9,
+      "quality_score": 11,
+      "discovery_priority_score": 11,
       "discovery_priority_note_zh": "发现排序分只用于从公开元数据中排定人工研究先后；不代表安全、代码质量、功能真实性、盈利能力或可直接采用。",
-      "metadata_evidence_score": 0.83,
-      "metadata_evidence_label_zh": "公开元数据部分完整",
+      "metadata_evidence_score": 1,
+      "metadata_evidence_label_zh": "公开元数据较完整",
       "metadata_verified_fields_zh": [
         "许可证",
         "足够的公开简介",
+        "主要语言",
         "主题标签",
         "默认分支",
         "更新时间和推送时间"
       ],
-      "metadata_missing_fields_zh": [
-        "主要语言"
-      ],
+      "metadata_missing_fields_zh": [],
       "metadata_evidence_note_zh": "只衡量本次公开元数据是否足以支持初步研究；不代表代码安全、功能真实、供应商可靠或可以接入真实账户。",
       "public_community_signal_label_zh": "公开社区信号未形成",
       "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
       "selection_reasons_zh": [
         "许可证 MIT",
-        "最近 5 天更新（新技术）",
+        "最近 3 天更新（新技术）",
+        "直接涉及 Shopify",
         "涉及 Meta 投流或信号",
         "涉及自动化或 AI 助手"
       ],
-      "discovery_query": "meta ads mcp in:name,description,readme archived:false",
+      "discovery_query": "shopify agent mcp ecommerce in:name,description,readme archived:false",
       "discovery_queries": [
-        "meta ads mcp in:name,description,readme archived:false",
-        "meta ads creative ai open source in:name,description,readme archived:false"
+        "shopify agent mcp ecommerce in:name,description,readme archived:false"
       ],
       "discovery_providers": [
         "GitHub"
       ],
-      "matching_query_count": 2,
+      "matching_query_count": 1,
       "capability_exposures": [
         {
           "id": "agent_or_mcp_integration",
@@ -1094,7 +1270,6 @@
         "阅读项目公开说明、许可证和依赖清单，确认实际用途与本次公开元数据一致。",
         "在隔离环境完成最小化只读评估；不得在评估前接入真实 Meta、Shopify、客户或支付数据。",
         "核对数据流、日志位置、网络访问和权限范围；不得提供 Token、Cookie、恢复资料或客户名单。",
-        "补齐或人工核对：主要语言。",
         "先检查工具清单、外部网络请求、权限范围和日志；不得提供 Token、Cookie、客户资料或真实广告写入权限。"
       ],
       "adoption_rule_zh": "只作第三方技术参考；先用 Meta/Shopify 官方资料核验，再决定是否在本机隔离试用。不得把账户 Token、客户数据或真实广告写入第三方工具。",
@@ -1139,9 +1314,9 @@
       "open_issues": 0,
       "created_at": "2026-10-20T14:50:12Z",
       "project_age_days": 31,
-      "pushed_at": "2026-11-21T06:55:11Z",
+      "pushed_at": "2026-11-21T11:08:03Z",
       "updated_at": "2026-11-11T07:14:50Z",
-      "age_days": 9,
+      "age_days": 10,
       "freshness": "fresh_within_30_days",
       "freshness_label_zh": "最近 30 天更新：新技术候选",
       "quality_score": 9,
@@ -1164,7 +1339,7 @@
       "public_community_signal_note_zh": "仅按公开星标、Fork 和项目年龄提示社区信号；不代表安全、可信、合规、效果或适合接入。",
       "selection_reasons_zh": [
         "许可证 MIT",
-        "最近 9 天更新（新技术）",
+        "最近 10 天更新（新技术）",
         "涉及 Meta 投流或信号",
         "涉及自动化或 AI 助手"
       ],
